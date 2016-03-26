@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+	
+	#Activación de Rewrite
+	RewriteEngine on	
+	
+	RewriteCond $1 !^(index\.php|resources|robots\.txt)
+
+	#Verificamos si es un directorio o archivo
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+
+	#En caso de no existir redireccionamos
+	RewriteRule ^(.*)$ index.php/$1 [L,QSA]
+	
+</IfModule>
