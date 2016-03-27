@@ -164,7 +164,7 @@ header {
 }
 
 #menu-top a {
-    color: #2562AE; /*#2562AE AZUL UV           f4d2e1*/
+    color: #2562AE; /*#2562AE AZUL UV   #1EB463 VERDE        f4d2e1*/
     text-decoration: none;
     font-weight: bold;
     padding: 10px 10px 10px 10px;
@@ -177,11 +177,11 @@ header {
 }
 
 .menu-section .nav > li > a:hover,.menu-section .nav > li > a:focus {
-    background-color: #2562AE!important;
+    background-color: #1EB463!important;
 }
 
 .menu-section .dropdown-menu > li > a:hover,.menu-section .dropdown-menu > li > a:focus {
-    background-color: #2562AE!important;
+    background-color: #1EB463!important;
 }
 
 .navbar-inverse {

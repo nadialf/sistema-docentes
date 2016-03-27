@@ -12,7 +12,6 @@
 
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 </head>
 
 <body style="background-color:#e5e5e5;">
@@ -62,27 +61,27 @@
               <li>
                 <a href="">
                   <div>
-                    <i class="fa fa-users"></i>     Correo
+                    <i class="fa fa-envelope"></i>     Correo
                   </div>
                 </a>
               </li>
               <li>
                  <a href="">
                   <div>
-                    <i class="fa fa-money"></i>     Constancias
+                    <i class="fa fa-file-text-o"></i>     Constancias
                   </div>
                 </a>
               </li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                   <div>
-                      <i class="fa fa-file-text-o"></i>     Docentes
+                      <i class="fa fa-users"></i>     Docentes
                       <span class="caret"></span>
                   </div>
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a href="<?php echo base_url().'Profesionales'; ?>">Ver docentes</a></li>
-                  <li><a href="<?=base_url()?>espacios/">Asignaciones</a></li>
+                  <li><a href="">Ver docentes</a></li>
+                  <li><a href="">Asignaciones</a></li>
                 </ul>
               </li>
             </ul>
@@ -91,6 +90,18 @@
       </div>
     </div>
   </section>
+
+<div class="clear"> </div>
+
+<div style="text-align: center;   width:  100%;">
+
+</br></br></br></br></br></br></br>
+<h1>Bienvenido al</h1>
+<h1>Sistema de Actividades de Docentes</h1>
+
+</div>
+
+<div class="clear"> </div>
 
 
 <footer style="bottom: 0; width: 100%; position: fixed;">
