@@ -1,4 +1,4 @@
- <div class="content-wrapper" style="background-color: #e5e5e5; margin-top:0px;">
+<div class="content-wrapper" style="background-color: #e5e5e5; margin-top:0px;">
    
     <br>
     <div id="exTab3" class="tab">
@@ -6,17 +6,17 @@
       <ul  class="nav nav-pills">
         <li class="active" data-toggle="tab">
           <a href="#1b" data-toggle="tab">
-            <i class="fa fa-list"></i>     Nueva actividad
+            <i class="fa fa-list"></i>     Nuevo docente
           </a>
         </li>
         <li data-toggle="tab">
           <a href="#3b" data-toggle="tab">
-            <i class="fa fa-table"></i>     Actividades registradas
+            <i class="fa fa-table"></i>     Docentes registrados
           </a>
         </li>
         <li data-toggle="tab">
           <a href="#2b" data-toggle="tab">
-            <i class="glyphicon glyphicon-search"></i>     Busqueda de actividad
+            <i class="glyphicon glyphicon-search"></i>     Busqueda de docentes
           </a>
         </li>
       </ul>
@@ -28,20 +28,20 @@
         <div class="tab-pane active" id="1b">
           <?=  form_open(base_url().'actividades/agregar')?>
           <br>
-          <h2 style="text-align:center;">Datos de la actividad</h2>
+          <h2 style="text-align:center;">Datos de cuenta y docente</h2>
           
           <div style="margin-left:20px; margin-right:20px;">
             <div class="content-wrapper"  style="width:100%; min-height: auto; height:auto; margin-left;10px; margin-right:10px;">
               <div class="col-xs-4">
-                <span class="input-group-addon">Nombre de la actividad</span>
+                <span class="input-group-addon">Nombre(s)</span>
                 <input type="text" class="form-control" aria-describedby="sizing-addon2" name="nombre" required>
               </div>
               <div class="col-xs-4">
-                <span class="input-group-addon">Tipo de actividad</span>
+                <span class="input-group-addon">Apellido paterno</span>
                 <input type="text" class="form-control" aria-describedby="sizing-addon2" name="paterno" required>
               </div>
               <div class="col-xs-4">
-                <span class="input-group-addon">Lugar</span>
+                <span class="input-group-addon">Apellido materno</span>
                 <input type="text" class="form-control" aria-describedby="sizing-addon2" name="materno" required>
               </div>
             </div>
@@ -52,12 +52,16 @@
           <div style="margin-left:20px; margin-right:20px;">
             <div class="content-wrapper"  style="width:100%; min-height: auto; height:auto; margin-left;10px; margin-right:10px;">
               <div class="col-xs-4">
-                <span class="input-group-addon" id="sizing-addon2">Fecha inicio</span>
-                <input type="date" class="form-control" aria-describedby="sizing-addon2" data-provide="datepicker" name="fecha1" required>
+                <span class="input-group-addon">Tipo de trabajador</span>
+                <input type="text" class="form-control" aria-describedby="sizing-addon2" name="tipot" required>
               </div>
               <div class="col-xs-4">
-                <span class="input-group-addon" id="sizing-addon2">Fecha fin</span>
-                <input type="date" class="form-control" aria-describedby="sizing-addon2" data-provide="datepicker" name="fecha2" required>
+                <span class="input-group-addon">Usuario</span>
+                <input type="text" class="form-control" aria-describedby="sizing-addon2" name="user" required>
+              </div>
+              <div class="col-xs-4">
+                <span class="input-group-addon">Contraseña</span>
+                <input type="text" class="form-control" aria-describedby="sizing-addon2" name="contrasena" required>
               </div>
             </div>
           </div>
@@ -74,15 +78,17 @@
 
 
         <div class="tab-pane" id="3b">
-          <h4 style="padding-left:2%;">Actividades registradas</h4>
+        </br>
           <table class="table">
             <thead>
               <tr>
-                <th>Nombre</th>
-                <th>Tipo</th>
-                <th>Lugar</th>
-                <th>Fecha inicio</th>
-                <th>Fecha fin</th>
+                <th>No. Control</th>
+                <th>Nombre(s)</th>
+                <th>Apellido paterno</th>
+                <th>Apellido materno</th>
+                <th>Tipo de trabajador</th>
+                <th>Usuario</th>
+                <th>Contraseña</th>
                 <th></th>
                 <th></th>
               </tr>
@@ -117,10 +123,10 @@
 
 
         <div class="tab-pane" id="2b">
-          <h4 style="padding-left:2%;">Búsqueda de actividad</h4>
+          <h4 style="padding-left:2%;">Búsqueda de docentes</h4>
           <br/>
           <div class="col-xs-4">
-            <input type="text" class="form-control autocompletar"  name="autocompletar" id="autocompletar" onpaste="return false"  aria-describedby="sizing-addon2" placeholder="Nombre de la actividad">
+            <input type="text" class="form-control autocompletar"  name="autocompletar" id="autocompletar" onpaste="return false"  aria-describedby="sizing-addon2" placeholder="Nombre del docente">
             <br/>
           </div>
           <table class="table table-hover table-responsive" id="tableSearch">

@@ -65,14 +65,14 @@
                 </a>
               </li>
               <li>
-                <a href="">
+                <a href="<?php echo base_url().'correo'; ?>">
                   <div>
                     <i class="fa fa-envelope"></i>     Correo
                   </div>
                 </a>
               </li>
               <li>
-                 <a href="">
+                 <a href="<?php echo base_url().'constancias'?>">
                   <div>
                     <i class="fa fa-file-text-o"></i>     Constancias
                   </div>
@@ -86,8 +86,9 @@
                   </div>
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a href="">Ver docentes</a></li>
-                  <li><a href="">Asignaciones</a></li>
+                  <li><a href="<?php echo base_url().'docentes'; ?>">Ver docentes</a></li>
+                  <li><a href="<?php echo base_url().'asignaciones'; ?>">Asignaciones</a></li>
+                  <li><a href="<?php echo base_url().'avances'; ?>">Avances</a></li>
                 </ul>
               </li>
             </ul>
