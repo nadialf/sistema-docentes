@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-03-2016 a las 13:23:31
+-- Tiempo de generación: 29-03-2016 a las 00:13:00
 -- Versión del servidor: 5.6.24
 -- Versión de PHP: 5.5.24
 
@@ -33,7 +33,15 @@ CREATE TABLE IF NOT EXISTS `actividades` (
   `Fecha_Inicio` date NOT NULL,
   `Fecha_Fin` date NOT NULL,
   `Lugar` varchar(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `actividades`
+--
+
+INSERT INTO `actividades` (`ID_Actividad`, `Tipo`, `Nombre`, `Fecha_Inicio`, `Fecha_Fin`, `Lugar`) VALUES
+(1, 'Curso', 'Java', '2016-03-28', '2016-03-29', 'FEI'),
+(2, 'Proyecto', 'SAD', '2016-03-01', '2016-03-21', 'FEI');
 
 -- --------------------------------------------------------
 
@@ -173,7 +181,7 @@ ALTER TABLE `trabajadores`
 -- AUTO_INCREMENT de la tabla `actividades`
 --
 ALTER TABLE `actividades`
-  MODIFY `ID_Actividad` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Actividad` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `constancias`
 --

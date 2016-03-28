@@ -87,29 +87,21 @@
                 <th></th>
               </tr>
             </thead>
-            <!--<?php foreach($query as $row): ?>
+            <?php foreach($query as $row): ?>
               <tr>
-                <td><?php echo $row->nombrePersona.' '.$row->apaPersona.' '.$row->amaPersona; ?></td>
-                <td><?php echo $row->callePersona.' #'.$row->numDirPersona; ?></td>
-                <td><?php echo $row->coloniaPersona; ?></td>
-                <td><?php echo $row->celPersona; ?></td>
-                <td><?php echo $row->correoPersona; ?></td>
-                <td><?php echo $row->sexo; ?></td>
+                <td><?php echo $row->Nombre; ?></td>
+                <td><?php echo $row->Tipo; ?></td>
+                <td><?php echo $row->Lugar; ?></td>
+                <td><?php echo $row->Fecha_Inicio; ?></td>
+                <td><?php echo $row->Fecha_Fin; ?></td>
                 <td>
-                  <?php
-                    $then = date('Ymd', strtotime($row->fechaNa));
-                    $diff = date('Ymd') - $then;
-                    echo substr($diff, 0, -4);
-                  ?>
+                  <a href='#' onclick="editar('');"><i class='glyphicon glyphicon-pencil'></i></a>
                 </td>
                 <td>
-                  <a href='#' onclick="editar('<?=base_url()?>paciente/modificar/<?=$row->idpersona?>');"><i class='glyphicon glyphicon-pencil'></i></a>
-                </td>
-                <td>
-                  <a href='#' onclick="elimina('<?=base_url()?>paciente/deletePaciente/<?=$row->idpersona?>');"><i class='glyphicon glyphicon-trash'></i></a>
+                  <a href='#' onclick="elimina('');"><i class='glyphicon glyphicon-trash'></i></a>
                 </td>
               </tr>
-            <?php endforeach; ?> -->
+            <?php endforeach; ?>
           </table>
 
         </div>

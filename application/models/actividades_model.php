@@ -7,4 +7,10 @@ class Actividades_model extends CI_Model{
 
     }
 
+     function getActividades(){
+        $query = $this->db->get('actividades');
+        return $query->result();
+
+    }
+
 }

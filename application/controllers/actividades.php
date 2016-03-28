@@ -10,8 +10,10 @@ class Actividades extends CI_Controller {
 	}
 
 	public function index(){
+		$data['query'] = $this->actividades_model->getActividades();
+
 		$this->load->view('admin/header');
-		$this->load->view('admin/actividades_view');
+		$this->load->view('admin/actividades_view', $data);
 		$this->load->view('footer');
 	}
 
