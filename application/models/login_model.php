@@ -8,16 +8,24 @@ class Login_model extends CI_Model {
  
     public function validate($usuario, $contrasena){
         print_r($usuario);
-        $this->db->select();
+        $this->db->select('tipousuario');
+        $this->db->from('cuentas');
         $this->db->where('usuario', $usuario);
         $this->db->where('contrasena', $contrasena);
-        $query = $this->db->get('cuentas');
+        $query = $this->db->get();
+        foreach($query->result() as $row) {
+            $tipo = $row->tipousuario;
+        }
 
-        if ($query->num_rows() == 1) {
-            //return $query->row();
-            redirect(base_url().'welcome_message');    
-        }else{
+        if ($tipo == "1") {
+            redirect(base_url().'welcome_message/admin');    
+        } if ($tipo == "2") {
+            redirect(base_url().'welcome_message/director');    
+        } if ($tipo == "3") {
+            redirect(base_url().'welcome_message/docente');    
+        }else {
             redirect(base_url());
         }
     }
+
 }

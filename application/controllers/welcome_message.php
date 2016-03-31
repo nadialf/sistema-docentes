@@ -10,12 +10,21 @@ class Welcome_message extends CI_Controller {
   		//$this->load->model('citas_model');
 	}
 
-	public function index(){
+	public function admin(){
 		$this->load->view('admin/header');
 		$this->load->view('message_view');
 		$this->load->view('footer');
 	}
 
-	
+	public function director(){
+		$this->load->view('director/header');
+		$this->load->view('message_view');
+		$this->load->view('footer');
+	}
+
+	public function docente(){
+		$this->load->view('admin/header');
+		$this->load->view('footer');
+	}
 
 }

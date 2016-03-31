@@ -24,17 +24,6 @@ class Login extends CI_Controller {
 	public function logout() {
 		redirect(base_url());
 	}
-
-	/*public function login_webService() {
-		$usuario = $this->input->post('usuario');
-		$contraseña = $this->input->post('contraseña');
-		$this->load->model('profesional_model');
-		$profesional = $this->profesional_model->get_profesional($usuario, $contraseña);
-		print (json_encode($profesional));
-	}*/
-
-
-	
 }
 
 /* End of file login.php */

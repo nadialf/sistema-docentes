@@ -34,7 +34,7 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                 <div style="color:#FFF;">
-                    <i class="fa fa-user"></i>     Administrador
+                    <i class="fa fa-user"></i>     Director
                     <span class="caret"></span>
                 </div>
               </a>
@@ -58,38 +58,18 @@
           <div class="navbar-collapse collapse ">
             <ul id="menu-top" class="nav navbar-nav navbar-right">
               <li>
-             	<a href="<?php echo base_url().'actividades/act_admin'; ?>">
+             	<a href="<?php echo base_url().'actividades/act_direc'; ?>">
                   <div>
                     <i class="fa fa-calendar"></i>     Actividades
                   </div>
                 </a>
               </li>
               <li>
-                <a href="<?php echo base_url().'correo'; ?>">
+                <a href="">
                   <div>
                     <i class="fa fa-envelope"></i>     Correo
                   </div>
                 </a>
-              </li>
-              <li>
-                 <a href="<?php echo base_url().'constancias'?>">
-                  <div>
-                    <i class="fa fa-file-text-o"></i>     Constancias
-                  </div>
-                </a>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                  <div>
-                      <i class="fa fa-users"></i>     Docentes
-                      <span class="caret"></span>
-                  </div>
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a href="<?php echo base_url().'docentes'; ?>">Ver docentes</a></li>
-                  <li><a href="<?php echo base_url().'asignaciones'; ?>">Asignaciones</a></li>
-                  <li><a href="<?php echo base_url().'avances'; ?>">Avances</a></li>
-                </ul>
               </li>
             </ul>
           </div>
