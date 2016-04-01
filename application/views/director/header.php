@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SAD</title>
+  <title>SAC</title>
 
   <link href="<?php echo base_url(); ?>assets/css/bootstrap.css" rel="stylesheet" />
   <link href="<?php echo base_url(); ?>assets/css/font-awesome.css" rel="stylesheet" />
@@ -28,7 +28,7 @@
       </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav" style="margin:5px;">
-            <li><a style="color:#FFF; font-size:45px;"> SAD</a></li>
+            <li><a style="color:#FFF; font-size:45px;"> SAC</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">

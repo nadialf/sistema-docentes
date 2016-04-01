@@ -12,6 +12,7 @@ class Login extends CI_Controller {
 	public function index() {
 		$this->load->database('default');
 		$this->load->view('login_view');
+		$this->load->view('footer');
 	}
 
 	public function new_login() {

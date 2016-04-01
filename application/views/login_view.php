@@ -7,7 +7,7 @@
  	<meta name="description" content="">
  	<meta name="author" content="">
  	
- 	<title>SAD</title>
+ 	<title>SAC</title>
 
 	<link href="assets/css/bootstrap.css" rel="stylesheet" />
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
@@ -30,7 +30,7 @@
   		</div>
   		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     		<ul class="nav navbar-nav" style="margin:5px;">
-    			<li><a style="color:#FFF; font-size:45px;"> Sistema de Actividades de Docentes</a></li>
+    			<li><a style="color:#FFF; font-size:45px;"> Sistema de Administración de Constancias</a></li>
         	</ul>
     	</div><!-- /.navbar-collapse -->
   	</div><!-- /.container-fluid -->
@@ -63,18 +63,4 @@
 </div>
 
 
-<div class="clear"></div> <!-- CONTENT-WRAPPER SECTION END-->
-
-
-<footer style="bottom: 0; width: 100%; position: fixed;">
-	<div class="container">
-	    <div class="row">
-	        <div class="col-md-12 col-md-push-1">
-	         	&copy; 2016 SISTEMA SAD | BY : <a href="http://www.uv.mx/Fei/" target="_blank">FEI UV</a>
-	        </div>
-	    </div>
-    </div>
-</footer>
-
-</body>
-</html>
+<!-- CONTENT-WRAPPER SECTION END-->
