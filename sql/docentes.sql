@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-03-2016 a las 00:13:00
+-- Tiempo de generación: 01-04-2016 a las 18:31:07
 -- Versión del servidor: 5.6.24
 -- Versión de PHP: 5.5.24
 
@@ -29,19 +29,22 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `actividades` (
   `ID_Actividad` int(10) NOT NULL,
   `Tipo` varchar(30) NOT NULL,
-  `Nombre` varchar(30) NOT NULL,
+  `Nombre` varchar(75) NOT NULL,
   `Fecha_Inicio` date NOT NULL,
   `Fecha_Fin` date NOT NULL,
   `Lugar` varchar(40) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `actividades`
 --
 
 INSERT INTO `actividades` (`ID_Actividad`, `Tipo`, `Nombre`, `Fecha_Inicio`, `Fecha_Fin`, `Lugar`) VALUES
-(1, 'Curso', 'Java', '2016-03-28', '2016-03-29', 'FEI'),
-(2, 'Proyecto', 'SAD', '2016-03-01', '2016-03-21', 'FEI');
+(2, 'Proyecto', 'SAC', '2016-03-01', '2016-03-21', 'FEI'),
+(6, 'Festival', 'Install Fest', '2016-04-02', '2016-04-02', 'FEI'),
+(8, 'Congreso', 'CONISOFT', '2016-02-01', '2016-02-19', 'Museo de Antrología'),
+(9, 'Taller', 'Java', '2015-09-02', '2015-09-02', 'FEI'),
+(10, 'Conferencia', 'Arduino', '2016-04-01', '2016-04-01', 'Museo de Antrología');
 
 -- --------------------------------------------------------
 
@@ -91,14 +94,16 @@ CREATE TABLE IF NOT EXISTS `cuentas` (
   `Usuario` varchar(10) NOT NULL,
   `Contrasena` varchar(10) NOT NULL,
   `TipoUsuario` varchar(10) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `cuentas`
 --
 
 INSERT INTO `cuentas` (`ID_Cuenta`, `Usuario`, `Contrasena`, `TipoUsuario`) VALUES
-(1, 'Admin', '1234', '1');
+(1, 'Admin', '1234', '1'),
+(2, 'Docente1', '1234', '3'),
+(3, 'Direc', '1234', '2');
 
 -- --------------------------------------------------------
 
@@ -181,7 +186,7 @@ ALTER TABLE `trabajadores`
 -- AUTO_INCREMENT de la tabla `actividades`
 --
 ALTER TABLE `actividades`
-  MODIFY `ID_Actividad` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `ID_Actividad` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `constancias`
 --
@@ -196,7 +201,7 @@ ALTER TABLE `correos`
 -- AUTO_INCREMENT de la tabla `cuentas`
 --
 ALTER TABLE `cuentas`
-  MODIFY `ID_Cuenta` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `ID_Cuenta` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `solicitudes`
 --
