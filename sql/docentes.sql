@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-04-2016 a las 18:31:07
+-- Tiempo de generación: 04-04-2016 a las 19:58:18
 -- Versión del servidor: 5.6.24
 -- Versión de PHP: 5.5.24
 
@@ -49,13 +49,25 @@ INSERT INTO `actividades` (`ID_Actividad`, `Tipo`, `Nombre`, `Fecha_Inicio`, `Fe
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `actividad_trabajador`
+-- Estructura de tabla para la tabla `asignaciones`
 --
 
-CREATE TABLE IF NOT EXISTS `actividad_trabajador` (
+CREATE TABLE IF NOT EXISTS `asignaciones` (
   `ID_Actividad` int(10) NOT NULL,
-  `ID_Trabajador` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `ID_Trabajador` int(10) NOT NULL,
+  `Fecha_Incorporacion` date NOT NULL,
+  `ID_Asignacion` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `asignaciones`
+--
+
+INSERT INTO `asignaciones` (`ID_Actividad`, `ID_Trabajador`, `Fecha_Incorporacion`, `ID_Asignacion`) VALUES
+(2, 7, '2016-04-04', 1),
+(6, 11, '2016-03-22', 2),
+(8, 1, '2016-03-22', 3),
+(9, 16, '2016-04-03', 4);
 
 -- --------------------------------------------------------
 
@@ -94,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `cuentas` (
   `Usuario` varchar(10) NOT NULL,
   `Contrasena` varchar(10) NOT NULL,
   `TipoUsuario` varchar(10) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `cuentas`
@@ -102,8 +114,20 @@ CREATE TABLE IF NOT EXISTS `cuentas` (
 
 INSERT INTO `cuentas` (`ID_Cuenta`, `Usuario`, `Contrasena`, `TipoUsuario`) VALUES
 (1, 'Admin', '1234', '1'),
-(2, 'Docente1', '1234', '3'),
-(3, 'Direc', '1234', '2');
+(3, 'Director', '1234', '2'),
+(4, 'Docente2', '1234', '3'),
+(5, 'Docente3', '1234', '3'),
+(7, 'Docente5', '1234', '3'),
+(8, 'Docente6', '1234', '3'),
+(9, 'Docente7', '1234', '3'),
+(10, 'Docente8', '1234', '3'),
+(11, 'Docente9', '1234', '3'),
+(12, 'Docente12', '1234', '3'),
+(13, 'Docente13', '1234', '3'),
+(14, 'Docente14', '1234', '3'),
+(15, 'DocenteX', '1234', '3'),
+(16, 'Docente16', '1234', '3'),
+(18, 'prueba', '123456', '3');
 
 -- --------------------------------------------------------
 
@@ -125,12 +149,33 @@ CREATE TABLE IF NOT EXISTS `solicitudes` (
 
 CREATE TABLE IF NOT EXISTS `trabajadores` (
   `ID_Trabajador` int(10) NOT NULL,
-  `Nombre` varchar(30) NOT NULL,
+  `Nombres` varchar(50) NOT NULL,
   `ApPaterno` varchar(30) NOT NULL,
   `ApMaterno` varchar(30) NOT NULL,
   `TipoTrabajo` varchar(10) NOT NULL,
   `ID_Cuenta` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `trabajadores`
+--
+
+INSERT INTO `trabajadores` (`ID_Trabajador`, `Nombres`, `ApPaterno`, `ApMaterno`, `TipoTrabajo`, `ID_Cuenta`) VALUES
+(1, 'Guillermo Felipe Francisco', 'Araceli', 'Nadia', 'PTC', 1),
+(2, 'Gerardo', 'Contreras', 'Vega', 'PTC', 3),
+(4, 'María Lina', 'López', 'Martínez', 'TP', 4),
+(5, 'Lizbeth Alejandra', 'Hernández', 'González', 'TP', 5),
+(7, 'Jorge Gibran', 'Hernández', 'Calderón', 'PTC', 7),
+(8, 'Edgard Iván', 'Benítez', 'Guerrero', 'PA', 8),
+(9, 'Óscar José Luis', 'Cruz', 'Reyes', 'PA', 9),
+(10, 'Blanca Rosa', 'Landa', 'Pensado', 'PTC', 10),
+(11, 'Juan Luis', 'López', 'Herrera', 'PA', 11),
+(12, 'Carlos Alberto', 'Ochoa', 'Rivera', 'PTC', 12),
+(13, 'María de los Angeles', 'Navarro', 'Guerrero', 'PTC', 13),
+(14, 'Juan Carlos', 'Pérez', 'Arriaga', 'PTC', 14),
+(15, 'Alfonso', 'Sánchez', 'Orea', 'PTC', 15),
+(16, 'Jesús Roberto', 'Méndez', 'Ortíz', 'PTC', 16),
+(18, 'prueba', 'prueba', 'prueba', 'PTC', 18);
 
 --
 -- Índices para tablas volcadas
@@ -143,10 +188,10 @@ ALTER TABLE `actividades`
   ADD PRIMARY KEY (`ID_Actividad`);
 
 --
--- Indices de la tabla `actividad_trabajador`
+-- Indices de la tabla `asignaciones`
 --
-ALTER TABLE `actividad_trabajador`
-  ADD KEY `ID_Actividad` (`ID_Actividad`), ADD KEY `ID_Trabajador` (`ID_Trabajador`);
+ALTER TABLE `asignaciones`
+  ADD PRIMARY KEY (`ID_Asignacion`), ADD KEY `ID_Actividad` (`ID_Actividad`), ADD KEY `ID_Trabajador` (`ID_Trabajador`);
 
 --
 -- Indices de la tabla `constancias`
@@ -188,6 +233,11 @@ ALTER TABLE `trabajadores`
 ALTER TABLE `actividades`
   MODIFY `ID_Actividad` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
+-- AUTO_INCREMENT de la tabla `asignaciones`
+--
+ALTER TABLE `asignaciones`
+  MODIFY `ID_Asignacion` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
 -- AUTO_INCREMENT de la tabla `constancias`
 --
 ALTER TABLE `constancias`
@@ -201,7 +251,7 @@ ALTER TABLE `correos`
 -- AUTO_INCREMENT de la tabla `cuentas`
 --
 ALTER TABLE `cuentas`
-  MODIFY `ID_Cuenta` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `ID_Cuenta` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT de la tabla `solicitudes`
 --
@@ -211,17 +261,17 @@ ALTER TABLE `solicitudes`
 -- AUTO_INCREMENT de la tabla `trabajadores`
 --
 ALTER TABLE `trabajadores`
-  MODIFY `ID_Trabajador` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Trabajador` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
 --
 -- Restricciones para tablas volcadas
 --
 
 --
--- Filtros para la tabla `actividad_trabajador`
+-- Filtros para la tabla `asignaciones`
 --
-ALTER TABLE `actividad_trabajador`
-ADD CONSTRAINT `actividad_trabajador_ibfk_1` FOREIGN KEY (`ID_Actividad`) REFERENCES `actividades` (`ID_Actividad`),
-ADD CONSTRAINT `actividad_trabajador_ibfk_2` FOREIGN KEY (`ID_Trabajador`) REFERENCES `trabajadores` (`ID_Trabajador`);
+ALTER TABLE `asignaciones`
+ADD CONSTRAINT `asignaciones_ibfk_1` FOREIGN KEY (`ID_Actividad`) REFERENCES `actividades` (`ID_Actividad`),
+ADD CONSTRAINT `asignaciones_ibfk_2` FOREIGN KEY (`ID_Trabajador`) REFERENCES `trabajadores` (`ID_Trabajador`);
 
 --
 -- Filtros para la tabla `constancias`
