@@ -4,19 +4,19 @@
     <div id="exTab3" class="tab">
       
       <ul  class="nav nav-pills">
-        <li class="active" data-toggle="tab">
-          <a href="#1b" data-toggle="tab">
-            <i class="fa fa-list"></i>     Nuevo docente
-          </a>
-        </li>
+      <li class="active" data-toggle="tab">
+        <a href="#1b" data-toggle="tab">
+          <i class="fa fa-list"></i>     Docentes registrados 
+        </a>
+      </li>
+      <li data-toggle="tab">
+        <a href="#2b" data-toggle="tab">
+          <i class="fa fa-plus"></i>     Nuevo docente
+        </a>
+      </li>
         <li data-toggle="tab">
           <a href="#3b" data-toggle="tab">
-            <i class="fa fa-table"></i>     Docentes registrados
-          </a>
-        </li>
-        <li data-toggle="tab">
-          <a href="#2b" data-toggle="tab">
-            <i class="glyphicon glyphicon-search"></i>     Busqueda de docentes
+            <i class="glyphicon glyphicon-search"></i>     Búsqueda
           </a>
         </li>
       </ul>
@@ -24,9 +24,48 @@
       <div style="background-color:#e5e5e5; height:3px;"></div>
 
       <div class="tab-content clearfix">
-        
+
+
+
         <div class="tab-pane active" id="1b">
-          <?=  form_open(base_url().'actividades/agregar')?>
+        </br>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>No. Control</th>
+                <th>Nombre(s)</th>
+                <th>Apellido paterno</th>
+                <th>Apellido materno</th>
+                <th>Tipo de trabajador</th>
+                <th>Usuario</th>
+                <th>Contraseña</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+           <?php foreach($query as $row): ?>
+              <tr>
+                <td><?php echo $row->ID_Trabajador; ?></td>
+                <td><?php echo $row->Nombre; ?></td>
+                <td><?php echo $row->ApPaterno; ?></td>
+                <td><?php echo $row->ApMaterno; ?></td>
+                <td><?php echo $row->TipoTrabajo; ?></td>
+                <td><?php echo $row->Usuario; ?></td>
+                <td><?php echo $row->Contrasena; ?></td>
+                <td>
+                  <a href='#' onclick="editar('<?=base_url()?>docentes/modificar/<?=$row->ID_Trabajador?>');"><i class='glyphicon glyphicon-pencil'></i></a>
+                </td>
+                <td>
+                  <a href='#' onclick="elimina('<?=base_url()?>docentes/delete/<?=$row->ID_Trabajador?>');"><i class='glyphicon glyphicon-trash'></i></a>
+                </td>
+              </tr>
+            <?php endforeach; ?>
+          </table>
+
+        </div> <!-- DOCENTES REGISTRADOS SECTION END -->
+        
+        <div class="tab-pane" id="2b">
+          <?=  form_open(base_url().'docentes/agregarDocente')?>
           <br>
           <h2 style="text-align:center;">Datos de cuenta y docente</h2>
           
@@ -74,47 +113,46 @@
 
           <br>
           <?=form_close()?>
-        </div>
+        </div> <!-- REGISTRAR DOCENTE SECTION END -->
+
 
 
         <div class="tab-pane" id="3b">
-        </br>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>No. Control</th>
-                <th>Nombre(s)</th>
-                <th>Apellido paterno</th>
-                <th>Apellido materno</th>
-                <th>Tipo de trabajador</th>
-                <th>Usuario</th>
-                <th>Contraseña</th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            
-          </table>
-
-        </div>
-
-
-
-        <div class="tab-pane" id="2b">
-          <h4 style="padding-left:2%;">Búsqueda de docentes</h4>
           <br/>
           <div class="col-xs-4">
-            <input type="text" class="form-control autocompletar"  name="autocompletar" id="autocompletar" onpaste="return false"  aria-describedby="sizing-addon2" placeholder="Nombre del docente">
+            <input type="text" class="form-control autocompletar"  name="autocompletar" id="autocompletar" onpaste="return false"  aria-describedby="sizing-addon2" placeholder="Nombre del docente o usuario">
             <br/>
           </div>
           <table class="table table-hover table-responsive" id="tableSearch">
           </table>
-        </div>
+        </div> <!-- BÚSQUEDA SECTION END -->
 
       </div>
 
     </div>
 
-  </div>
+  </div> <!-- CONTENT-WRAPPER SECTION END-->
 
-  <!-- CONTENT-WRAPPER SECTION END-->
+<script type="text/javascript">
+    $(document).ready(function(){
+    $(".autocompletar").keyup(function(){
+      var info = $(this).val();
+      $.post('<?php echo base_url().'docentes/autocompletar' ?>',{ info : info }, function(data){
+        if(data != ''){
+          $("#tableSearch").html(data);
+        }else{
+          $("#tableSearch").html('');
+        }
+      })
+    })
+
+    })
+      function elimina(url){
+        if (confirm("¿Está seguro que desea eliminar al docente?") ){
+          location.href=url;
+        }
+      }
+      function editar(url){
+        location.href=url;
+      }
+</script>

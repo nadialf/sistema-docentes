@@ -131,7 +131,7 @@
       var info = $(this).val();
       //hacemos la petición al método autocompletado del controlador home
       //pasando la variable info
-      $.post('<?php echo base_url().'actividades/autocompletar' ?>',{ info : info }, function(data){
+      $.post('<?php echo base_url().'actividades/autocompletarB' ?>',{ info : info }, function(data){
         //si autocompletado nos devuelve algo
         if(data != ''){
           //$('.contenedor').show();

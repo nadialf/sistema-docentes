@@ -86,7 +86,7 @@
                   </div>
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a href="<?php echo base_url().'docentes'; ?>">Ver docentes</a></li>
+                  <li><a href="<?php echo base_url().'docentes/doc_admin'; ?>">Ver docentes</a></li>
                   <li><a href="<?php echo base_url().'asignaciones'; ?>">Asignaciones</a></li>
                   <li><a href="<?php echo base_url().'avances'; ?>">Avances</a></li>
                 </ul>

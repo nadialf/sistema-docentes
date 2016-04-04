@@ -113,4 +113,51 @@ class Actividades extends CI_Controller {
 
   }
 
+    public function autocompletarB(){
+    $this->load->database('default');
+    $this->load->model('actividades_model');
+      $data = array();
+    //si es una petición ajax y existe una variable post
+    //llamada info dejamos pasar
+    if($this->input->is_ajax_request() && $this->input->post('info')){
+      $abuscar = $this->security->xss_clean($this->input->post('info'));
+      $search = $this->actividades_model->buscador(trim($abuscar));
+      //si search es distinto de false significa que hay resultados
+      //y los mostramos con un loop foreach
+      if($search !== FALSE){
+        echo "<thead>";
+        echo "<tr>";
+        echo "<th>Nombre</th>";
+        echo "<th>Tipo</th>";
+        echo "<th>Lugar</th>";
+        echo "<th>Fecha inicio</th>";
+        echo "<th>Fecha fin</th>";
+        echo "</tr>";
+        echo "</thead>";
+        foreach($search->result() as $fila){
+            echo "<tr>";
+            echo "<td>".$fila->Nombre."<td>";
+            echo "<td>".$fila->Tipo."</td>";
+            echo "<td>".$fila->Lugar."</td>";
+            echo "<td>".$fila->Fecha_Inicio."</td>";
+            echo "<td>".$fila->Fecha_Fin."</td>";
+            echo "</tr>";
+        ?>
+        <?php
+        /*
+        foreach ($empleados->result() as $row){
+
+        } 
+        */
+        }
+      //en otro caso decimos que no hay resultados
+      }else{
+      ?>
+        <p><?php  echo "<div class='alert alert-warning'><p class='text-center'>No hay actividades registradas con el nombre, tipo o lugar introducido.</p></div>"; ?></p>
+      <?php
+      }
+    }
+
+  }
+
 }

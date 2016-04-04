@@ -2,7 +2,7 @@
 
 </br></br></br></br></br></br></br>
 <h1>Bienvenido al</h1>
-<h1>Sistema de Actividades de Docentes</h1>
+<h1>Sistema de Administración de Constancias</h1>
 
 </div>
 

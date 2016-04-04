@@ -9,7 +9,7 @@
         </li>
       </ul>
 
-    <div style="background-color:#e5e5e5; height:3px;"></div>
+      <div style="background-color:#e5e5e5; height:3px;"></div>
 
       <div class="tab-content clearfix">
 

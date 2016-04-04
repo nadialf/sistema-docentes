@@ -64,6 +64,30 @@
 
     </div>
 
-  </div>
+  </div>  <!-- CONTENT-WRAPPER SECTION END-->
 
-  <!-- CONTENT-WRAPPER SECTION END-->
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+    //utilizamos el evento keyup para coger la información
+    //cada vez que se pulsa alguna tecla con el foco en el buscador
+    $(".autocompletar").keyup(function(){
+    //alert("Hello! I am an alert box!!");
+    //en info tenemos lo que vamos escribiendo en el buscador
+      var info = $(this).val();
+      //hacemos la petición al método autocompletado del controlador home
+      //pasando la variable info
+      $.post('<?php echo base_url().'actividades/autocompletar' ?>',{ info : info }, function(data){
+        //si autocompletado nos devuelve algo
+        if(data != ''){
+          //$('.contenedor').show();
+          $("#tableSearch").html(data);
+        }else{
+          $("#tableSearch").html('');
+        }
+      })
+    })
+
+    })
+
+</script>
