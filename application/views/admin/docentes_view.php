@@ -46,7 +46,7 @@
            <?php foreach($query as $row): ?>
               <tr>
                 <td><?php echo $row->ID_Trabajador; ?></td>
-                <td><?php echo $row->Nombre; ?></td>
+                <td><?php echo $row->Nombres; ?></td>
                 <td><?php echo $row->ApPaterno; ?></td>
                 <td><?php echo $row->ApMaterno; ?></td>
                 <td><?php echo $row->TipoTrabajo; ?></td>

@@ -8,7 +8,7 @@ class Docentes_model extends CI_Model{
     }
 
     function getDocentes(){
-    	$this->db->select('trabajadores.ID_Trabajador, trabajadores.Nombre, trabajadores.ApPaterno, trabajadores.ApMaterno, trabajadores.TipoTrabajo, cuentas.Usuario, cuentas.Contrasena');
+    	$this->db->select('trabajadores.ID_Trabajador, trabajadores.Nombres, trabajadores.ApPaterno, trabajadores.ApMaterno, trabajadores.TipoTrabajo, cuentas.Usuario, cuentas.Contrasena');
         $this->db->from('trabajadores');
         $this->db->join('cuentas', 'cuentas.ID_Cuenta = trabajadores.ID_Cuenta');
         $query = $this->db->get();
@@ -16,7 +16,7 @@ class Docentes_model extends CI_Model{
     }
 
     function getDocentesID($id){
-        $this->db->select('trabajadores.ID_Trabajador, trabajadores.Nombre, trabajadores.ApPaterno, trabajadores.ApMaterno, trabajadores.TipoTrabajo, cuentas.Usuario, cuentas.Contrasena');
+        $this->db->select('trabajadores.ID_Trabajador, trabajadores.Nombres, trabajadores.ApPaterno, trabajadores.ApMaterno, trabajadores.TipoTrabajo, cuentas.Usuario, cuentas.Contrasena');
         $this->db->from('trabajadores');
         $this->db->join('cuentas', 'cuentas.ID_Cuenta = trabajadores.ID_Cuenta');
         $this->db->where('ID_Trabajador', $id);
@@ -32,7 +32,7 @@ class Docentes_model extends CI_Model{
 
         $id=mysql_insert_id();
 
-        $datos = array('Nombre' => $nombre,
+        $datos = array('Nombres' => $nombre,
                         'ApPaterno' => $paterno,
                         'ApMaterno' => $materno,
                         'TipoTrabajo' => $tipot,
@@ -42,7 +42,7 @@ class Docentes_model extends CI_Model{
     }
 
     function updateDoc($id, $nombre, $paterno, $materno, $tipot, $user, $contrasena){
-        $datos = array('Nombre' => $nombre,
+        $datos = array('Nombres' => $nombre,
                         'ApPaterno' => $paterno,
                         'ApMaterno' => $materno,
                         'TipoTrabajo' => $tipot);
@@ -68,11 +68,11 @@ class Docentes_model extends CI_Model{
     }
 
     public function buscador($abuscar){
-    	$this->db->select('trabajadores.ID_Trabajador, trabajadores.Nombre, trabajadores.ApPaterno, trabajadores.ApMaterno, trabajadores.TipoTrabajo, cuentas.Usuario, cuentas.Contrasena');
+    	$this->db->select('trabajadores.ID_Trabajador, trabajadores.Nombres, trabajadores.ApPaterno, trabajadores.ApMaterno, trabajadores.TipoTrabajo, cuentas.Usuario, cuentas.Contrasena');
         $this->db->from('trabajadores');
         $this->db->join('cuentas', 'cuentas.ID_Cuenta = trabajadores.ID_Cuenta');
 
-    	$this->db->or_like('Nombre',$abuscar,'after');
+    	$this->db->or_like('Nombres',$abuscar,'after');
     	$this->db->or_like('ApPaterno',$abuscar,'after');
     	$this->db->or_like('ApMaterno',$abuscar,'after');
     	$this->db->or_like('Usuario',$abuscar,'after');

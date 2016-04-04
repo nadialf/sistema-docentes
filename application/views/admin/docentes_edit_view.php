@@ -24,7 +24,7 @@
               <div class="col-xs-4">
                 <span class="input-group-addon">Nombre(s)</span>
                 <input type="text" class="form-control" aria-describedby="sizing-addon2" name="nombre" required 
-                value="<?php echo $query['0']->Nombre ?>">
+                value="<?php echo $query['0']->Nombres ?>">
               </div>
               <div class="col-xs-4">
                 <span class="input-group-addon">Apellido paterno</span>
