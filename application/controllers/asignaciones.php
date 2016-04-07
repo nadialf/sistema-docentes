@@ -18,9 +18,11 @@ class Asignaciones extends CI_Controller {
 	}
 
 	public function showDocentes(){
-		$q = strtolower($_GET['term']);
-		$valores = $this->asignaciones_model->getDocente($q);
-		echo json_encode($valores);  
-	}
+        $q = strtolower($_GET['term']);
+        $this->load->database('default');
+        $this->load->model('asignaciones_model');
+        $valores = $this->asignaciones_model->verDocentes($q);
+        echo json_encode($valores);  
+  }
 
 }

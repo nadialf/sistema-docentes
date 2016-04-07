@@ -1,9 +1,8 @@
- <div class="content-wrapper" style="background-color: #e5e5e5; margin-top:0px;">
-   
-    <br>
-    <div id="exTab3" class="tab">
-      
-      <ul  class="nav nav-pills">
+<div class="content-wrapper" style="background-color: #e5e5e5; margin-top:0px;">
+  <br>
+  <div id="exTab3" class="tab"> 
+
+    <ul  class="nav nav-pills">
       <li class="active" data-toggle="tab">
         <a href="#1b" data-toggle="tab">
           <i class="fa fa-list"></i>     Asignaciones registradas 
@@ -15,18 +14,18 @@
         </a>
       </li>
       <li data-toggle="tab">
-          <a href="#3b" data-toggle="tab">
-            <i class="glyphicon glyphicon-search"></i>     Búsqueda
-          </a>
-        </li>
+        <a href="#3b" data-toggle="tab">
+          <i class="glyphicon glyphicon-search"></i>     Búsqueda
+        </a>
+      </li>
     </ul>
 
-      <div style="background-color:#e5e5e5; height:3px;"></div>
+    <div style="background-color:#e5e5e5; height:3px;"></div>
 
       <div class="tab-content clearfix">
         
         <div class="tab-pane active" id="1b">
-        </br>
+          </br>
           <table class="table">
             <thead>
               <tr>
@@ -39,21 +38,20 @@
               </tr>
             </thead>
             <?php foreach($query as $row): ?>
-              <tr>
-                <td><?php echo $row->Nombres.' '.$row->ApPaterno.' '.$row->ApMaterno; ?></td>
-                <td><?php echo $row->Tipo; ?></td>
-                <td><?php echo $row->Nombre; ?></td>
-                <td><?php echo $row->Fecha_Incorporacion; ?></td>
-                <td>
-                  <a href='#' onclick="editar('<?=base_url()?>asignaciones/modificar/<?=$row->ID_Asignacion?>');"><i class='glyphicon glyphicon-pencil'></i></a>
-                </td>
-                <td>
-                  <a href='#' onclick="elimina('<?=base_url()?>asignaciones/delete/<?=$row->ID_Asignacion?>');"><i class='glyphicon glyphicon-trash'></i></a>
-                </td>
-              </tr>
+            <tr>
+              <td><?php echo $row->Nombres.' '.$row->ApPaterno.' '.$row->ApMaterno; ?></td>
+              <td><?php echo $row->Tipo; ?></td>
+              <td><?php echo $row->Nombre; ?></td>
+              <td><?php echo $row->Fecha_Incorporacion; ?></td>
+              <td>
+                <a href='#' onclick="editar('');"><i class='glyphicon glyphicon-pencil'></i></a>
+              </td>
+              <td>
+                <a href='#' onclick="elimina('');"><i class='glyphicon glyphicon-trash'></i></a>
+              </td>
+            </tr>
             <?php endforeach; ?>
           </table>
-
         </div>
           
 
@@ -66,9 +64,9 @@
           
           <div style="margin-left:20px; margin-right:20px;">
             <div class="content-wrapper"  style="width:100%; min-height: auto; height:auto; margin-left;10px; margin-right:10px;">
-              <div class="col-xs-8">
-                <span class="input-group-addon">Docente</span>
-                <input type="text" class="form-control" aria-describedby="sizing-addon2" id="nombreD" name="nombre" required>
+              <div class="col-xs-8 ui-widget">
+                <span class="input-group-addon" id="sizing- addon2">Docente</span>
+                  <input type="text" class="form-control" aria-describedby="sizing-addon2" name="docente" id="docente" required="required">
               </div>
               <div class="col-xs-4">
                 <span class="input-group-addon">Tipo de actividad</span>
@@ -100,7 +98,7 @@
 
           <br>
           <?=form_close()?>
-        </div>
+        </div> <!--NUEVA ASIGNACIÓN SECTION END -->
 
 
 
@@ -112,18 +110,16 @@
           </div>
           <table class="table table-hover table-responsive" id="tableSearch">
           </table>
-        </div>
+        </div> <!-- BÚSQUEDA SECTION END -->
 
       </div>
-
     </div>
-
   </div> <!-- CONTENT-WRAPPER SECTION END-->
 
-    <script>
+<script>
     $(document).ready(function($){
 
-     $('#nombreD').autocomplete({
+     $('#docente').autocomplete({
       source:'<?php echo base_url('asignaciones/showDocentes');?>',
       minLength:1,
       // optional
@@ -135,4 +131,10 @@
       }
      });
     });
-    </script>
+</script>
+
+<script type="text/javascript">
+  jQuery(document).ready(function() {
+      jQuery("#datepicker").datepicker();
+  });
+</script>

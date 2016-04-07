@@ -1,6 +1,3 @@
-<div class="clear"></div>
-
-
 <footer style="bottom: 0; width: 100%; position: fixed;">
 	<div class="container">
 	    <div class="row">
