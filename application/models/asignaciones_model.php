@@ -16,7 +16,7 @@ class Asignaciones_model extends CI_Model{
         return $query->result();
     }
 
-    function verDocentes($q){
+    function get_docente($q){
         $this->db->select();
         $this->db->like('Nombres', $q);
         $this->db->or_like('ApPaterno', $q);
@@ -26,9 +26,9 @@ class Asignaciones_model extends CI_Model{
 
         if($query->num_rows > 0){
             foreach ($query->result() as $row){
-                    $new_row['id'] = htmlentities(stripslashes($row->ID_Trabajador));
-                    $new_row['value'] = htmlentities(stripslashes($row->Nombres.' '.$row->ApPaterno.' '.$row->ApMaterno));
-                    $row_set[] = $new_row;                
+                $new_row['id'] = htmlentities(stripslashes($row->ID_Trabajador));
+                $new_row['value'] = htmlentities(stripslashes($row->Nombres.' '.$row->ApPaterno.' '.$row->ApMaterno));
+                $row_set[] = $new_row;
             }
             return $row_set;
         }

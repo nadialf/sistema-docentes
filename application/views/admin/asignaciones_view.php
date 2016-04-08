@@ -66,11 +66,11 @@
             <div class="content-wrapper"  style="width:100%; min-height: auto; height:auto; margin-left;10px; margin-right:10px;">
               <div class="col-xs-8 ui-widget">
                 <span class="input-group-addon" id="sizing- addon2">Docente</span>
-                  <input type="text" class="form-control" aria-describedby="sizing-addon2" name="docente" id="docente" required="required">
+                  <input type="text" class="form-control" aria-describedby="sizing-addon2" name="nombreP" id="nombreP" required>
               </div>
               <div class="col-xs-4">
                 <span class="input-group-addon">Tipo de actividad</span>
-                <input type="text" class="form-control" aria-describedby="sizing-addon2" name="tipo" required>
+                <input type="text" class="form-control" aria-describedby="sizing-addon2" name="tipo" id="tipo" required>
               </div>
             </div>
           </div>
@@ -81,11 +81,11 @@
             <div class="content-wrapper"  style="width:100%; min-height: auto; height:auto; margin-left;10px; margin-right:10px;">
               <div class="col-xs-4">
                 <span class="input-group-addon">Actividad</span>
-                <input type="text" class="form-control" aria-describedby="sizing-addon2" name="actividad" required>
+                <input type="text" class="form-control" aria-describedby="sizing-addon2" name="actividad" id="actividad" required>
               </div>
               <div class="col-xs-4">
                 <span class="input-group-addon" id="sizing-addon2">Fecha de incorporación</span>
-                <input type="date" class="form-control" aria-describedby="sizing-addon2" data-provide="datepicker" name="fecha" required>
+                <input type="date" class="form-control" aria-describedby="sizing-addon2" data-provide="datepicker" name="fecha" id="fecha" required>
               </div>
             </div>
           </div>
@@ -116,11 +116,11 @@
     </div>
   </div> <!-- CONTENT-WRAPPER SECTION END-->
 
-<script>
+  <script>
     $(document).ready(function($){
 
-     $('#docente').autocomplete({
-      source:'<?php echo base_url('asignaciones/showDocentes');?>',
+     $('#nombreP').autocomplete({
+      source:'<?php echo base_url('asignaciones/show_Docente');?>',
       minLength:1,
       // optional
       html: true,
@@ -131,9 +131,9 @@
       }
      });
     });
-</script>
+    </script>
 
-<script type="text/javascript">
+  <script type="text/javascript">
   jQuery(document).ready(function() {
       jQuery("#datepicker").datepicker();
   });

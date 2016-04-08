@@ -70,7 +70,7 @@ class Docentes extends CI_Controller {
         echo "<th>Apellido paterno</th>";
         echo "<th>Apellido materno</th>";
         echo "<th>Tipo de trabajador</th>";
-        echo "<th>Usuario</th>";
+        echo "<th>Nombre de usuario</th>";
         echo "<th>Contraseña</th>";
         echo "<th></th>";
         echo "<th></th>";

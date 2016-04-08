@@ -37,7 +37,7 @@
                 <th>Apellido paterno</th>
                 <th>Apellido materno</th>
                 <th>Tipo de trabajador</th>
-                <th>Usuario</th>
+                <th>Nombre de usuario</th>
                 <th>Contraseña</th>
                 <th></th>
                 <th></th>
