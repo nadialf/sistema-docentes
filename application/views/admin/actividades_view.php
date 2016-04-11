@@ -70,7 +70,14 @@
               </div>
               <div class="col-xs-4">
                 <span class="input-group-addon">Tipo de actividad</span>
-                <input type="text" class="form-control" aria-describedby="sizing-addon2" name="tipo" required>
+                <select class="form-control" value="tipo" id="tipo" required>
+                  <option></option>
+                  <option value="Conferencia" name="Conferencia">Conferencia</option>
+                  <option value="Congreso" name="Congreso">Congreso</option>
+                  <option value="Festival" name="Festival">Festival</option>
+                  <option value="Proyecto" name="Proyecto">Proyecto</option>
+                  <option value="Taller" name="Taller">Taller</option>
+                </select>
               </div>
               <div class="col-xs-4">
                 <span class="input-group-addon">Lugar</span>

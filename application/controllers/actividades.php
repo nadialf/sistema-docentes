@@ -62,7 +62,7 @@ class Actividades extends CI_Controller {
     $delete = $this->actividades_model->deleteAct($id);
   }
 
-	public function autocompletar(){
+	public function autocompletarB(){
     $this->load->database('default');
     $this->load->model('actividades_model');
       $data = array();
@@ -87,7 +87,7 @@ class Actividades extends CI_Controller {
         echo "</thead>";
         foreach($search->result() as $fila){
           	echo "<tr>";
-            echo "<td>".$fila->Nombre."<td>";
+            echo "<td>".$fila->Nombre."</td>";
             echo "<td>".$fila->Tipo."</td>";
             echo "<td>".$fila->Lugar."</td>";
             echo "<td>".$fila->Fecha_Inicio."</td>";
@@ -113,7 +113,7 @@ class Actividades extends CI_Controller {
 
   }
 
-    public function autocompletarB(){
+    public function autocompletar(){
     $this->load->database('default');
     $this->load->model('actividades_model');
       $data = array();
@@ -136,7 +136,7 @@ class Actividades extends CI_Controller {
         echo "</thead>";
         foreach($search->result() as $fila){
             echo "<tr>";
-            echo "<td>".$fila->Nombre."<td>";
+            echo "<td>".$fila->Nombre."</td>";
             echo "<td>".$fila->Tipo."</td>";
             echo "<td>".$fila->Lugar."</td>";
             echo "<td>".$fila->Fecha_Inicio."</td>";

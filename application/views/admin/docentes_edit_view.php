@@ -49,7 +49,7 @@
                 value="<?php echo $query['0']->TipoTrabajo ?>">
               </div>
               <div class="col-xs-4">
-                <span class="input-group-addon">Usuario</span>
+                <span class="input-group-addon">Nombre de usuario</span>
                 <input type="text" class="form-control" aria-describedby="sizing-addon2" name="user" required
                 value="<?php echo $query['0']->Usuario ?>">
               </div>

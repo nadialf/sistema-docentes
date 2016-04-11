@@ -78,7 +78,7 @@ class Docentes extends CI_Controller {
         echo "</thead>";
         foreach($search->result() as $fila){
           	echo "<tr>";
-            echo "<td>".$fila->ID_Trabajador."<td>";
+            echo "<td>".$fila->ID_Trabajador."</td>";
             echo "<td>".$fila->Nombres."</td>";
             echo "<td>".$fila->ApPaterno."</td>";
             echo "<td>".$fila->ApMaterno."</td>";

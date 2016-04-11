@@ -58,7 +58,7 @@
 
         <div class="tab-pane" id="2b">
 
-        <?=  form_open(base_url().'actividades/agregar')?>
+        <?=  form_open(base_url().'asignaciones/newAsignacion')?>
           <br>
           <h2 style="text-align:center;">Datos de asignación</h2>
           
@@ -66,11 +66,18 @@
             <div class="content-wrapper"  style="width:100%; min-height: auto; height:auto; margin-left;10px; margin-right:10px;">
               <div class="col-xs-8 ui-widget">
                 <span class="input-group-addon" id="sizing- addon2">Docente</span>
-                  <input type="text" class="form-control" aria-describedby="sizing-addon2" name="nombreP" id="nombreP" required>
+                  <input type="text" class="form-control" aria-describedby="sizing-addon2" name="docente" id="docente" required>
               </div>
               <div class="col-xs-4">
                 <span class="input-group-addon">Tipo de actividad</span>
-                <input type="text" class="form-control" aria-describedby="sizing-addon2" name="tipo" id="tipo" required>
+                <select class="form-control" value="tipo" id="tipo" required>
+                  <option></option>
+                  <option value="Conferencia" name="Conferencia">Conferencia</option>
+                  <option value="Congreso" name="Congreso">Congreso</option>
+                  <option value="Festival" name="Festival">Festival</option>
+                  <option value="Proyecto" name="Proyecto">Proyecto</option>
+                  <option value="Taller" name="Taller">Taller</option>
+                </select>
               </div>
             </div>
           </div>
@@ -116,22 +123,63 @@
     </div>
   </div> <!-- CONTENT-WRAPPER SECTION END-->
 
-  <script>
-    $(document).ready(function($){
-
-     $('#nombreP').autocomplete({
-      source:'<?php echo base_url('asignaciones/show_Docente');?>',
+<!-- <script>
+  $(document).ready(function($){
+    $('#docente').autocomplete({
+      source:'<?php echo base_url('asignaciones/showDocentes');?>',
       minLength:1,
       // optional
       html: true,
-
       // optional (if other layers overlap the autocomplete list)
       open: function(event, ui) {
-       $(".ui-autocomplete").css("z-index", 1000);
+        $(".ui-autocomplete").css("z-index", 1000);
       }
-     });
     });
-    </script>
+  });
+</script>-->
+
+<script>
+    $(document).ready(function () {
+    $("#docente").autocomplete({
+        source: function(request, response) {
+            $.ajax({
+                url: "<?php echo base_url().'asignaciones/showDocentes' ?>",
+                dataType: "json",
+                minLength:1,
+                data: {
+                    term: request.term,
+                },
+                success: function(data) {
+                    response(data);
+                    //alert('You selected:');
+                }
+            });
+        },
+    });
+  });
+  </script>
+
+<script>
+  $(document).ready(function () {
+    $("#actividad").autocomplete({
+        source: function(request, response) {
+            $.ajax({
+                url: "<?php echo base_url().'asignaciones/showActividades' ?>",
+                dataType: "json",
+                minLength:1,
+                data: {
+                    term: request.term,
+                    tipo: $("#tipo").val(),
+                },
+                success: function(data) {
+                    response(data);
+                    //alert('You selected:');
+                }
+            });
+        },
+    });
+  });
+  </script>
 
   <script type="text/javascript">
   jQuery(document).ready(function() {
