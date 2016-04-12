@@ -66,7 +66,7 @@ class Asignaciones_model extends CI_Model{
     function getActividades($q, $tipo){
         if ($tipo == "") {
             $new_row['id'] = htmlentities(stripslashes(0));
-            $new_row['value'] = htmlentities(stripslashes("Seleccione tipo de actividad"));
+            $new_row['value'] = htmlentities(stripslashes("Seleccione el tipo de actividad"));
             $row_set[] = $new_row;
             return $row_set;
         }
@@ -78,12 +78,12 @@ class Asignaciones_model extends CI_Model{
         if($query->num_rows > 0){
             foreach ($query->result() as $row){
                 if($row->Tipo == $tipo){
-                    $new_row['id'] = htmlentities(stripslashes($row->ID_Actividad));
-                    $new_row['value'] = htmlentities(stripslashes($row->Nombre));
+                    $new_row['id'] = htmlspecialchars($row->ID_Actividad);
+                    $new_row['value'] = htmlspecialchars($row->Nombre);
                     $row_set[] = $new_row;
                 }else{
-                    $new_row['id'] = htmlentities(stripslashes($row->ID_Actividad));
-                    $new_row['value'] = htmlentities(stripslashes("La actividad no pertenece al tipo seleccionado"));
+                    $new_row['id'] = htmlspecialchars($row->ID_Actividad);
+                    $new_row['value'] = htmlspecialchars("La actividad no pertenece al tipo seleccionado");
                     $row_set[] = $new_row;
                 }
                 

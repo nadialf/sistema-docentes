@@ -69,7 +69,7 @@
                 <input type="text" class="form-control" aria-describedby="sizing-addon2" name="nombre" required>
               </div>
               <div class="col-xs-4">
-                <span class="input-group-addon">Tipo de actividad</span>
+                <span class="input-group-addon" id="sizing-addon2">Tipo de actividad</span>
                 <select class="form-control" value="tipo" id="tipo" required>
                   <option></option>
                   <option value="Conferencia" name="Conferencia">Conferencia</option>
