@@ -41,4 +41,38 @@ class Asignaciones extends CI_Controller {
     	echo json_encode($valores);  
   }
 
+  public function autocompletar(){
+    $data = array();
+    if($this->input->is_ajax_request() && $this->input->post('info')){
+      $abuscar = $this->security->xss_clean($this->input->post('info'));
+      $search = $this->asignaciones_model->buscador(trim($abuscar));
+        echo "<thead>";
+        echo "<tr>";
+        echo "<th>Docente</th>";
+        echo "<th>Tipo</th>";
+        echo "<th>Actividad</th>";
+        echo "<th>Fecha de incorporación</th>";
+        echo "<th></th>";
+        echo "<th></th>";
+        echo "</tr>";
+        echo "</thead>";
+        foreach($search->result() as $fila){
+            echo "<tr>";
+            echo "<td>".$fila->Nombres.' '.$fila->ApPaterno.' '.$fila->ApMaterno."</td>";
+            echo "<td>".$fila->Tipo."</td>";
+            echo "<td>".$fila->Nombre."</td>";
+            echo "<td>".$fila->Fecha_Incorporacion."</td>";
+            echo "<td><a href='".base_url()."asignaciones/modificar/$fila->ID_Actividad'> <i class='glyphicon glyphicon-pencil' title='Editar'></i></a></td>";
+            echo "<td><a href='".base_url()."asignaciones/delete/$fila->ID_Actividad'> <i class='glyphicon glyphicon-trash' title='Eliminar'></i></a></td>";
+            echo "</tr>";
+        ?>
+        <?php
+        }
+      }else{
+      ?>
+        <p><?php  echo "<div class='alert alert-warning'><p class='text-center'>No hay actividades registradas con el nombre, tipo o lugar introducido.</p></div>"; ?></p>
+      <?php
+      }
+    }
+
 }

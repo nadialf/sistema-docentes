@@ -90,5 +90,23 @@ class Asignaciones_model extends CI_Model{
             }
             return $row_set;
         }
+    }
+
+    public function buscador($abuscar){
+        $this->db->select('trabajadores.Nombres, trabajadores.ApPaterno, trabajadores.ApMaterno, actividades.Tipo, actividades.Nombre, asignaciones.Fecha_Incorporacion, asignaciones.ID_Asignacion');
+        $this->db->from('asignaciones');
+        $this->db->join('trabajadores', 'trabajadores.ID_Trabajador = asignaciones.ID_Trabajador');
+        $this->db->join('actividades', 'actividades.ID_Actividad = asignaciones.ID_Actividad');
+        $this->db->or_like('trabajadores.Nombres',$abuscar,'after');
+        $this->db->or_like('actividades.Tipo',$abuscar,'after');
+        $this->db->or_like('actividades.Nombre',$abuscar,'after');
+        $resultados = $this->db->get();
+
+        if($resultados->num_rows() > 0){
+            return $resultados;
+            
+        }else{
+            return FALSE;
+        }
     }  
 }

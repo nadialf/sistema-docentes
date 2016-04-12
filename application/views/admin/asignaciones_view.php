@@ -44,10 +44,10 @@
               <td><?php echo $row->Nombre; ?></td>
               <td><?php echo $row->Fecha_Incorporacion; ?></td>
               <td>
-                <a href='#' onclick="editar('');"><i class='glyphicon glyphicon-pencil'></i></a>
+                <a href='#' onclick="editar('');"><i class='glyphicon glyphicon-pencil' title='Editar'></i></a>
               </td>
               <td>
-                <a href='#' onclick="elimina('');"><i class='glyphicon glyphicon-trash'></i></a>
+                <a href='#' onclick="elimina('');"><i class='glyphicon glyphicon-trash' title='Eliminar'></i></a>
               </td>
             </tr>
             <?php endforeach; ?>
@@ -123,21 +123,6 @@
     </div>
   </div> <!-- CONTENT-WRAPPER SECTION END-->
 
-<!-- <script>
-  $(document).ready(function($){
-    $('#docente').autocomplete({
-      source:'<?php echo base_url('asignaciones/showDocentes');?>',
-      minLength:1,
-      // optional
-      html: true,
-      // optional (if other layers overlap the autocomplete list)
-      open: function(event, ui) {
-        $(".ui-autocomplete").css("z-index", 1000);
-      }
-    });
-  });
-</script>-->
-
 <script>
     $(document).ready(function () {
     $("#docente").autocomplete({
@@ -185,4 +170,28 @@
   jQuery(document).ready(function() {
       jQuery("#datepicker").datepicker();
   });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+    $(".autocompletar").keyup(function(){
+      var info = $(this).val();
+      $.post('<?php echo base_url().'asignaciones/autocompletar' ?>',{ info : info }, function(data){
+        if(data != ''){
+          $("#tableSearch").html(data);
+        }else{
+          $("#tableSearch").html('');
+        }
+      })
+    })
+
+    })
+      function elimina(url){
+        if (confirm("¿Está seguro que desea eliminar la asignación?") ){
+          location.href=url;
+        }
+      }
+      function editar(url){
+        location.href=url;
+      }
 </script>
