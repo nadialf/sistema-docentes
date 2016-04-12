@@ -1,76 +1,34 @@
 <div class="content-wrapper" style="background-color: #e5e5e5; margin-top:0px;">
   <br>
-  <div id="exTab3" class="tab"> 
+    <div id="exTab3" class="tab">
+      <ul  class="nav nav-pills">
+        <li class="active" data-toggle="tab">
+          <a href="#1b" data-toggle="tab">
+            <i class="fa fa-pencil"></i>     Edición de asignación
+          </a>
+        </li>
+      </ul>
 
-    <ul  class="nav nav-pills">
-      <li class="active" data-toggle="tab">
-        <a href="#1b" data-toggle="tab">
-          <i class="fa fa-list"></i>     Asignaciones registradas 
-        </a>
-      </li>
-      <li data-toggle="tab">
-        <a href="#2b" data-toggle="tab">
-          <i class="fa fa-plus"></i>     Nueva asignación
-        </a>
-      </li>
-      <li data-toggle="tab">
-        <a href="#3b" data-toggle="tab">
-          <i class="glyphicon glyphicon-search"></i>     Búsqueda
-        </a>
-      </li>
-    </ul>
-
-    <div style="background-color:#e5e5e5; height:3px;"></div>
+      <div style="background-color:#e5e5e5; height:3px;"></div>
 
       <div class="tab-content clearfix">
-        
+                       
         <div class="tab-pane active" id="1b">
-          </br>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Docente</th>
-                <th>Tipo</th>
-                <th>Actividad</th>
-                <th>Fecha de incorporación</th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            <?php foreach($query as $row): ?>
-            <tr>
-              <td><?php echo $row->Nombres.' '.$row->ApPaterno.' '.$row->ApMaterno; ?></td>
-              <td><?php echo $row->Tipo; ?></td>
-              <td><?php echo $row->Nombre; ?></td>
-              <td><?php echo $row->Fecha_Incorporacion; ?></td>
-              <td>
-                <a href='#' onclick="editar('<?=base_url()?>asignaciones/modificar/<?=$row->ID_Asignacion?>');"><i class='glyphicon glyphicon-pencil' title='Editar'></i></a>
-              </td>
-              <td>
-                <a href='#' onclick="elimina('<?=base_url()?>asignaciones/delete/<?=$row->ID_Asignacion?>');"><i class='glyphicon glyphicon-trash' title='Eliminar'></i></a>
-              </td>
-            </tr>
-            <?php endforeach; ?>
-          </table>
-        </div>
-          
-
-
-        <div class="tab-pane" id="2b">
-
-        <?=  form_open(base_url().'asignaciones/newAsignacion')?>
+        <?=  form_open(base_url().'asignaciones/updateAsignacion')?>
           <br>
           <h2 style="text-align:center;">Datos de asignación</h2>
-          
+
+          <input type="hidden" value="<?php echo $query['0']->ID_Asignacion ?>" name="id" id="id">
           <div style="margin-left:20px; margin-right:20px;">
             <div class="content-wrapper"  style="width:100%; min-height: auto; height:auto; margin-left;10px; margin-right:10px;">
               <div class="col-xs-8 ui-widget">
                 <span class="input-group-addon" id="sizing- addon2">Docente</span>
-                  <input type="text" class="form-control" aria-describedby="sizing-addon2" name="docente" id="docente" required>
+                  <input type="text" class="form-control" aria-describedby="sizing-addon2" name="docente" id="docente" required 
+                  value="<?php echo $query['0']->Nombres." ".$query['0']->ApPaterno." ".$query['0']->ApMaterno ?>">
               </div>
               <div class="col-xs-4">
                 <span class="input-group-addon">Tipo de actividad</span>
-                <select class="form-control" value="tipo" id="tipo" required>
+                <select class="form-control" value="<?php echo $query['0']->Tipo ?>" id="tipo" required>
                   <option></option>
                   <option value="Conferencia" name="Conferencia">Conferencia</option>
                   <option value="Congreso" name="Congreso">Congreso</option>
@@ -88,11 +46,11 @@
             <div class="content-wrapper"  style="width:100%; min-height: auto; height:auto; margin-left;10px; margin-right:10px;">
               <div class="col-xs-4">
                 <span class="input-group-addon">Actividad</span>
-                <input type="text" class="form-control" aria-describedby="sizing-addon2" name="actividad" id="actividad" required>
+                <input type="text" class="form-control" aria-describedby="sizing-addon2" name="actividad" id="actividad" required value="<?php echo $query['0']->Nombre ?>">
               </div>
               <div class="col-xs-4">
                 <span class="input-group-addon" id="sizing-addon2">Fecha de incorporación</span>
-                <input type="date" class="form-control" aria-describedby="sizing-addon2" data-provide="datepicker" name="fecha" id="fecha" required>
+                <input type="date" class="form-control" aria-describedby="sizing-addon2" data-provide="datepicker" name="fecha" id="fecha" required value="<?php echo $query['0']->Fecha_Incorporacion ?>">
               </div>
             </div>
           </div>
@@ -105,19 +63,7 @@
 
           <br>
           <?=form_close()?>
-        </div> <!--NUEVA ASIGNACIÓN SECTION END -->
-
-
-
-        <div class="tab-pane" id="3b">
-          <br/>
-          <div class="col-xs-4">
-            <input type="text" class="form-control autocompletar"  name="autocompletar" id="autocompletar" onpaste="return false"  aria-describedby="sizing-addon2" placeholder="Nombre del docente o actividad">
-            <br/>
-          </div>
-          <table class="table table-hover table-responsive" id="tableSearch">
-          </table>
-        </div> <!-- BÚSQUEDA SECTION END -->
+        </div> <!--EDICIÓN ASIGNACIÓN SECTION END -->
 
       </div>
     </div>

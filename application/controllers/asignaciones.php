@@ -75,4 +75,28 @@ class Asignaciones extends CI_Controller {
       }
     }
 
+    public function modificar(){
+    $id = $this->uri->segment(3);
+    $data['query'] = $this->asignaciones_model->getAsignacionesID($id);
+
+    $this->load->view('admin/header');
+    $this->load->view('admin/asignaciones_edit_view', $data);
+    $this->load->view('footer');
+  }
+
+  public function updateAsignacion(){
+    $id = $this->input->post('id');
+    $nombre = $this->input->post('docente');
+    $tipo = $this->input->post('tipo');
+    $lugar = $this->input->post('actividad');
+    $fechaini = $this->input->post('fecha');
+    $insert = $this->asignaciones_model->updateAsig($id, $nombre, $tipo, $lugar, $fechaini, $fechafin);  
+  }
+
+  public function delete(){
+    $id = $this->uri->segment(3);
+    $this->load->model('actividades_model');
+    $delete = $this->actividades_model->deleteAct($id);
+  }
+
 }

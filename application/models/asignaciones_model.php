@@ -7,8 +7,26 @@ class Asignaciones_model extends CI_Model{
 
     }
 
-    public function saveAsignacion($docente, $tipo, $actividad, $fecha){
-        
+    function getAsignaciones(){
+        $this->db->select('trabajadores.Nombres, trabajadores.ApPaterno, trabajadores.ApMaterno, actividades.Tipo, actividades.Nombre, asignaciones.Fecha_Incorporacion, asignaciones.ID_Asignacion');
+        $this->db->from('asignaciones');
+        $this->db->join('trabajadores', 'trabajadores.ID_Trabajador = asignaciones.ID_Trabajador');
+        $this->db->join('actividades', 'actividades.ID_Actividad = asignaciones.ID_Actividad');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    function getAsignacionesID($id){
+        $this->db->select('trabajadores.Nombres, trabajadores.ApPaterno, trabajadores.ApMaterno, actividades.Tipo, actividades.Nombre, asignaciones.Fecha_Incorporacion, asignaciones.ID_Asignacion');
+        $this->db->from('asignaciones');
+        $this->db->join('trabajadores', 'trabajadores.ID_Trabajador = asignaciones.ID_Trabajador');
+        $this->db->join('actividades', 'actividades.ID_Actividad = asignaciones.ID_Actividad');
+        $this->db->where('ID_Asignacion', $id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function saveAsignacion($docente, $tipo, $actividad, $fecha){  
         $this->db->select('ID_Trabajador, CONCAT(Nombres," ",ApPaterno," ",ApMaterno) AS name', FALSE);
         $this->db->from('trabajadores');
         $query = $this->db->get();
@@ -36,13 +54,33 @@ class Asignaciones_model extends CI_Model{
         $this->db->insert('asignaciones', $array);
     }
 
-    function getAsignaciones(){
-    	$this->db->select('trabajadores.Nombres, trabajadores.ApPaterno, trabajadores.ApMaterno, actividades.Tipo, actividades.Nombre, asignaciones.Fecha_Incorporacion, asignaciones.ID_Asignacion');
-        $this->db->from('asignaciones');
-        $this->db->join('trabajadores', 'trabajadores.ID_Trabajador = asignaciones.ID_Trabajador');
-        $this->db->join('actividades', 'actividades.ID_Actividad = asignaciones.ID_Actividad');
+    function updateAsig($id, $docente, $tipo, $actividad, $fecha){
+        $this->db->select('ID_Trabajador, CONCAT(Nombres," ",ApPaterno," ",ApMaterno) AS name', FALSE);
+        $this->db->from('trabajadores');
         $query = $this->db->get();
-        return $query->result();
+        foreach ($query->result() as $row) {
+            if ($row->name == $docente) {
+                $ID_Trabajador = $row->ID_Trabajador;
+            }
+        }
+        
+        $this->db->select();
+        $this->db->where('Nombre', $actividad);
+        $query2 = $this->db->get('actividades');
+        if ($query2->num_rows() == 1) {
+            foreach ($query2->result() as $row) {
+                $ID_Actividad = $row->ID_Actividad;
+            }
+        }
+
+        $datos = array('ID_Actividad' => $ID_Actividad,
+                       'ID_Trabajador' => $ID_Trabajador,
+                       'Fecha_Incorporacion' => $fecha
+                       );
+        $this->db->where('ID_Asignacion', $id);
+        $this->db->update('asignaciones', $datos);
+
+        redirect(base_url().'asignaciones');
     }
 
     function getDocentes($q){
