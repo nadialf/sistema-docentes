@@ -37,13 +37,15 @@
                 <th></th>
                 <th>Remitente</th>
                 <th>Mensaje</th>
+                <th>Fecha</th>
               </tr>
             </thead>
             <?php foreach($query as $row): ?>
             <tr>
-              <td><input type="checkbox"></td>
+              <td><input type="checkbox" value="<?php echo $row->ID_Correo ?>" name="<?php echo $row->ID_Correo ?>"></td>
               <td><?php echo $row->Nombres.' '.$row->ApPaterno.' '.$row->ApMaterno; ?></td>
               <td><?php echo $row->Asunto; ?></td>
+              <td><?php echo $row->Fecha_Envio; ?></td>
             </tr>
             <?php endforeach; ?>
           </table>
@@ -54,14 +56,18 @@
           <table class="table">
             <thead>
               <tr>
+                <th></th>
                 <th>Remitente</th>
                 <th>Mensaje</th>
+                <th>Fecha</th>
               </tr>
             </thead>
             <?php foreach($query as $row): ?>
             <tr>
+              <td><input type="checkbox"></td>
               <td><?php echo $row->Nombres.' '.$row->ApPaterno.' '.$row->ApMaterno; ?></td>
               <td><?php echo $row->Asunto; ?></td>
+              <td><?php echo $row->Fecha_Envio; ?></td>
             </tr>
             <?php endforeach; ?>
           </table>
@@ -74,6 +80,7 @@
               <tr>
                 <th>Remitente</th>
                 <th>Mensaje</th>
+                <th>Fecha</th>
                 <th></th>
               </tr>
             </thead>
@@ -81,6 +88,7 @@
             <tr>
               <td><?php echo $row->Nombres.' '.$row->ApPaterno.' '.$row->ApMaterno; ?></td>
               <td><?php echo $row->Asunto; ?></td>
+              <td><?php echo $row->Fecha_Envio; ?></td>
               <td>
                 <a href='#' onclick="elimina('<?=base_url()?>correo/delete/<?=$row->ID_Correo?>');"><i class='glyphicon glyphicon-trash' title='Eliminar'></i></a>
               </td>

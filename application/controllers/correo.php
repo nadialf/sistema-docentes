@@ -17,6 +17,11 @@ class Correo extends CI_Controller {
 		$this->load->view('footer');
 	}
 
+	 public function delete(){
+    	$id = $this->uri->segment(3);
+    	$delete = $this->correo_model->deleteMail($id);
+ 	}
+
 	public function autocompletar(){
     $data = array();
     if($this->input->is_ajax_request() && $this->input->post('info')){
@@ -27,6 +32,7 @@ class Correo extends CI_Controller {
         echo "<th></th>";
         echo "<th>Remitente</th>";
         echo "<th>Asunto</th>";
+        echo "<th>Fecha</th>";
         echo "</tr>";
         echo "</thead>";
         foreach($search->result() as $fila){
@@ -34,6 +40,7 @@ class Correo extends CI_Controller {
             echo "<td><input type='checkbox'></td>";
             echo "<td>".$fila->Nombres.' '.$fila->ApPaterno.' '.$fila->ApMaterno."</td>";
             echo "<td>".$fila->Asunto."</td>";
+            echo "<td>".$fila->Fecha_Envio."</td>";
             echo "</tr>";
         ?>
         <?php

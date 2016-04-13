@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-04-2016 a las 19:58:18
+-- Tiempo de generación: 13-04-2016 a las 21:56:16
 -- Versión del servidor: 5.6.24
 -- Versión de PHP: 5.5.24
 
@@ -33,18 +33,22 @@ CREATE TABLE IF NOT EXISTS `actividades` (
   `Fecha_Inicio` date NOT NULL,
   `Fecha_Fin` date NOT NULL,
   `Lugar` varchar(40) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `actividades`
 --
 
 INSERT INTO `actividades` (`ID_Actividad`, `Tipo`, `Nombre`, `Fecha_Inicio`, `Fecha_Fin`, `Lugar`) VALUES
-(2, 'Proyecto', 'SAC', '2016-03-01', '2016-03-21', 'FEI'),
+(2, 'Proyecto', 'SAC', '2016-02-02', '2016-05-25', 'FEI'),
 (6, 'Festival', 'Install Fest', '2016-04-02', '2016-04-02', 'FEI'),
-(8, 'Congreso', 'CONISOFT', '2016-02-01', '2016-02-19', 'Museo de Antrología'),
+(8, 'Congreso', 'CONISOFT', '2016-02-01', '2016-02-19', 'Museo de Antropología'),
 (9, 'Taller', 'Java', '2015-09-02', '2015-09-02', 'FEI'),
-(10, 'Conferencia', 'Arduino', '2016-04-01', '2016-04-01', 'Museo de Antrología');
+(10, 'Conferencia', 'Arduino', '2016-04-01', '2016-04-01', 'Museo de Antropología'),
+(11, 'Festival', 'FLISoL 2016', '2016-04-23', '2016-04-23', 'FEI'),
+(12, 'Conferencia', 'Redes', '2016-04-14', '2016-04-13', 'Museo de Antropología'),
+(13, 'Proyecto', 'CEPII', '2016-04-01', '2016-04-27', 'FEI'),
+(14, 'Conferencia', 'Parallel programming model', '2015-12-05', '2015-12-05', 'Auditorio FEI');
 
 -- --------------------------------------------------------
 
@@ -57,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `asignaciones` (
   `ID_Trabajador` int(10) NOT NULL,
   `Fecha_Incorporacion` date NOT NULL,
   `ID_Asignacion` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `asignaciones`
@@ -66,8 +70,15 @@ CREATE TABLE IF NOT EXISTS `asignaciones` (
 INSERT INTO `asignaciones` (`ID_Actividad`, `ID_Trabajador`, `Fecha_Incorporacion`, `ID_Asignacion`) VALUES
 (2, 7, '2016-04-04', 1),
 (6, 11, '2016-03-22', 2),
-(8, 1, '2016-03-22', 3),
-(9, 16, '2016-04-03', 4);
+(9, 16, '2016-04-03', 4),
+(10, 8, '2016-04-11', 5),
+(8, 4, '2016-12-31', 6),
+(10, 15, '2017-02-02', 7),
+(9, 5, '2014-06-29', 8),
+(13, 10, '2016-04-02', 9),
+(11, 2, '2016-04-12', 10),
+(14, 14, '2015-12-01', 11),
+(2, 1, '2016-02-02', 13);
 
 -- --------------------------------------------------------
 
@@ -92,8 +103,20 @@ CREATE TABLE IF NOT EXISTS `correos` (
   `ID_Remitente` int(10) NOT NULL,
   `Destinatario` varchar(20) NOT NULL,
   `Asunto` varchar(50) NOT NULL,
-  `Leido` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `Leido` tinyint(1) NOT NULL,
+  `Fecha_Envio` date NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `correos`
+--
+
+INSERT INTO `correos` (`ID_Correo`, `ID_Remitente`, `Destinatario`, `Asunto`, `Leido`, `Fecha_Envio`) VALUES
+(3, 19, 'Admin', 'No estoy asignado al congreso CONISOFT', 1, '2016-04-13'),
+(4, 4, 'Admin', 'No estoy asignado al taller Java', 1, '2016-04-12'),
+(5, 16, 'Admin', 'No estoy asignado al proyecto CEPII', 1, '2016-04-03'),
+(6, 5, 'Admin', 'No estoy asignado la conferencia Arduino', 1, '2016-01-08'),
+(7, 15, 'Admin', 'No estoy asignado a la conferencia Redes', 1, '2016-04-13');
 
 -- --------------------------------------------------------
 
@@ -106,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `cuentas` (
   `Usuario` varchar(10) NOT NULL,
   `Contrasena` varchar(10) NOT NULL,
   `TipoUsuario` varchar(10) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `cuentas`
@@ -127,7 +150,9 @@ INSERT INTO `cuentas` (`ID_Cuenta`, `Usuario`, `Contrasena`, `TipoUsuario`) VALU
 (14, 'Docente14', '1234', '3'),
 (15, 'DocenteX', '1234', '3'),
 (16, 'Docente16', '1234', '3'),
-(18, 'prueba', '123456', '3');
+(18, 'Prueba', '123456', '3'),
+(19, 'hola', '123456', '3'),
+(20, 'arabogu', '1234', '3');
 
 -- --------------------------------------------------------
 
@@ -154,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `trabajadores` (
   `ApMaterno` varchar(30) NOT NULL,
   `TipoTrabajo` varchar(10) NOT NULL,
   `ID_Cuenta` int(10) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `trabajadores`
@@ -175,7 +200,9 @@ INSERT INTO `trabajadores` (`ID_Trabajador`, `Nombres`, `ApPaterno`, `ApMaterno`
 (14, 'Juan Carlos', 'Pérez', 'Arriaga', 'PTC', 14),
 (15, 'Alfonso', 'Sánchez', 'Orea', 'PTC', 15),
 (16, 'Jesús Roberto', 'Méndez', 'Ortíz', 'PTC', 16),
-(18, 'prueba', 'prueba', 'prueba', 'PTC', 18);
+(18, 'Prueba', 'Prueba', 'Prueba', 'PTC', 18),
+(19, 'memowii', 'hola', 'hola', 'hola', 19),
+(20, 'araceli', 'gamboa', 'gutiertez', 'estudiant', 20);
 
 --
 -- Índices para tablas volcadas
@@ -231,12 +258,12 @@ ALTER TABLE `trabajadores`
 -- AUTO_INCREMENT de la tabla `actividades`
 --
 ALTER TABLE `actividades`
-  MODIFY `ID_Actividad` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+  MODIFY `ID_Actividad` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT de la tabla `asignaciones`
 --
 ALTER TABLE `asignaciones`
-  MODIFY `ID_Asignacion` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `ID_Asignacion` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT de la tabla `constancias`
 --
@@ -246,12 +273,12 @@ ALTER TABLE `constancias`
 -- AUTO_INCREMENT de la tabla `correos`
 --
 ALTER TABLE `correos`
-  MODIFY `ID_Correo` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Correo` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `cuentas`
 --
 ALTER TABLE `cuentas`
-  MODIFY `ID_Cuenta` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
+  MODIFY `ID_Cuenta` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT de la tabla `solicitudes`
 --
@@ -261,7 +288,7 @@ ALTER TABLE `solicitudes`
 -- AUTO_INCREMENT de la tabla `trabajadores`
 --
 ALTER TABLE `trabajadores`
-  MODIFY `ID_Trabajador` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
+  MODIFY `ID_Trabajador` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 --
 -- Restricciones para tablas volcadas
 --
