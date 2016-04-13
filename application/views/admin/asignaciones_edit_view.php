@@ -29,7 +29,8 @@
               <div class="col-xs-4">
                 <span class="input-group-addon">Tipo de actividad</span>
                 <select class="form-control" value="<?php echo $query['0']->Tipo ?>" id="tipo" required>
-                  <option></option>
+                  <option value="<?php echo $query['0']->Tipo ?>" name"<?php echo $query['0']->Tipo ?>">
+                          <?php echo $query['0']->Tipo ?></option>
                   <option value="Conferencia" name="Conferencia">Conferencia</option>
                   <option value="Congreso" name="Congreso">Congreso</option>
                   <option value="Festival" name="Festival">Festival</option>

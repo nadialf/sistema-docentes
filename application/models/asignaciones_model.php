@@ -83,6 +83,12 @@ class Asignaciones_model extends CI_Model{
         redirect(base_url().'asignaciones');
     }
 
+    function deleteAsig($id){
+        $this->db->where('ID_Asignacion', $id);
+        $this->db->delete('asignaciones');
+        redirect(base_url().'asignaciones');
+    }
+
     function getDocentes($q){
         $this->db->select();
         $this->db->like('Nombres', $q);
@@ -135,9 +141,12 @@ class Asignaciones_model extends CI_Model{
         $this->db->from('asignaciones');
         $this->db->join('trabajadores', 'trabajadores.ID_Trabajador = asignaciones.ID_Trabajador');
         $this->db->join('actividades', 'actividades.ID_Actividad = asignaciones.ID_Actividad');
-        $this->db->or_like('trabajadores.Nombres',$abuscar,'after');
-        $this->db->or_like('actividades.Tipo',$abuscar,'after');
-        $this->db->or_like('actividades.Nombre',$abuscar,'after');
+        $this->db->like('trabajadores.Nombres',$abuscar,'both');
+        $this->db->or_like('trabajadores.ApPaterno',$abuscar,'both');
+        $this->db->or_like('trabajadores.ApMaterno',$abuscar,'both');
+        $this->db->or_like('trabajadores.Nombres',$abuscar,'both');
+        $this->db->or_like('actividades.Tipo',$abuscar,'both');
+        $this->db->or_like('actividades.Nombre',$abuscar,'both');
         $resultados = $this->db->get();
 
         if($resultados->num_rows() > 0){

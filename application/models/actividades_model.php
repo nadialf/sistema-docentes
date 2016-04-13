@@ -57,9 +57,9 @@ class Actividades_model extends CI_Model{
     	//WHERE localidad LIKE '%$abuscar' limit 12
 
     	$this->db->select();
-    	$this->db->or_like('Nombre',$abuscar,'after');
-    	$this->db->or_like('Tipo',$abuscar,'after');
-    	$this->db->or_like('Lugar',$abuscar,'after');
+    	$this->db->like('Nombre',$abuscar,'both');
+    	$this->db->or_like('Tipo',$abuscar,'both');
+    	$this->db->or_like('Lugar',$abuscar,'both');
     	$resultados = $this->db->get('actividades', 22);
 
     	//si existe algún resultado lo devolvemos

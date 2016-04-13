@@ -72,10 +72,10 @@ class Docentes_model extends CI_Model{
         $this->db->from('trabajadores');
         $this->db->join('cuentas', 'cuentas.ID_Cuenta = trabajadores.ID_Cuenta');
 
-    	$this->db->or_like('Nombres',$abuscar,'after');
-    	$this->db->or_like('ApPaterno',$abuscar,'after');
-    	$this->db->or_like('ApMaterno',$abuscar,'after');
-    	$this->db->or_like('Usuario',$abuscar,'after');
+    	$this->db->or_like('Nombres',$abuscar,'both');
+    	$this->db->or_like('ApPaterno',$abuscar,'both');
+    	$this->db->or_like('ApMaterno',$abuscar,'both');
+    	$this->db->or_like('Usuario',$abuscar,'both');
     	$resultados = $this->db->get();
 
     	if($resultados->num_rows() > 0){

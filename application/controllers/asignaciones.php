@@ -62,8 +62,8 @@ class Asignaciones extends CI_Controller {
             echo "<td>".$fila->Tipo."</td>";
             echo "<td>".$fila->Nombre."</td>";
             echo "<td>".$fila->Fecha_Incorporacion."</td>";
-            echo "<td><a href='".base_url()."asignaciones/modificar/$fila->ID_Actividad'> <i class='glyphicon glyphicon-pencil' title='Editar'></i></a></td>";
-            echo "<td><a href='".base_url()."asignaciones/delete/$fila->ID_Actividad'> <i class='glyphicon glyphicon-trash' title='Eliminar'></i></a></td>";
+            echo "<td><a href='".base_url()."asignaciones/modificar/$fila->ID_Asignacion'> <i class='glyphicon glyphicon-pencil' title='Editar'></i></a></td>";
+            echo "<td><a href='".base_url()."asignaciones/delete/$fila->ID_Asignacion'> <i class='glyphicon glyphicon-trash' title='Eliminar'></i></a></td>";
             echo "</tr>";
         ?>
         <?php
@@ -86,17 +86,16 @@ class Asignaciones extends CI_Controller {
 
   public function updateAsignacion(){
     $id = $this->input->post('id');
-    $nombre = $this->input->post('docente');
+    $docente = $this->input->post('docente');
     $tipo = $this->input->post('tipo');
-    $lugar = $this->input->post('actividad');
-    $fechaini = $this->input->post('fecha');
-    $insert = $this->asignaciones_model->updateAsig($id, $nombre, $tipo, $lugar, $fechaini, $fechafin);  
+    $actividad = $this->input->post('actividad');
+    $fecha = $this->input->post('fecha');
+    $insert = $this->asignaciones_model->updateAsig($id, $docente, $tipo, $actividad, $fecha);  
   }
 
   public function delete(){
     $id = $this->uri->segment(3);
-    $this->load->model('actividades_model');
-    $delete = $this->actividades_model->deleteAct($id);
+    $delete = $this->asignaciones_model->deleteAsig($id);
   }
 
 }
