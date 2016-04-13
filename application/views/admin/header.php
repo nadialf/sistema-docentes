@@ -64,7 +64,7 @@
                 </a>
               </li>
               <li>
-                <a href="<?php echo base_url().'correo'; ?>">
+                <a href="<?php echo base_url().'correo/mail_admin'; ?>">
                   <div>
                     <i class="fa fa-envelope"></i>     Correo
                   </div>

@@ -5,12 +5,22 @@
       
       <ul  class="nav nav-pills">
         <li class="active" data-toggle="tab">
-          <a href="#3b" data-toggle="tab">
+          <a href="#1b" data-toggle="tab">
             <i class="fa fa-table"></i>     Todos los correos
           </a>
         </li>
         <li data-toggle="tab">
           <a href="#2b" data-toggle="tab">
+            <i class="glyphicon glyphicon-inbox"></i>     No leidos
+          </a>
+        </li>
+        <li data-toggle="tab">
+          <a href="#3b" data-toggle="tab">
+            <i class="glyphicon glyphicon-check"></i>     Leidos
+          </a>
+        </li>
+        <li data-toggle="tab">
+          <a href="#4b" data-toggle="tab">
             <i class="glyphicon glyphicon-search"></i>     Búsqueda
           </a>
         </li>
@@ -20,24 +30,67 @@
 
       <div class="tab-content clearfix">
         </br>
-        <div class="tab-pane active" id="3b">
+        <div class="tab-pane active" id="1b">
+          <table class="table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Remitente</th>
+                <th>Mensaje</th>
+              </tr>
+            </thead>
+            <?php foreach($query as $row): ?>
+            <tr>
+              <td><input type="checkbox"></td>
+              <td><?php echo $row->Nombres.' '.$row->ApPaterno.' '.$row->ApMaterno; ?></td>
+              <td><?php echo $row->Asunto; ?></td>
+            </tr>
+            <?php endforeach; ?>
+          </table>
+
+        </div> <!-- TODOS LOS CORREOS SECTION END-->
+
+        <div class="tab-pane" id="2b">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Remitente</th>
+                <th>Mensaje</th>
+              </tr>
+            </thead>
+            <?php foreach($query as $row): ?>
+            <tr>
+              <td><?php echo $row->Nombres.' '.$row->ApPaterno.' '.$row->ApMaterno; ?></td>
+              <td><?php echo $row->Asunto; ?></td>
+            </tr>
+            <?php endforeach; ?>
+          </table>
+
+        </div> <!--NO LEIDOS SECTION END-->
+
+        <div class="tab-pane" id="3b">
           <table class="table">
             <thead>
               <tr>
                 <th>Remitente</th>
                 <th>Mensaje</th>
                 <th></th>
-                <th></th>
               </tr>
             </thead>
+            <?php foreach($query as $row): ?>
+            <tr>
+              <td><?php echo $row->Nombres.' '.$row->ApPaterno.' '.$row->ApMaterno; ?></td>
+              <td><?php echo $row->Asunto; ?></td>
+              <td>
+                <a href='#' onclick="elimina('<?=base_url()?>correo/delete/<?=$row->ID_Correo?>');"><i class='glyphicon glyphicon-trash' title='Eliminar'></i></a>
+              </td>
+            </tr>
+            <?php endforeach; ?>
           </table>
 
-        </div>
+        </div> <!--LEIDOS SECTION END-->
 
-
-
-        <div class="tab-pane" id="2b">
-          <h4 style="padding-left:2%;">Búsqueda</h4>
+        <div class="tab-pane" id="4b">
           <br/>
           <div class="col-xs-4">
             <input type="text" class="form-control autocompletar"  name="autocompletar" id="autocompletar" onpaste="return false"  aria-describedby="sizing-addon2" placeholder="Nombre del remitente">
@@ -45,12 +98,31 @@
           </div>
           <table class="table table-hover table-responsive" id="tableSearch">
           </table>
-        </div>
+        </div> <!--BÚSQUEDA SECTION END-->
 
       </div>
 
     </div>
 
-  </div>
+  </div> <!-- CONTENT-WRAPPER SECTION END-->
 
-  <!-- CONTENT-WRAPPER SECTION END-->
+<script type="text/javascript">
+    $(document).ready(function(){
+    $(".autocompletar").keyup(function(){
+      var info = $(this).val();
+      $.post('<?php echo base_url().'correo/autocompletar' ?>',{ info : info }, function(data){
+        if(data != ''){
+          $("#tableSearch").html(data);
+        }else{
+          $("#tableSearch").html('');
+        }
+      })
+    })
+
+    })
+      function elimina(url){
+        if (confirm("¿Está seguro que desea eliminar el correo de manera permanente?") ){
+          location.href=url;
+        }
+      }
+</script>
