@@ -63,7 +63,7 @@
                 </a>
               </li>
               <li>
-                <a href="">
+                <a href="<?php echo base_url().'constancias/cons_direc'; ?>">
                   <div>
                     <i class="fa fa-file-text-o"></i>     Constancias
                   </div>
