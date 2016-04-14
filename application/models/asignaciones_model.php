@@ -12,6 +12,7 @@ class Asignaciones_model extends CI_Model{
         $this->db->from('asignaciones');
         $this->db->join('trabajadores', 'trabajadores.ID_Trabajador = asignaciones.ID_Trabajador');
         $this->db->join('actividades', 'actividades.ID_Actividad = asignaciones.ID_Actividad');
+        $this->db->order_by("Fecha_Incorporacion","desc");
         $query = $this->db->get();
         return $query->result();
     }
@@ -147,6 +148,7 @@ class Asignaciones_model extends CI_Model{
         $this->db->or_like('trabajadores.Nombres',$abuscar,'both');
         $this->db->or_like('actividades.Tipo',$abuscar,'both');
         $this->db->or_like('actividades.Nombre',$abuscar,'both');
+        $this->db->order_by("Fecha_Incorporacion","desc");
         $resultados = $this->db->get();
 
         if($resultados->num_rows() > 0){

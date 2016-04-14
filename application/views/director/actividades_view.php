@@ -11,7 +11,7 @@
         </li>
         <li data-toggle="tab">
           <a href="#2b" data-toggle="tab">
-            <i class="glyphicon glyphicon-search"></i>     Busqueda de actividad
+            <i class="glyphicon glyphicon-search"></i>     Búsqueda
           </a>
         </li>
       </ul>
@@ -21,7 +21,7 @@
       <div class="tab-content clearfix">
         
         <div class="tab-pane active" id="3b">
-          <h4 style="padding-left:2%;">Actividades registradas</h4>
+        </br>
           <table class="table">
             <thead>
               <tr>
@@ -44,13 +44,9 @@
               </tr>
             <?php endforeach; ?>
           </table>
-
-        </div>
-
-
+        </div> <!-- TABLA SECTION END -->
 
         <div class="tab-pane" id="2b">
-          <h4 style="padding-left:2%;">Búsqueda de actividad</h4>
           <br/>
           <div class="col-xs-4">
             <input type="text" class="form-control autocompletar"  name="autocompletar" id="autocompletar" onpaste="return false"  aria-describedby="sizing-addon2" placeholder="Nombre de la actividad">
@@ -58,7 +54,7 @@
           </div>
           <table class="table table-hover table-responsive" id="tableSearch">
           </table>
-        </div>
+        </div> <!-- BÚSQUEDA SECTION END -->
 
       </div>
 
@@ -67,20 +63,12 @@
   </div>  <!-- CONTENT-WRAPPER SECTION END-->
 
 
-    <script type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function(){
-    //utilizamos el evento keyup para coger la información
-    //cada vez que se pulsa alguna tecla con el foco en el buscador
     $(".autocompletar").keyup(function(){
-    //alert("Hello! I am an alert box!!");
-    //en info tenemos lo que vamos escribiendo en el buscador
       var info = $(this).val();
-      //hacemos la petición al método autocompletado del controlador home
-      //pasando la variable info
       $.post('<?php echo base_url().'actividades/autocompletar' ?>',{ info : info }, function(data){
-        //si autocompletado nos devuelve algo
         if(data != ''){
-          //$('.contenedor').show();
           $("#tableSearch").html(data);
         }else{
           $("#tableSearch").html('');
@@ -89,5 +77,4 @@
     })
 
     })
-
 </script>

@@ -39,8 +39,6 @@
                 </div>
               </a>
               <ul class="dropdown-menu">
-                <li><a href="#">Perfil</a></li>
-                <li role="separator" class="divider"></li>
                 <li><a href="<?php echo base_url().'login/logout'?>">Cerrar Sesión</a></li>
               </ul>
             </li>
@@ -67,7 +65,7 @@
               <li>
                 <a href="">
                   <div>
-                    <i class="fa fa-envelope"></i>     Correo
+                    <i class="fa fa-file-text-o"></i>     Constancias
                   </div>
                 </a>
               </li>

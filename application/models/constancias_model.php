@@ -7,4 +7,38 @@ class Constancias_model extends CI_Model{
 
     }
 
+    function getSolicitudes(){
+        $this->db->select('trabajadores.Nombres, trabajadores.ApPaterno, trabajadores.ApMaterno, actividades.Tipo, actividades.Nombre, solicitudes.ID_Solicitud');
+        $this->db->from('solicitudes');
+        $this->db->join('trabajadores', 'trabajadores.ID_Trabajador = solicitudes.ID_Trabajador');
+        $this->db->join('actividades', 'actividades.ID_Actividad = solicitudes.ID_Actividad');
+        $this->db->order_by("ID_Solicitud","desc");
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function buscador($abuscar){
+        $this->db->select('trabajadores.Nombres, trabajadores.ApPaterno, trabajadores.ApMaterno, actividades.Tipo, actividades.Nombre, solicitudes.ID_Solicitud');
+        $this->db->from('solicitudes');
+        $this->db->join('trabajadores', 'trabajadores.ID_Trabajador = solicitudes.ID_Trabajador');
+        $this->db->join('actividades', 'actividades.ID_Actividad = solicitudes.ID_Actividad');
+
+        $this->db->like('trabajadores.Nombres',$abuscar,'both');
+        $this->db->or_like('trabajadores.ApPaterno',$abuscar,'both');
+        $this->db->or_like('trabajadores.ApMaterno',$abuscar,'both');
+        $this->db->or_like('trabajadores.Nombres',$abuscar,'both');
+        $this->db->or_like('actividades.Tipo',$abuscar,'both');
+        $this->db->or_like('actividades.Nombre',$abuscar,'both');
+        
+        $this->db->order_by("ID_Solicitud","desc");
+        $resultados = $this->db->get();
+
+        if($resultados->num_rows() > 0){
+            return $resultados;
+            
+        }else{
+            return FALSE;
+        }
+    } 
+
 }

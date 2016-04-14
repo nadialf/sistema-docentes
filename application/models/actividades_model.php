@@ -8,6 +8,7 @@ class Actividades_model extends CI_Model{
     }
 
     function getActividades(){
+        $this->db->order_by("Fecha_Inicio","desc");
         $query = $this->db->get('actividades');
         return $query->result();
 
@@ -60,6 +61,7 @@ class Actividades_model extends CI_Model{
     	$this->db->like('Nombre',$abuscar,'both');
     	$this->db->or_like('Tipo',$abuscar,'both');
     	$this->db->or_like('Lugar',$abuscar,'both');
+        $this->db->order_by("Fecha_Inicio","desc");
     	$resultados = $this->db->get('actividades', 22);
 
     	//si existe algún resultado lo devolvemos

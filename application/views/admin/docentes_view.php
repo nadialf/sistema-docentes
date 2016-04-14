@@ -32,7 +32,6 @@
           <table class="table">
             <thead>
               <tr>
-                <th>No. Control</th>
                 <th>Nombre(s)</th>
                 <th>Apellido paterno</th>
                 <th>Apellido materno</th>
@@ -45,7 +44,6 @@
             </thead>
            <?php foreach($query as $row): ?>
               <tr>
-                <td><?php echo $row->ID_Trabajador; ?></td>
                 <td><?php echo $row->Nombres; ?></td>
                 <td><?php echo $row->ApPaterno; ?></td>
                 <td><?php echo $row->ApMaterno; ?></td>
@@ -53,10 +51,10 @@
                 <td><?php echo $row->Usuario; ?></td>
                 <td><?php echo $row->Contrasena; ?></td>
                 <td>
-                  <a href='#' onclick="editar('<?=base_url()?>docentes/modificar/<?=$row->ID_Trabajador?>');"><i class='glyphicon glyphicon-pencil'></i></a>
+                  <a href='#' onclick="editar('<?=base_url()?>docentes/modificar/<?=$row->ID_Trabajador?>');"><i class='glyphicon glyphicon-pencil' title='Editar'></i></a>
                 </td>
                 <td>
-                  <a href='#' onclick="elimina('<?=base_url()?>docentes/delete/<?=$row->ID_Trabajador?>');"><i class='glyphicon glyphicon-trash'></i></a>
+                  <a href='#' onclick="elimina('<?=base_url()?>docentes/delete/<?=$row->ID_Trabajador?>');"><i class='glyphicon glyphicon-trash' title='Eliminar'></i></a>
                 </td>
               </tr>
             <?php endforeach; ?>

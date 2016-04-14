@@ -38,8 +38,6 @@
                 </div>
               </a>
               <ul class="dropdown-menu">
-                <li><a href="#">Perfil</a></li>
-                <li role="separator" class="divider"></li>
                 <li><a href="<?php echo base_url().'login/logout'?>">Cerrar Sesión</a></li>
               </ul>
             </li>
@@ -71,7 +69,7 @@
                 </a>
               </li>
               <li>
-                 <a href="<?php echo base_url().'constancias'?>">
+                 <a href="<?php echo base_url().'constancias/cons_admin'?>">
                   <div>
                     <i class="fa fa-file-text-o"></i>     Constancias
                   </div>

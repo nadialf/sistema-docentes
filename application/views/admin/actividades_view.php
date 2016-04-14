@@ -46,10 +46,10 @@
                 <td><?php echo $row->Fecha_Inicio; ?></td>
                 <td><?php echo $row->Fecha_Fin; ?></td>
                 <td>
-                  <a href='#' onclick="editar('<?=base_url()?>actividades/modificar/<?=$row->ID_Actividad?>');"><i class='glyphicon glyphicon-pencil'></i></a>
+                  <a href='#' onclick="editar('<?=base_url()?>actividades/modificar/<?=$row->ID_Actividad?>');"><i class='glyphicon glyphicon-pencil' title='Editar'></i></a>
                 </td>
                 <td>
-                  <a href='#' onclick="elimina('<?=base_url()?>actividades/delete/<?=$row->ID_Actividad?>');"><i class='glyphicon glyphicon-trash'></i></a>
+                  <a href='#' onclick="elimina('<?=base_url()?>actividades/delete/<?=$row->ID_Actividad?>');"><i class='glyphicon glyphicon-trash' title='Eliminar'></i></a>
                 </td>
               </tr>
             <?php endforeach; ?>

@@ -11,6 +11,7 @@ class Docentes_model extends CI_Model{
     	$this->db->select('trabajadores.ID_Trabajador, trabajadores.Nombres, trabajadores.ApPaterno, trabajadores.ApMaterno, trabajadores.TipoTrabajo, cuentas.Usuario, cuentas.Contrasena');
         $this->db->from('trabajadores');
         $this->db->join('cuentas', 'cuentas.ID_Cuenta = trabajadores.ID_Cuenta');
+        $this->db->order_by("Nombres","asc");
         $query = $this->db->get();
         return $query->result();
     }
@@ -76,6 +77,7 @@ class Docentes_model extends CI_Model{
     	$this->db->or_like('ApPaterno',$abuscar,'both');
     	$this->db->or_like('ApMaterno',$abuscar,'both');
     	$this->db->or_like('Usuario',$abuscar,'both');
+        $this->db->order_by("Nombres","asc");
     	$resultados = $this->db->get();
 
     	if($resultados->num_rows() > 0){
