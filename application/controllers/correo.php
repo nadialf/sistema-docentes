@@ -6,6 +6,8 @@ class Correo extends CI_Controller {
 		parent::__construct();
         $this->load->helper(array('url', 'form'));       
   		$this->load->model('correo_model');
+  		$this->load->model('login_model');
+  		$this->load->model('docentes_model');
   		$this->load->database('default');
 	}
 
@@ -15,6 +17,28 @@ class Correo extends CI_Controller {
 		$this->load->view('admin/header');
 		$this->load->view('admin/correo_view', $data);
 		$this->load->view('footer');
+	}
+	public function correo_doc(){
+		$this->load->view('docente/header');
+		$this->load->view('docente/correo_doc_view');
+		$this->load->view('footer');
+	}
+	public function agregarCorreo(){
+		$usuario = $this->input->post('de',true);
+		$datos=$this->login_model->cuenta($usuario);
+		foreach ($datos->result() as $row) {
+			$id=$row->ID_Trabajador;
+		}
+		$data['id'] =$id;
+
+		$datos = array (
+			'ID_Remitente' =>($id),
+			'Destinatario' => $this->input->post('para',true),
+			'Asunto' => $this->input->post('asunto',true),
+			'Leido' => ('1')
+			);
+		$this->docentes_model->guarda_correo($datos);
+			
 	}
 
 	 public function delete(){

@@ -84,4 +84,8 @@ class Docentes_model extends CI_Model{
     		return FALSE;
     	}
     }
+
+    public function guarda_correo($data){
+        $this->db->insert('correos',$data);
+    }
 }

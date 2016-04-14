@@ -17,6 +17,15 @@ class Actividades extends CI_Controller {
 		$this->load->view('footer');
 	}
 
+
+  public function act_doc(){
+    $data['query'] = $this->actividades_model->getActividades();
+
+    $this->load->view('docente/header');
+    $this->load->view('docente/actividades_view_doc', $data);
+    $this->load->view('footer');
+  }
+
 	public function act_direc(){
 		$data['query'] = $this->actividades_model->getActividades();
 

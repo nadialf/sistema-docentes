@@ -22,9 +22,10 @@ class Welcome_message extends CI_Controller {
 		$this->load->view('footer');
 	}
 
-	public function docente(){
-		$this->load->view('admin/header');
-		$this->load->view('footer');
+	public function docente($idCuenta){
+		//$this->load->view('docente/header');
+		//$this->load->view('footer');
+		echo$idCuenta;
 	}
 
 }
