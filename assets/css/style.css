@@ -407,3 +407,8 @@ footer {
 .login-block button:hover {
     background: #ff7b81;
 }
+
+#mytable thead tr th:hover{ /*Acción encima de*/
+    cursor: pointer;
+    color: #1EB463;
+}

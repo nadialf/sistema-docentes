@@ -29,14 +29,14 @@
 
         <div class="tab-pane active" id="1b">
         </br>
-          <table class="table">
+          <table class="table" id="mytable">
             <thead>
               <tr>
-                <th>Nombre(s)</th>
-                <th>Apellido paterno</th>
-                <th>Apellido materno</th>
-                <th>Tipo de trabajador</th>
-                <th>Nombre de usuario</th>
+                <th id="nombre_header">Nombre(s)</th>
+                <th id="appaterno_header">Apellido paterno</th>
+                <th id="apmaterno_header">Apellido materno</th>
+                <th id="tipo_header">Tipo de trabajador</th>
+                <th id="usuario_header">Nombre de usuario</th>
                 <th>Contraseña</th>
                 <th></th>
                 <th></th>
@@ -153,4 +153,29 @@
       function editar(url){
         location.href=url;
       }
+</script>
+
+<script type="text/javascript">
+  var table = $('table');
+    
+    $('#nombre_header, #appaterno_header, #apmaterno_header, #tipo_header, #usuario_header')
+        .wrapInner('<span title="sort this column"/>')
+        .each(function(){
+            var th = $(this),
+                thIndex = th.index(),
+                inverse = false;
+            th.click(function(){
+                table.find('td').filter(function(){
+                    return $(this).index() === thIndex;
+                }).sortElements(function(a, b){
+                    return $.text([a]) > $.text([b]) ?
+                        inverse ? -1 : 1
+                        : inverse ? 1 : -1;
+                }, function(){
+                    // parentNode is the element we want to move
+                    return this.parentNode;      
+                });
+                inverse = !inverse;     
+            });                
+        });
 </script>

@@ -26,13 +26,13 @@
         
         <div class="tab-pane active" id="1b">
           </br>
-          <table class="table">
+          <table class="table" id="mytable">
             <thead>
               <tr>
-                <th>Docente</th>
-                <th>Tipo</th>
-                <th>Actividad</th>
-                <th>Fecha de incorporación</th>
+                <th id="docente_header">Docente</th>
+                <th id="tipo_header">Tipo</th>
+                <th id="actividad_header">Actividad</th>
+                <th id="fechainc_header">Fecha de incorporación</th>
                 <th></th>
                 <th></th>
               </tr>
@@ -194,4 +194,29 @@
       function editar(url){
         location.href=url;
       }
+</script>
+
+<script type="text/javascript">
+  var table = $('table');
+    
+    $('#docente_header, #tipo_header, #actividad_header, #fechainc_header')
+        .wrapInner('<span title="sort this column"/>')
+        .each(function(){
+            var th = $(this),
+                thIndex = th.index(),
+                inverse = false;
+            th.click(function(){
+                table.find('td').filter(function(){
+                    return $(this).index() === thIndex;
+                }).sortElements(function(a, b){
+                    return $.text([a]) > $.text([b]) ?
+                        inverse ? -1 : 1
+                        : inverse ? 1 : -1;
+                }, function(){
+                    // parentNode is the element we want to move
+                    return this.parentNode;      
+                });
+                inverse = !inverse;     
+            });                
+        });
 </script>

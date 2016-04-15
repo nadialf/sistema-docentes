@@ -13,6 +13,7 @@
   <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/css/jquery-ui.js"></script>
+  <script src="//rawgit.com/padolsey/jQuery-Plugins/master/sortElements/jquery.sortElements.js"></script>
   <!-- <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js'></script> -->
 
   <link rel="icon" type="image/x-icon" href="<?php echo base_url(); ?>assets/img/icon.png">

@@ -26,14 +26,14 @@
 
         <div class="tab-pane active" id="1b">
           </br>
-          <table class="table">
+          <table class="table" id="mytable">
             <thead>
               <tr>
-                <th>Nombre</th>
-                <th>Tipo</th>
-                <th>Lugar</th>
-                <th>Fecha inicio</th>
-                <th>Fecha fin</th>
+                <th id="nombre_header">Nombre</th>
+                <th id="tipo_header">Tipo</th>
+                <th id="lugar_header">Lugar</th>
+                <th id="fechaini_header">Fecha inicio</th>
+                <th id="fechafin_header">Fecha fin</th>
                 <th></th>
                 <th></th>
               </tr>
@@ -159,3 +159,28 @@
         location.href=url;
       }
     </script>
+
+<script type="text/javascript">
+  var table = $('table');
+    
+    $('#nombre_header, #tipo_header, #lugar_header, #fechaini_header, #fechafin_header')
+        .wrapInner('<span title="sort this column"/>')
+        .each(function(){
+            var th = $(this),
+                thIndex = th.index(),
+                inverse = false;
+            th.click(function(){
+                table.find('td').filter(function(){
+                    return $(this).index() === thIndex;
+                }).sortElements(function(a, b){
+                    return $.text([a]) > $.text([b]) ?
+                        inverse ? -1 : 1
+                        : inverse ? 1 : -1;
+                }, function(){
+                    // parentNode is the element we want to move
+                    return this.parentNode;      
+                });
+                inverse = !inverse;     
+            });                
+        });
+</script>

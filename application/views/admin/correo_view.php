@@ -31,13 +31,13 @@
       <div class="tab-content clearfix">
         </br>
         <div class="tab-pane active" id="1b">
-          <table class="table">
+          <table class="table" id="mytable">
             <thead>
               <tr>
                 <th></th>
-                <th>Remitente</th>
+                <th id="remitente_header">Remitente</th>
                 <th>Mensaje</th>
-                <th>Fecha</th>
+                <th id="fecha_header">Fecha</th>
               </tr>
             </thead>
             <?php foreach($query as $row): ?>
@@ -53,13 +53,13 @@
         </div> <!-- TODOS LOS CORREOS SECTION END-->
 
         <div class="tab-pane" id="2b">
-          <table class="table">
+          <table class="table" id="mytable">
             <thead>
               <tr>
                 <th></th>
-                <th>Remitente</th>
+                <th id="remitente_header">Remitente</th>
                 <th>Mensaje</th>
-                <th>Fecha</th>
+                <th id="fecha_header">Fecha</th>
               </tr>
             </thead>
             <?php foreach($query as $row): ?>
@@ -75,12 +75,12 @@
         </div> <!--NO LEIDOS SECTION END-->
 
         <div class="tab-pane" id="3b">
-          <table class="table">
+          <table class="table" id="mytable">
             <thead>
               <tr>
-                <th>Remitente</th>
+                <th id="remitente_header">Remitente</th>
                 <th>Mensaje</th>
-                <th>Fecha</th>
+                <th id="fecha_header">Fecha</th>
                 <th></th>
               </tr>
             </thead>
@@ -133,4 +133,29 @@
           location.href=url;
         }
       }
+</script>
+
+<script type="text/javascript">
+  var table = $('table');
+    
+    $('#remitente_header, #fecha_header')
+        .wrapInner('<span title="sort this column"/>')
+        .each(function(){
+            var th = $(this),
+                thIndex = th.index(),
+                inverse = false;
+            th.click(function(){
+                table.find('td').filter(function(){
+                    return $(this).index() === thIndex;
+                }).sortElements(function(a, b){
+                    return $.text([a]) > $.text([b]) ?
+                        inverse ? -1 : 1
+                        : inverse ? 1 : -1;
+                }, function(){
+                    // parentNode is the element we want to move
+                    return this.parentNode;      
+                });
+                inverse = !inverse;     
+            });                
+        });
 </script>
