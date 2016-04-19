@@ -7,13 +7,40 @@ class Correo_model extends CI_Model{
 
     }
 
-    function getCorreos(){
+    function getCorreosNoLeidos(){
         $this->db->select('trabajadores.Nombres, trabajadores.ApPaterno, trabajadores.ApMaterno, correos.ID_Correo, correos.Asunto, correos.Leido, correos.Fecha_Envio');
         $this->db->from('correos');
         $this->db->join('trabajadores', 'trabajadores.ID_Trabajador = correos.ID_Remitente');
+        $this->db->where('Leido', '0');
         $this->db->order_by("correos.Fecha_Envio","desc");
         $query = $this->db->get();
         return $query->result();
+    }
+
+    function getCorreosLeidos(){
+        $this->db->select('trabajadores.Nombres, trabajadores.ApPaterno, trabajadores.ApMaterno, correos.ID_Correo, correos.Asunto, correos.Leido, correos.Fecha_Envio');
+        $this->db->from('correos');
+        $this->db->join('trabajadores', 'trabajadores.ID_Trabajador = correos.ID_Remitente');
+        $this->db->where('Leido', '1');
+        $this->db->order_by("correos.Fecha_Envio","desc");
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    function changeMail1($id){
+        $datos = array('Leido' => '0');
+        $this->db->where('ID_Correo', $id);
+        $this->db->update('correos', $datos);
+
+        redirect(base_url().'correo/mail_admin');
+    }
+
+    function changeMail2($id){
+        $datos = array('Leido' => '1');
+        $this->db->where('ID_Correo', $id);
+        $this->db->update('correos', $datos);
+
+        redirect(base_url().'correo/mail_admin');
     }
 
     function deleteMail($id){

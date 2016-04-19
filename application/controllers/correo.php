@@ -12,7 +12,8 @@ class Correo extends CI_Controller {
 	}
 
 	public function mail_admin(){
-		$data['query'] = $this->correo_model->getCorreos();
+		$data['query1'] = $this->correo_model->getCorreosNoLeidos();
+    $data['query2'] = $this->correo_model->getCorreosLeidos();
 
 		$this->load->view('admin/header');
 		$this->load->view('admin/correo_view', $data);
@@ -41,6 +42,16 @@ class Correo extends CI_Controller {
 			
 	}
 
+  public function changeNoLeido(){
+    $id = $this->uri->segment(3);
+    $changeNoLeido = $this->correo_model->changeMail1($id);
+  }
+
+  public function changeLeido(){
+    $id = $this->uri->segment(3);
+    $changeLeido = $this->correo_model->changeMail2($id);
+  }
+
 	 public function delete(){
     	$id = $this->uri->segment(3);
     	$delete = $this->correo_model->deleteMail($id);
@@ -53,7 +64,6 @@ class Correo extends CI_Controller {
       $search = $this->correo_model->buscador(trim($abuscar));
         echo "<thead>";
         echo "<tr>";
-        echo "<th></th>";
         echo "<th>Remitente</th>";
         echo "<th>Asunto</th>";
         echo "<th>Fecha</th>";
@@ -61,7 +71,6 @@ class Correo extends CI_Controller {
         echo "</thead>";
         foreach($search->result() as $fila){
             echo "<tr>";
-            echo "<td><input type='checkbox'></td>";
             echo "<td>".$fila->Nombres.' '.$fila->ApPaterno.' '.$fila->ApMaterno."</td>";
             echo "<td>".$fila->Asunto."</td>";
             echo "<td>".$fila->Fecha_Envio."</td>";
