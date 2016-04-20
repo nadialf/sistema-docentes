@@ -27,7 +27,7 @@
                 <th id="tipo_header">Tipo</th>
                 <th id="actividad_header">Actividad</th>
                 <th id="fechainc_header">Fecha de inicio</th>
-                <th>Progreso</th>
+                <th id="progreso_header">Progreso</th>
               </tr>
             </thead>
             <?php foreach($query as $row): ?>
@@ -36,7 +36,16 @@
               <td><?php echo $row->Tipo; ?></td>
               <td><?php echo $row->Nombre; ?></td>
               <td><?php echo $row->Fecha_Inicio; ?></td>
-              <td></td>
+              <td><?php 
+                        if ($row->Avance == "Por comenzar"){
+                            echo "<span style='color: #0000FF'>$row->Avance</span>";
+                        } elseif ($row->Avance == "En curso"){
+                            echo "<span style='color: #31B404'>$row->Avance</span>";
+                        } elseif ($row->Avance == "Terminada"){
+                            echo "<span style='color: #FF0000'>$row->Avance</span>";
+                        }
+                  ?>
+              </td>
             </tr>
             <?php endforeach; ?>
           </table>
@@ -46,7 +55,7 @@
         <div class="tab-pane" id="2b">
           <br/>
           <div class="col-xs-4">
-            <input type="text" class="form-control autocompletar"  name="autocompletar" id="autocompletar" onpaste="return false"  aria-describedby="sizing-addon2" placeholder="Nombre del docente, tipo o actividad">
+            <input type="text" class="form-control autocompletar"  name="autocompletar" id="autocompletar" onpaste="return false"  aria-describedby="sizing-addon2" placeholder="Nombre del docente, tipo, actividad o progreso">
             <br/>
           </div>
           <table class="table table-hover table-responsive" id="tableSearch">
@@ -75,7 +84,7 @@
 <script type="text/javascript">
   var table = $('table');
     
-    $('#docente_header, #tipo_header, #actividad_header, #fechainc_header')
+    $('#docente_header, #tipo_header, #actividad_header, #fechainc_header, #progreso_header')
         .wrapInner('<span title="sort this column"/>')
         .each(function(){
             var th = $(this),

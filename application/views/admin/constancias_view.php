@@ -39,7 +39,7 @@
               <td><?php echo $row->Nombre; ?></td>
               <td></td>
               <td>
-                <a href='#' onclick="elimina('<?=base_url()?>constancias/formato/<?=$row->ID_Solicitud?>');"><i class='glyphicon glyphicon-paperclip' title='Adjuntar formato'></i></a>
+                <a href='#' onclick="format('<?=base_url()?>constancias/formato/<?=$row->ID_Solicitud?>');"><i class='glyphicon glyphicon-paperclip' title='Adjuntar formato'></i></a>
               </td>
               <td>
                 <a href='#' onclick="elimina('<?=base_url()?>constancias/delete/<?=$row->ID_Solicitud?>');"><i class='glyphicon glyphicon-trash' title='Eliminar'></i></a>
@@ -83,7 +83,7 @@
           location.href=url;
         }
       }
-      function editar(url){
+      function format(url){
         location.href=url;
       }
 </script>
@@ -92,7 +92,7 @@
   var table = $('table');
     
     $('#docente_header, #tipo_header, #actividad_header, #formato_header')
-        .wrapInner('<span title="sort this column"/>')
+        .wrapInner('<span title="Ordenar esa columna"/>')
         .each(function(){
             var th = $(this),
                 thIndex = th.index(),

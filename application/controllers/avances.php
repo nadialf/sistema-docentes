@@ -37,14 +37,23 @@ class Avances extends CI_Controller {
             echo "<td>".$fila->Tipo."</td>";
             echo "<td>".$fila->Nombre."</td>";
             echo "<td>".$fila->Fecha_Inicio."</td>";
-            echo "<td></td>";
+            echo "<td>";
+                        if ($fila->Avance == "Por comenzar"){
+                            echo "<span style='color: #0000FF'>$fila->Avance</span>";
+                        } elseif ($fila->Avance == "En curso"){
+                            echo "<span style='color: #31B404'>$fila->Avance</span>";
+                        } elseif ($fila->Avance == "Terminada"){
+                            echo "<span style='color: #FF0000'>$fila->Avance</span>";
+                        }
+
+                "</td>";
             echo "</tr>";
         ?>
         <?php
         }
       }else{
       ?>
-        <p><?php  echo "<div class='alert alert-warning'><p class='text-center'>No hay avances de asignación registrados con el nombre, tipo o lugar introducido.</p></div>"; ?></p>
+        <p><?php  echo "<div class='alert alert-warning'><p class='text-center'>No hay avances de asignación registrados con el nombre, tipo, lugar o progreso introducido.</p></div>"; ?></p>
       <?php
       }
     }
