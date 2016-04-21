@@ -51,7 +51,7 @@
               </div>
               <div class="col-xs-4">
                 <span class="input-group-addon" id="sizing-addon2">Fecha de incorporación</span>
-                <input type="date" class="form-control" aria-describedby="sizing-addon2" data-provide="datepicker" name="fecha" id="fecha" required value="<?php echo $query['0']->Fecha_Incorporacion ?>">
+                <input type="date" class="form-control" aria-describedby="sizing-addon2" data-provide="datepicker" name="fecha" id="fecha" required disabled value="<?php echo $query['0']->Fecha_Incorporacion ?>">
               </div>
             </div>
           </div>

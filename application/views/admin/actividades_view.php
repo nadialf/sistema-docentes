@@ -151,7 +151,7 @@
 
     })
       function elimina(url){
-        if (confirm("¿Está seguro que desea eliminar la actividad?") ){
+        if (confirm("¿Está seguro que desea eliminar la actividad? Se eliminará toda la información contenida acerca de la actividad en el sistema. (Constancias/Asignaciones/Avances).") ){
           location.href=url;
         }
       }

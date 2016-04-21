@@ -46,16 +46,19 @@ class Asignaciones_model extends CI_Model{
             }
         }
 
+        $fecha = getdate();
+        $fechaactual = "$fecha[year]/$fecha[mon]/$fecha[mday]";
+
         $array = array(
             'ID_Actividad' => $ID_Actividad,
             'ID_Trabajador' => $ID_Trabajador,
-            'Fecha_Incorporacion' => $fecha
+            'Fecha_Incorporacion' => $fechaactual
             );
         
         $this->db->insert('asignaciones', $array);
     }
 
-    function updateAsig($id, $docente, $tipo, $actividad, $fecha){
+    function updateAsig($id, $docente, $tipo, $actividad){
         $this->db->select('ID_Trabajador, CONCAT(Nombres," ",ApPaterno," ",ApMaterno) AS name', FALSE);
         $this->db->from('trabajadores');
         $query = $this->db->get();
@@ -75,8 +78,7 @@ class Asignaciones_model extends CI_Model{
         }
 
         $datos = array('ID_Actividad' => $ID_Actividad,
-                       'ID_Trabajador' => $ID_Trabajador,
-                       'Fecha_Incorporacion' => $fecha
+                       'ID_Trabajador' => $ID_Trabajador
                        );
         $this->db->where('ID_Asignacion', $id);
         $this->db->update('asignaciones', $datos);

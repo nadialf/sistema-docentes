@@ -59,8 +59,8 @@ class Docentes_model extends CI_Model{
     }
 
     function deleteDoc($id){
-        $this->db->where('ID_Trabajador', $id);
-        $this->db->delete('trabajadores');
+        /*$this->db->where('ID_Trabajador', $id);
+        $this->db->delete('trabajadores');*/
 
         $this->db->where('ID_Cuenta', $id);
         $this->db->delete('cuentas');

@@ -146,7 +146,7 @@
 
     })
       function elimina(url){
-        if (confirm("¿Está seguro que desea eliminar al docente?") ){
+        if (confirm("¿Está seguro que desea eliminar al docente? Se eliminará toda la información contenida acerca de dicho docente en el sistema.") ){
           location.href=url;
         }
       }

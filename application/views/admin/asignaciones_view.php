@@ -86,13 +86,13 @@
 
           <div style="margin-left:20px; margin-right:20px;">
             <div class="content-wrapper"  style="width:100%; min-height: auto; height:auto; margin-left;10px; margin-right:10px;">
-              <div class="col-xs-4">
+              <div class="col-xs-8">
                 <span class="input-group-addon">Actividad</span>
                 <input type="text" class="form-control" aria-describedby="sizing-addon2" name="actividad" id="actividad" required>
               </div>
               <div class="col-xs-4">
                 <span class="input-group-addon" id="sizing-addon2">Fecha de incorporación</span>
-                <input type="date" class="form-control" aria-describedby="sizing-addon2" data-provide="datepicker" name="fecha" id="fecha" required>
+                <input type="date" class="form-control" aria-describedby="sizing-addon2" data-provide="datepicker" name="fecha" id="fecha" required disabled value="<?php echo date("Y-m-d");?>">
               </div>
             </div>
           </div>

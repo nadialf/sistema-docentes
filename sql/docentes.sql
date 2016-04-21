@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-04-2016 a las 20:15:59
+-- Tiempo de generación: 21-04-2016 a las 17:45:33
 -- Versión del servidor: 5.6.24
 -- Versión de PHP: 5.5.24
 
@@ -33,23 +33,23 @@ CREATE TABLE IF NOT EXISTS `actividades` (
   `Fecha_Inicio` date NOT NULL,
   `Fecha_Fin` date NOT NULL,
   `Lugar` varchar(40) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `actividades`
 --
 
 INSERT INTO `actividades` (`ID_Actividad`, `Tipo`, `Nombre`, `Fecha_Inicio`, `Fecha_Fin`, `Lugar`) VALUES
-(2, 'Proyecto', 'SAC', '2016-02-02', '2016-05-25', 'FEI'),
-(6, 'Festival', 'Install Fest', '2016-04-02', '2016-04-02', 'FEI'),
-(8, 'Congreso', 'CONISOFT', '2016-02-01', '2016-02-19', 'Museo de Antropología'),
-(9, 'Taller', 'Java', '2015-09-02', '2015-09-02', 'FEI'),
+(6, 'Festival', 'Install Fest', '2016-04-21', '2016-04-21', 'FEI'),
+(8, 'Congreso', 'CONISOFT', '2016-02-01', '2016-03-01', 'Museo de Antropología'),
+(9, 'Taller', 'Java', '2015-09-02', '2015-09-09', 'FEI'),
 (10, 'Conferencia', 'Arduino', '2016-04-01', '2016-04-01', 'Museo de Antropología'),
-(11, 'Festival', 'FLISoL 2016', '2016-04-23', '2016-04-23', 'FEI'),
-(12, 'Conferencia', 'Redes', '2016-04-14', '2016-04-13', 'Museo de Antropología'),
-(13, 'Proyecto', 'CEPII', '2016-04-01', '2016-04-27', 'FEI'),
+(11, 'Festival', 'FLISoL 2016', '2016-04-23', '2017-01-01', 'FEI'),
+(12, 'Conferencia', 'Redes', '2016-04-14', '2016-04-30', 'Museo de Antropología'),
+(13, 'Proyecto', 'CEPII', '2016-01-01', '2016-05-02', 'FEI'),
 (14, 'Conferencia', 'Parallel programming model', '2015-12-05', '2015-12-05', 'Auditorio FEI'),
-(15, 'Conferencia', 'prueba', '2016-12-31', '2016-12-31', 'FEI');
+(15, 'Conferencia', 'prueba', '2016-01-01', '2016-12-31', 'FEI'),
+(16, 'Proyecto', 'SAC', '2016-02-02', '2016-05-25', 'FEI');
 
 -- --------------------------------------------------------
 
@@ -58,29 +58,30 @@ INSERT INTO `actividades` (`ID_Actividad`, `Tipo`, `Nombre`, `Fecha_Inicio`, `Fe
 --
 
 CREATE TABLE IF NOT EXISTS `asignaciones` (
-  `ID_Actividad` int(10) NOT NULL,
-  `ID_Trabajador` int(10) NOT NULL,
+  `ID_Asignacion` int(11) NOT NULL,
   `Fecha_Incorporacion` date NOT NULL,
-  `ID_Asignacion` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+  `Avance` varchar(30) NOT NULL,
+  `ID_Actividad` int(10) NOT NULL,
+  `ID_Trabajador` int(10) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `asignaciones`
 --
 
-INSERT INTO `asignaciones` (`ID_Actividad`, `ID_Trabajador`, `Fecha_Incorporacion`, `ID_Asignacion`) VALUES
-(2, 7, '2016-04-04', 1),
-(6, 11, '2016-03-22', 2),
-(9, 16, '2016-04-03', 4),
-(10, 8, '2016-04-11', 5),
-(8, 4, '2016-12-31', 6),
-(10, 15, '2017-02-02', 7),
-(9, 5, '2014-06-29', 8),
-(13, 10, '2016-04-02', 9),
-(11, 2, '2016-04-12', 10),
-(14, 14, '2015-12-01', 11),
-(2, 1, '2016-02-02', 13),
-(8, 18, '2016-04-14', 14);
+INSERT INTO `asignaciones` (`ID_Asignacion`, `Fecha_Incorporacion`, `Avance`, `ID_Actividad`, `ID_Trabajador`) VALUES
+(2, '2016-03-22', 'En curso', 6, 11),
+(4, '2016-04-03', 'Terminada', 9, 16),
+(5, '2016-04-11', 'Terminada', 10, 8),
+(6, '2016-12-31', 'Terminada', 8, 4),
+(7, '2017-02-02', 'Terminada', 10, 15),
+(8, '2014-06-29', 'Terminada', 9, 5),
+(9, '2016-04-02', 'En curso', 13, 10),
+(10, '2016-04-12', 'Por comenzar', 11, 2),
+(11, '2015-12-01', 'Terminada', 14, 14),
+(16, '2016-04-21', 'En curso', 16, 7),
+(17, '2016-04-21', 'En curso', 16, 1),
+(21, '2016-04-21', 'En curso', 12, 9);
 
 -- --------------------------------------------------------
 
@@ -115,9 +116,9 @@ CREATE TABLE IF NOT EXISTS `correos` (
 
 INSERT INTO `correos` (`ID_Correo`, `ID_Remitente`, `Destinatario`, `Asunto`, `Leido`, `Fecha_Envio`) VALUES
 (3, 19, 'Admin', 'No estoy asignado al congreso CONISOFT', 1, '2016-04-13'),
-(4, 4, 'Admin', 'No estoy asignado al taller Java', 1, '2016-04-12'),
+(4, 4, 'Admin', 'No estoy asignado al taller Java', 0, '2016-04-12'),
 (5, 16, 'Admin', 'No estoy asignado al proyecto CEPII', 1, '2016-04-03'),
-(6, 5, 'Admin', 'No estoy asignado la conferencia Arduino', 1, '2016-01-08'),
+(6, 5, 'Admin', 'No estoy asignado la conferencia Arduino', 0, '2016-01-08'),
 (7, 15, 'Admin', 'No estoy asignado a la conferencia Redes', 1, '2016-04-13');
 
 -- --------------------------------------------------------
@@ -152,9 +153,7 @@ INSERT INTO `cuentas` (`ID_Cuenta`, `Usuario`, `Contrasena`, `TipoUsuario`) VALU
 (14, 'Docente14', '1234', '3'),
 (15, 'DocenteX', '1234', '3'),
 (16, 'Docente16', '1234', '3'),
-(18, 'Prueba', '123456', '3'),
-(19, 'hola', '1234', '3'),
-(21, 'prueba', '1234', '3');
+(19, 'hola', '1234', '3');
 
 -- --------------------------------------------------------
 
@@ -176,8 +175,7 @@ CREATE TABLE IF NOT EXISTS `solicitudes` (
 INSERT INTO `solicitudes` (`ID_Solicitud`, `Etapa`, `ID_Trabajador`, `ID_Actividad`) VALUES
 (1, 'En proceso', 5, 8),
 (2, 'En proceso', 9, 15),
-(3, 'En proceso', 9, 13),
-(4, 'En proceso', 21, 2);
+(3, 'En proceso', 9, 13);
 
 -- --------------------------------------------------------
 
@@ -213,9 +211,7 @@ INSERT INTO `trabajadores` (`ID_Trabajador`, `Nombres`, `ApPaterno`, `ApMaterno`
 (14, 'Juan Carlos', 'Pérez', 'Arriaga', 'PTC', 14),
 (15, 'Alfonso', 'Sánchez', 'Orea', 'PTC', 15),
 (16, 'Jesús Roberto', 'Méndez', 'Ortíz', 'PTC', 16),
-(18, 'Prueba', 'Prueba', 'Prueba', 'PTC', 18),
-(19, 'Memowii', 'hola', 'hola', 'hola', 19),
-(21, 'prueba', 'prueba', 'prueba', 'PTC', 21);
+(19, 'Memowii', 'hola', 'hola', 'hola', 19);
 
 --
 -- Índices para tablas volcadas
@@ -231,19 +227,19 @@ ALTER TABLE `actividades`
 -- Indices de la tabla `asignaciones`
 --
 ALTER TABLE `asignaciones`
-  ADD PRIMARY KEY (`ID_Asignacion`), ADD KEY `ID_Actividad` (`ID_Actividad`), ADD KEY `ID_Trabajador` (`ID_Trabajador`);
+  ADD PRIMARY KEY (`ID_Asignacion`), ADD KEY `asignaciones_ibfk_1` (`ID_Actividad`), ADD KEY `asignaciones_ibfk_2` (`ID_Trabajador`);
 
 --
 -- Indices de la tabla `constancias`
 --
 ALTER TABLE `constancias`
-  ADD PRIMARY KEY (`ID_Constancia`), ADD KEY `ID_Actividad` (`ID_Actividad`);
+  ADD PRIMARY KEY (`ID_Constancia`), ADD KEY `constancias_ibfk_1` (`ID_Actividad`);
 
 --
 -- Indices de la tabla `correos`
 --
 ALTER TABLE `correos`
-  ADD PRIMARY KEY (`ID_Correo`), ADD KEY `ID_Remitente` (`ID_Remitente`);
+  ADD PRIMARY KEY (`ID_Correo`), ADD KEY `correos_ibfk_1` (`ID_Remitente`);
 
 --
 -- Indices de la tabla `cuentas`
@@ -255,13 +251,13 @@ ALTER TABLE `cuentas`
 -- Indices de la tabla `solicitudes`
 --
 ALTER TABLE `solicitudes`
-  ADD PRIMARY KEY (`ID_Solicitud`), ADD KEY `ID_Trabajador` (`ID_Trabajador`), ADD KEY `ID_Actividad` (`ID_Actividad`);
+  ADD PRIMARY KEY (`ID_Solicitud`), ADD KEY `solicitudes_ibfk_1` (`ID_Trabajador`), ADD KEY `solicitudes_ibfk_2` (`ID_Actividad`);
 
 --
 -- Indices de la tabla `trabajadores`
 --
 ALTER TABLE `trabajadores`
-  ADD PRIMARY KEY (`ID_Trabajador`), ADD KEY `ID_Cuenta` (`ID_Cuenta`);
+  ADD PRIMARY KEY (`ID_Trabajador`), ADD KEY `trabajadores_ibfk_1` (`ID_Cuenta`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -271,12 +267,12 @@ ALTER TABLE `trabajadores`
 -- AUTO_INCREMENT de la tabla `actividades`
 --
 ALTER TABLE `actividades`
-  MODIFY `ID_Actividad` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+  MODIFY `ID_Actividad` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT de la tabla `asignaciones`
 --
 ALTER TABLE `asignaciones`
-  MODIFY `ID_Asignacion` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+  MODIFY `ID_Asignacion` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT de la tabla `constancias`
 --
@@ -310,33 +306,33 @@ ALTER TABLE `trabajadores`
 -- Filtros para la tabla `asignaciones`
 --
 ALTER TABLE `asignaciones`
-ADD CONSTRAINT `asignaciones_ibfk_1` FOREIGN KEY (`ID_Actividad`) REFERENCES `actividades` (`ID_Actividad`),
-ADD CONSTRAINT `asignaciones_ibfk_2` FOREIGN KEY (`ID_Trabajador`) REFERENCES `trabajadores` (`ID_Trabajador`);
+ADD CONSTRAINT `asignaciones_ibfk_1` FOREIGN KEY (`ID_Actividad`) REFERENCES `actividades` (`ID_Actividad`) ON DELETE CASCADE,
+ADD CONSTRAINT `asignaciones_ibfk_2` FOREIGN KEY (`ID_Trabajador`) REFERENCES `trabajadores` (`ID_Trabajador`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `constancias`
 --
 ALTER TABLE `constancias`
-ADD CONSTRAINT `constancias_ibfk_1` FOREIGN KEY (`ID_Actividad`) REFERENCES `actividades` (`ID_Actividad`);
+ADD CONSTRAINT `constancias_ibfk_1` FOREIGN KEY (`ID_Actividad`) REFERENCES `actividades` (`ID_Actividad`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `correos`
 --
 ALTER TABLE `correos`
-ADD CONSTRAINT `correos_ibfk_1` FOREIGN KEY (`ID_Remitente`) REFERENCES `trabajadores` (`ID_Trabajador`);
+ADD CONSTRAINT `correos_ibfk_1` FOREIGN KEY (`ID_Remitente`) REFERENCES `trabajadores` (`ID_Trabajador`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `solicitudes`
 --
 ALTER TABLE `solicitudes`
-ADD CONSTRAINT `solicitudes_ibfk_1` FOREIGN KEY (`ID_Trabajador`) REFERENCES `trabajadores` (`ID_Trabajador`),
-ADD CONSTRAINT `solicitudes_ibfk_2` FOREIGN KEY (`ID_Actividad`) REFERENCES `actividades` (`ID_Actividad`);
+ADD CONSTRAINT `solicitudes_ibfk_1` FOREIGN KEY (`ID_Trabajador`) REFERENCES `trabajadores` (`ID_Trabajador`) ON DELETE CASCADE,
+ADD CONSTRAINT `solicitudes_ibfk_2` FOREIGN KEY (`ID_Actividad`) REFERENCES `actividades` (`ID_Actividad`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `trabajadores`
 --
 ALTER TABLE `trabajadores`
-ADD CONSTRAINT `trabajadores_ibfk_1` FOREIGN KEY (`ID_Cuenta`) REFERENCES `cuentas` (`ID_Cuenta`);
+ADD CONSTRAINT `trabajadores_ibfk_1` FOREIGN KEY (`ID_Cuenta`) REFERENCES `cuentas` (`ID_Cuenta`) ON DELETE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

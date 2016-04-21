@@ -8,13 +8,13 @@
   <link href="<?php echo base_url(); ?>assets/css/bootstrap.css" rel="stylesheet" />
   <link href="<?php echo base_url(); ?>assets/css/font-awesome.css" rel="stylesheet" />
   <link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet" />
-  <link href="<?php echo base_url(); ?>css/jquery-ui.min.css" rel="stylesheet" />
+  <link href="<?php echo base_url(); ?>assets/css/jquery-ui.css" rel="stylesheet" />
 
   <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-  <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js'></script>
-  <script type="text/javascript" src="<?php echo base_url('js/funciones.js') ?>"></script>
+  <script src="<?php echo base_url(); ?>assets/css/jquery-ui.js"></script>
+  <script src="//rawgit.com/padolsey/jQuery-Plugins/master/sortElements/jquery.sortElements.js"></script>
+  <!-- <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js'></script> -->
 
   <link rel="icon" type="image/x-icon" href="<?php echo base_url(); ?>assets/img/icon.png">
 
