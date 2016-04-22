@@ -30,6 +30,7 @@
                 <th id="formato_header">Formato</th>
                 <th></th>
                 <th></th>
+                <th></th>
               </tr>
             </thead>
             <?php foreach($query as $row): ?>
@@ -39,7 +40,10 @@
               <td><?php echo $row->Nombre; ?></td>
               <td></td>
               <td>
-                <a href='#' onclick="format('<?=base_url()?>constancias/formato/<?=$row->ID_Solicitud?>');"><i class='glyphicon glyphicon-paperclip' title='Adjuntar formato'></i></a>
+                <a href='#' onclick="formatUP('<?=base_url()?>constancias/formato/<?=$row->ID_Solicitud?>');"><i class='glyphicon glyphicon-upload' title='Subir formato firmado'></i></a>
+              </td>
+              <td>
+                <a href='#' onclick="formatDOW('<?=base_url()?>constancias/formatoDownload/<?=$row->ID_Solicitud?>');"><i class='glyphicon glyphicon-download' title='Desargar formato sin firma'></i></a>
               </td>
               <td>
                 <a href='#' onclick="elimina('<?=base_url()?>constancias/delete/<?=$row->ID_Solicitud?>');"><i class='glyphicon glyphicon-trash' title='Eliminar'></i></a>
@@ -83,7 +87,10 @@
           location.href=url;
         }
       }
-      function format(url){
+      function formatUP(url){
+        location.href=url;
+      }
+      function formatDOW(url){
         location.href=url;
       }
 </script>

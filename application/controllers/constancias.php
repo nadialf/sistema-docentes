@@ -4,10 +4,10 @@ class Constancias extends CI_Controller {
 	
 	public function __construct(){
 		parent::__construct();
-        $this->load->helper(array('url', 'form'));       
+      $this->load->helper(array('url', 'form'));       
   		$this->load->model('constancias_model');
   		$this->load->database('default');
-	}
+    }
 
 	public function cons_admin(){
 		$data['query'] = $this->constancias_model->getSolicitudes();
@@ -88,6 +88,39 @@ class Constancias extends CI_Controller {
       ?>
         <p><?php  echo "<div class='alert alert-warning'><p class='text-center'>No hay solicitudes registradas con el nombre, tipo o actividad introducido.</p></div>"; ?></p>
       <?php
+      }
+    }
+
+    public function formatoDownload(){
+      $id = $this->uri->segment(3);
+
+      require_once '/PHPWord-master/src/PhpWord/Autoloader.php';
+      \PhpOffice\PhpWord\Autoloader::register();
+
+      require_once '/PHPWord-master/src/PhpWord/TemplateProcessor.php';
+
+      $templateWord = new PhpOffice\PhpWord\TemplateProcessor('C:\xampp\htdocs\sistema-docentes\application\controllers\plantilla-constancia.docx');
+ 
+      $data = $this->constancias_model->getSolicitudID($id);
+      foreach($data->result() as $fila){
+          $docente = $fila->Nombres.' '.$fila->ApPaterno.' '.$fila->ApMaterno;
+          $tipo = $fila->Tipo;
+          $actividad = $fila->Nombre;
+          $fechaini = $fila->Fecha_Inicio;
+          $fechafin = $fila->Fecha_Fin;
+
+          // --- Asignamos valores a la plantilla
+          $templateWord->setValue('nombre_docente',$docente);
+          $templateWord->setValue('nombre_tipo',$tipo);
+          $templateWord->setValue('nombre_actividad',$actividad);
+          $templateWord->setValue('fecha_inicio',$fechaini);
+          $templateWord->setValue('fecha_fin',$fechafin);
+
+          // --- Guardamos el documento
+          $templateWord->saveAs('Constancia_'.$fila->Nombres.'.docx');
+
+          header("Content-Disposition: attachment; filename=Constancia_$fila->Nombres.docx; charset=iso-8859-1");
+          echo file_get_contents('Constancia_'.$fila->Nombres.'.docx');
       }
     }
 
