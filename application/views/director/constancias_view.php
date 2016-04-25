@@ -6,7 +6,7 @@
       <ul  class="nav nav-pills">
       <li class="active" data-toggle="tab">
         <a href="#1b" data-toggle="tab">
-          <i class="fa fa-list"></i>     Solicitudes de constancias 
+          <i class="fa fa-list"></i>     Constancias firmadas
         </a>
       <li data-toggle="tab">
           <a href="#2b" data-toggle="tab">
@@ -27,21 +27,35 @@
                 <th>Docente</th>
                 <th>Tipo</th>
                 <th>Actividad</th>
-                <th>Formato</th>
-                <th></th>
+                <th>Formato con firma</th>
               </tr>
             </thead>
-            <?php foreach($query as $row): ?>
-            <tr>
-              <td><?php echo $row->Nombres.' '.$row->ApPaterno.' '.$row->ApMaterno; ?></td>
-              <td><?php echo $row->Tipo; ?></td>
-              <td><?php echo $row->Nombre; ?></td>
-              <td></td>
-              <td>
-                <a href='#' onclick="elimina('<?=base_url()?>constancias/formato/<?=$row->ID_Solicitud?>');"><i class='glyphicon glyphicon-paperclip' title='Adjuntar formato'></i></a>
-              </td>
-            </tr>
-            <?php endforeach; ?>
+            <?php foreach($query as $row){
+
+                $this->load->database('default');
+                $this->db->select('ID_Constancias, Formato, ID_Solicitud');
+                $this->db->where('ID_Solicitud', $row->ID_Solicitud);
+                $this->db->from('constancias');
+                $query2 = $this->db->get();
+
+                if($query2->num_rows() > 0){
+                  foreach ($query2->result() as $fila) {
+                    if ($fila->Formato != '') {
+            ?>
+                      <tr>
+                      <td><?php echo $row->Nombres.' '.$row->ApPaterno.' '.$row->ApMaterno; ?></td>
+                      <td><?php echo $row->Tipo; ?></td>
+                      <td><?php echo $row->Nombre; ?></td>
+                      <td><?php 
+                                $ruta = base_url().$fila->Formato;
+                                $Archivo = "<a href='$ruta' target='_blank' title='Constancia'> <i class='glyphicon glyphicon-file' title='Ver formato con firma'></i></a>";
+                                echo $Archivo; ?>
+                      </td>
+                      </tr>
+                    <?php }
+                  }
+                }
+            } ?>
           </table>
         </div> <!-- TABLA SECTION END -->
 

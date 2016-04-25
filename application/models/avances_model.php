@@ -36,7 +36,7 @@ class Avances_model extends CI_Model{
         }
 
 
-        $this->db->select('trabajadores.Nombres, trabajadores.ApPaterno, trabajadores.ApMaterno, actividades.Tipo, actividades.Nombre, actividades.Fecha_Inicio, actividades.Fecha_Fin, asignaciones.ID_Asignacion, asignaciones.Avance');
+        $this->db->select('trabajadores.Nombres, trabajadores.ApPaterno, trabajadores.ApMaterno, actividades.ID_Actividad, actividades.Tipo, actividades.Nombre, actividades.Fecha_Inicio, actividades.Fecha_Fin, asignaciones.ID_Asignacion, asignaciones.Avance');
         $this->db->from('asignaciones');
         $this->db->join('trabajadores', 'trabajadores.ID_Trabajador = asignaciones.ID_Trabajador');
         $this->db->join('actividades', 'actividades.ID_Actividad = asignaciones.ID_Actividad');

@@ -27,8 +27,8 @@
                 <th id="docente_header">Docente</th>
                 <th id="tipo_header">Tipo</th>
                 <th id="actividad_header">Actividad</th>
-                <th id="formato_header">Formato</th>
-                <th></th>
+                <th>Formato sin firma</th>
+                <th id="formato_header">Formato con firma</th>
                 <th></th>
                 <th></th>
               </tr>
@@ -38,12 +38,32 @@
               <td><?php echo $row->Nombres.' '.$row->ApPaterno.' '.$row->ApMaterno; ?></td>
               <td><?php echo $row->Tipo; ?></td>
               <td><?php echo $row->Nombre; ?></td>
-              <td></td>
               <td>
-                <a href='#' onclick="formatUP('<?=base_url()?>constancias/formato/<?=$row->ID_Solicitud?>');"><i class='glyphicon glyphicon-upload' title='Subir formato firmado'></i></a>
+                <a href='#' onclick="formatDOW('<?=base_url()?>constancias/formatoDownload/<?=$row->ID_Solicitud?>');"><i class='glyphicon glyphicon-save' title='Descargar formato sin firma'></i></a>
+              </td>
+              <td><?php 
+                    
+                    $this->load->database('default');
+                    $this->db->select('ID_Constancias, Formato, ID_Solicitud');
+                    $this->db->from('constancias');
+                    $this->db->where('ID_Solicitud', $row->ID_Solicitud);
+                    $query = $this->db->get();
+
+                    if($query->num_rows() > 0){
+                      foreach ($query->result() as $row) {
+                        if ($row->Formato != '') {
+                          $ruta = base_url().$row->Formato;
+                          $Archivo = "<a href='$ruta' target='_blank' title='Constancia'> <i class='glyphicon glyphicon-file' title='Ver formato con firma'></i></a>";
+                        echo $Archivo;
+                        }
+                      }
+                    } ?>
               </td>
               <td>
-                <a href='#' onclick="formatDOW('<?=base_url()?>constancias/formatoDownload/<?=$row->ID_Solicitud?>');"><i class='glyphicon glyphicon-download' title='Desargar formato sin firma'></i></a>
+                <form method="post" accept-charset="utf-8" action="<?=base_url()?>constancias/newConstancia/<?=$row->ID_Solicitud?>" enctype="multipart/form-data" >
+                <input type="file" accept="image/*" name="userfile" /> </br>
+                <input type="submit" value="Guardar" />
+                </form>
               </td>
               <td>
                 <a href='#' onclick="elimina('<?=base_url()?>constancias/delete/<?=$row->ID_Solicitud?>');"><i class='glyphicon glyphicon-trash' title='Eliminar'></i></a>
@@ -86,9 +106,6 @@
         if (confirm("¿Está seguro que desea eliminar la solicitud?") ){
           location.href=url;
         }
-      }
-      function formatUP(url){
-        location.href=url;
       }
       function formatDOW(url){
         location.href=url;

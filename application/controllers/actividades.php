@@ -27,7 +27,7 @@ class Actividades extends CI_Controller {
   }
 
 	public function act_direc(){
-		$data['query'] = $this->actividades_model->getActividades();
+		$data['query'] = $this->actividades_model->getActividadesAvances();
 
 		$this->load->view('director/header');
 		$this->load->view('director/actividades_view', $data);
@@ -130,7 +130,7 @@ class Actividades extends CI_Controller {
     //llamada info dejamos pasar
     if($this->input->is_ajax_request() && $this->input->post('info')){
       $abuscar = $this->security->xss_clean($this->input->post('info'));
-      $search = $this->actividades_model->buscador(trim($abuscar));
+      $search = $this->actividades_model->buscador2(trim($abuscar));
       //si search es distinto de false significa que hay resultados
       //y los mostramos con un loop foreach
       if($search !== FALSE){
@@ -141,6 +141,7 @@ class Actividades extends CI_Controller {
         echo "<th>Lugar</th>";
         echo "<th>Fecha inicio</th>";
         echo "<th>Fecha fin</th>";
+        echo "<th>Progreso</th>";
         echo "</tr>";
         echo "</thead>";
         foreach($search->result() as $fila){
@@ -150,6 +151,16 @@ class Actividades extends CI_Controller {
             echo "<td>".$fila->Lugar."</td>";
             echo "<td>".$fila->Fecha_Inicio."</td>";
             echo "<td>".$fila->Fecha_Fin."</td>";
+            echo "<td>";
+                        if ($fila->Avance == "Por comenzar"){
+                            echo "<span style='color: #0000FF'>$fila->Avance</span>";
+                        } elseif ($fila->Avance == "En curso"){
+                            echo "<span style='color: #31B404'>$fila->Avance</span>";
+                        } elseif ($fila->Avance == "Terminada"){
+                            echo "<span style='color: #FF0000'>$fila->Avance</span>";
+                        }
+
+                "</td>";
             echo "</tr>";
         ?>
         <?php

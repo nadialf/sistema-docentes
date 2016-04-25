@@ -6,7 +6,7 @@
       <ul  class="nav nav-pills">
         <li class="active" data-toggle="tab">
           <a href="#3b" data-toggle="tab">
-            <i class="fa fa-table"></i>     Actividades registradas
+            <i class="fa fa-list"></i>     Actividades registradas
           </a>
         </li>
         <li data-toggle="tab">
@@ -30,6 +30,7 @@
                 <th id="lugar_header">Lugar</th>
                 <th id="fechaini_header">Fecha inicio</th>
                 <th id="fechafin_header">Fecha fin</th>
+                <th id="progreso_header">Progreso</th>
               </tr>
             </thead>
             <?php foreach($query as $row): ?>
@@ -39,8 +40,19 @@
                 <td><?php echo $row->Lugar; ?></td>
                 <td><?php echo $row->Fecha_Inicio; ?></td>
                 <td><?php echo $row->Fecha_Fin; ?></td>
+                <td><?php 
+                          if ($row->Avance == "Por comenzar"){
+                            echo "<span style='color: #0000FF'>$row->Avance</span>";
+                          } elseif ($row->Avance == "En curso"){
+                            echo "<span style='color: #31B404'>$row->Avance</span>";
+                          } elseif ($row->Avance == "Terminada"){
+                            echo "<span style='color: #FF0000'>$row->Avance</span>";
+                          }
+                ?>
+                </td>
               </tr>
-            <?php endforeach; ?>
+            <?php
+            endforeach; ?>
           </table>
         </div> <!-- TABLA SECTION END -->
 
@@ -80,7 +92,7 @@
 <script type="text/javascript">
   var table = $('table');
     
-    $('#nombre_header, #tipo_header, #lugar_header, #fechaini_header, #fechafin_header')
+    $('#nombre_header, #tipo_header, #lugar_header, #fechaini_header, #fechafin_header, #progreso_header')
         .wrapInner('<span title="sort this column"/>')
         .each(function(){
             var th = $(this),
