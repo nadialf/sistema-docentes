@@ -26,7 +26,7 @@
       <div class="tab-content clearfix">
         </br>
         <div class="tab-pane active" id="1b">
-          <table class="table">
+          <table class="table" id="mytable">
             <thead>
               <tr>
                 <th>Leído</th>
@@ -51,7 +51,7 @@
 
 
         <div class="tab-pane" id="2b">
-          <table class="table">
+          <table class="table" id="mytable">
             <thead>
               <tr>
                 <th>Leído</th>
@@ -141,4 +141,14 @@
       function leido(url){
         location.href=url;
       }
+</script>
+
+<script type="text/javascript">
+$("#mytable tbody tr").mouseover(function() {
+  $(this).addClass("tr_hover");
+});
+
+$("#mytable tbody tr").mouseout(function() {
+  $(this).removeClass("tr_hover");
+});
 </script>

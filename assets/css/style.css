@@ -412,3 +412,7 @@ footer {
     cursor: pointer;
     color: #1EB463;
 }
+
+.tr_hover {
+    background-color: #93CCFC;
+}

@@ -105,3 +105,13 @@
             });                
         });
 </script>
+
+<script type="text/javascript">
+$("#mytable tbody tr").mouseover(function() {
+  $(this).addClass("tr_hover");
+});
+
+$("#mytable tbody tr").mouseout(function() {
+  $(this).removeClass("tr_hover");
+});
+</script>
