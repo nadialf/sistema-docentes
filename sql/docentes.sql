@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-04-2016 a las 17:45:33
+-- Tiempo de generación: 27-04-2016 a las 21:08:31
 -- Versión del servidor: 5.6.24
 -- Versión de PHP: 5.5.24
 
@@ -32,24 +32,25 @@ CREATE TABLE IF NOT EXISTS `actividades` (
   `Nombre` varchar(75) NOT NULL,
   `Fecha_Inicio` date NOT NULL,
   `Fecha_Fin` date NOT NULL,
-  `Lugar` varchar(40) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+  `Lugar` varchar(40) NOT NULL,
+  `Descripcion` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `actividades`
 --
 
-INSERT INTO `actividades` (`ID_Actividad`, `Tipo`, `Nombre`, `Fecha_Inicio`, `Fecha_Fin`, `Lugar`) VALUES
-(6, 'Festival', 'Install Fest', '2016-04-21', '2016-04-21', 'FEI'),
-(8, 'Congreso', 'CONISOFT', '2016-02-01', '2016-03-01', 'Museo de Antropología'),
-(9, 'Taller', 'Java', '2015-09-02', '2015-09-09', 'FEI'),
-(10, 'Conferencia', 'Arduino', '2016-04-01', '2016-04-01', 'Museo de Antropología'),
-(11, 'Festival', 'FLISoL 2016', '2016-04-23', '2017-01-01', 'FEI'),
-(12, 'Conferencia', 'Redes', '2016-04-14', '2016-04-30', 'Museo de Antropología'),
-(13, 'Proyecto', 'CEPII', '2016-01-01', '2016-05-02', 'FEI'),
-(14, 'Conferencia', 'Parallel programming model', '2015-12-05', '2015-12-05', 'Auditorio FEI'),
-(15, 'Conferencia', 'prueba', '2016-01-01', '2016-12-31', 'FEI'),
-(16, 'Proyecto', 'SAC', '2016-02-02', '2016-05-25', 'FEI');
+INSERT INTO `actividades` (`ID_Actividad`, `Tipo`, `Nombre`, `Fecha_Inicio`, `Fecha_Fin`, `Lugar`, `Descripcion`) VALUES
+(6, 'Festival', 'Install Fest', '2016-04-21', '2016-04-21', 'FEI', 'Festival de Instalación (en inglés installfest) es un acontecimiento, generalmente patrocinado por un Grupo de Usuarios de Linux local, Universidad o LAN party, en el que la gente se reúne para realizar instalaciones masivas de sistemas GNU/Linux.'),
+(8, 'Congreso', 'CONISOFT', '2016-02-01', '2016-03-01', 'Museo de Antropología', 'Invitación al Congreso Internacional de Investigación e Innovación en Ingeniería de Software (CONISOFT 2013), este año la sede será en la Facultad de Estadística e Informática, de la Universidad Veracruzana, en Xalapa, Veracruz. La información del llamado a artículos  y la convocatoria del llamado a tutoriales se puede consultar en la página del evento .'),
+(9, 'Taller', 'Java', '2015-09-02', '2015-09-09', 'FEI', 'El lenguaje de programación Java fue originalmente desarrollado por James Gosling de Sun Microsystems (la cual fue adquirida por la compañía Oracle) y publicado en 1995 como un componente fundamental de la plataforma Java de Sun Microsystems.'),
+(10, 'Conferencia', 'Arduino', '2016-04-01', '2016-04-01', 'Museo de Antropología', 'Arduino es una compañía de hardware libre, la cual desarrolla placas de desarrollo que integran un microcontrolador y un entorno de desarrollo (IDE), diseñado para facilitar el uso de la electrónica en proyectos multidisciplinarios.'),
+(11, 'Festival', 'FLISoL 2016', '2016-04-23', '2017-01-01', 'FEI', 'El FLISoL es el evento de difusión de Software Libre más grande en Latinoamérica y está dirigido a todo tipo de público: estudiantes, académicos, empresarios, trabajadores, funcionarios públicos, entusiastas y aun personas que no poseen mucho conocimiento informático.'),
+(12, 'Conferencia', 'Redes', '2016-04-14', '2016-04-30', 'Museo de Antropología', 'El término red inalámbrica (en inglés: wireless network) se utiliza en informática para designar la conexión de nodos que se da por medio de ondas electromagnéticas, sin necesidad de una red cableada o alámbrica. La transmisión y la recepción se realizan a través de puertos.'),
+(13, 'Proyecto', 'CEPII', '2016-01-01', '2016-05-02', 'FEI', 'Proyecto CEPII se basará para la realización de un sistema software para el Centro de Desarrollo Humano y Terapias Integrativas Ixtaxochitl'' A.C. (CEPII), que ayude a la agilización y eficiencia en el control de los procesos efectuados en el antes mencionado centro.'),
+(14, 'Conferencia', 'Parallel programming model', '2015-12-05', '2015-12-05', 'Auditorio FEI', 'La programación paralela es el uso de varios procesadores trabajando en conjunto para dar solución a una tarea en común, lo que hacen es que se dividen el trabajo y cada procesador hace una porción del problema al poder intercambiar datos por una red de interconexión o atraves de memoria.'),
+(16, 'Proyecto', 'SAC', '2016-02-02', '2016-05-25', 'FEI', 'SAC (Sistema de Administración de Actividades), aspira a realizar un sistema para la Facultad de Estadística e Informática de la Universidad Veracruzana campus Xalapa, que ayude a la emisión de constancias para avalar el trabajo de los docentes que efectúan labores de modo semestral o anual, tales como actividades, cursos, proyectos y/o programas cumplidos en dicha facultad.'),
+(17, 'Congreso', 'Prueba descripción actividad', '2016-09-09', '2016-12-20', 'Museo de Antropologia', 'Acción de probar a alguien o algo para conocer sus cualidades, verificar su eficacia, saber cómo funciona o reacciona, o qué resultado produce.');
 
 -- --------------------------------------------------------
 
@@ -63,25 +64,26 @@ CREATE TABLE IF NOT EXISTS `asignaciones` (
   `Avance` varchar(30) NOT NULL,
   `ID_Actividad` int(10) NOT NULL,
   `ID_Trabajador` int(10) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `asignaciones`
 --
 
 INSERT INTO `asignaciones` (`ID_Asignacion`, `Fecha_Incorporacion`, `Avance`, `ID_Actividad`, `ID_Trabajador`) VALUES
-(2, '2016-03-22', 'En curso', 6, 11),
+(2, '2016-03-22', 'Terminada', 6, 11),
 (4, '2016-04-03', 'Terminada', 9, 16),
 (5, '2016-04-11', 'Terminada', 10, 8),
 (6, '2016-12-31', 'Terminada', 8, 4),
 (7, '2017-02-02', 'Terminada', 10, 15),
 (8, '2014-06-29', 'Terminada', 9, 5),
 (9, '2016-04-02', 'En curso', 13, 10),
-(10, '2016-04-12', 'Por comenzar', 11, 2),
+(10, '2016-04-12', 'En curso', 11, 2),
 (11, '2015-12-01', 'Terminada', 14, 14),
 (16, '2016-04-21', 'En curso', 16, 7),
 (17, '2016-04-21', 'En curso', 16, 1),
-(21, '2016-04-21', 'En curso', 12, 9);
+(21, '2016-04-21', 'En curso', 12, 9),
+(24, '2016-04-27', 'Por comenzar', 17, 1);
 
 -- --------------------------------------------------------
 
@@ -90,10 +92,19 @@ INSERT INTO `asignaciones` (`ID_Asignacion`, `Fecha_Incorporacion`, `Avance`, `I
 --
 
 CREATE TABLE IF NOT EXISTS `constancias` (
-  `ID_Constancia` int(10) NOT NULL,
-  `Formato` varchar(50) NOT NULL,
-  `ID_Actividad` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `ID_Constancias` int(11) NOT NULL,
+  `Formato` varchar(100) NOT NULL,
+  `ID_Solicitud` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `constancias`
+--
+
+INSERT INTO `constancias` (`ID_Constancias`, `Formato`, `ID_Solicitud`) VALUES
+(32, 'assets/constancias/5.png', 5),
+(33, 'assets/constancias/4.png', 4),
+(34, 'assets/constancias/3.png', 3);
 
 -- --------------------------------------------------------
 
@@ -115,11 +126,10 @@ CREATE TABLE IF NOT EXISTS `correos` (
 --
 
 INSERT INTO `correos` (`ID_Correo`, `ID_Remitente`, `Destinatario`, `Asunto`, `Leido`, `Fecha_Envio`) VALUES
-(3, 19, 'Admin', 'No estoy asignado al congreso CONISOFT', 1, '2016-04-13'),
-(4, 4, 'Admin', 'No estoy asignado al taller Java', 0, '2016-04-12'),
+(4, 4, 'Admin', 'No estoy asignado al taller Java', 1, '2016-04-12'),
 (5, 16, 'Admin', 'No estoy asignado al proyecto CEPII', 1, '2016-04-03'),
 (6, 5, 'Admin', 'No estoy asignado la conferencia Arduino', 0, '2016-01-08'),
-(7, 15, 'Admin', 'No estoy asignado a la conferencia Redes', 1, '2016-04-13');
+(7, 15, 'Admin', 'No estoy asignado a la conferencia Redes', 0, '2016-04-13');
 
 -- --------------------------------------------------------
 
@@ -132,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `cuentas` (
   `Usuario` varchar(10) NOT NULL,
   `Contrasena` varchar(10) NOT NULL,
   `TipoUsuario` varchar(10) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `cuentas`
@@ -166,16 +176,17 @@ CREATE TABLE IF NOT EXISTS `solicitudes` (
   `Etapa` varchar(30) NOT NULL,
   `ID_Trabajador` int(11) NOT NULL,
   `ID_Actividad` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `solicitudes`
 --
 
 INSERT INTO `solicitudes` (`ID_Solicitud`, `Etapa`, `ID_Trabajador`, `ID_Actividad`) VALUES
-(1, 'En proceso', 5, 8),
-(2, 'En proceso', 9, 15),
-(3, 'En proceso', 9, 13);
+(3, 'En proceso', 9, 13),
+(4, 'En proceso', 16, 9),
+(5, 'En proceso', 14, 14),
+(8, 'En proceso', 5, 9);
 
 -- --------------------------------------------------------
 
@@ -190,7 +201,7 @@ CREATE TABLE IF NOT EXISTS `trabajadores` (
   `ApMaterno` varchar(30) NOT NULL,
   `TipoTrabajo` varchar(10) NOT NULL,
   `ID_Cuenta` int(10) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `trabajadores`
@@ -233,7 +244,7 @@ ALTER TABLE `asignaciones`
 -- Indices de la tabla `constancias`
 --
 ALTER TABLE `constancias`
-  ADD PRIMARY KEY (`ID_Constancia`), ADD KEY `constancias_ibfk_1` (`ID_Actividad`);
+  ADD PRIMARY KEY (`ID_Constancias`), ADD KEY `constancias_ibfk_1` (`ID_Solicitud`);
 
 --
 -- Indices de la tabla `correos`
@@ -267,17 +278,17 @@ ALTER TABLE `trabajadores`
 -- AUTO_INCREMENT de la tabla `actividades`
 --
 ALTER TABLE `actividades`
-  MODIFY `ID_Actividad` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
+  MODIFY `ID_Actividad` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT de la tabla `asignaciones`
 --
 ALTER TABLE `asignaciones`
-  MODIFY `ID_Asignacion` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
+  MODIFY `ID_Asignacion` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT de la tabla `constancias`
 --
 ALTER TABLE `constancias`
-  MODIFY `ID_Constancia` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Constancias` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT de la tabla `correos`
 --
@@ -287,17 +298,17 @@ ALTER TABLE `correos`
 -- AUTO_INCREMENT de la tabla `cuentas`
 --
 ALTER TABLE `cuentas`
-  MODIFY `ID_Cuenta` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
+  MODIFY `ID_Cuenta` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT de la tabla `solicitudes`
 --
 ALTER TABLE `solicitudes`
-  MODIFY `ID_Solicitud` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `ID_Solicitud` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `trabajadores`
 --
 ALTER TABLE `trabajadores`
-  MODIFY `ID_Trabajador` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
+  MODIFY `ID_Trabajador` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 --
 -- Restricciones para tablas volcadas
 --
@@ -313,7 +324,7 @@ ADD CONSTRAINT `asignaciones_ibfk_2` FOREIGN KEY (`ID_Trabajador`) REFERENCES `t
 -- Filtros para la tabla `constancias`
 --
 ALTER TABLE `constancias`
-ADD CONSTRAINT `constancias_ibfk_1` FOREIGN KEY (`ID_Actividad`) REFERENCES `actividades` (`ID_Actividad`) ON DELETE CASCADE;
+ADD CONSTRAINT `constancias_ibfk_1` FOREIGN KEY (`ID_Solicitud`) REFERENCES `solicitudes` (`ID_Solicitud`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `correos`

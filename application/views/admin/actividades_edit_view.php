@@ -21,7 +21,7 @@
           <input type="hidden" value="<?php echo $query['0']->ID_Actividad ?>" name="id" id="id">
           <div style="margin-left:20px; margin-right:20px;">
             <div class="content-wrapper"  style="width:100%; min-height: auto; height:auto; margin-left;10px; margin-right:10px;">
-              <div class="col-xs-4">
+              <div class="col-xs-8">
                 <span class="input-group-addon">Nombre de la actividad</span>
                 <input type="text" class="form-control" aria-describedby="sizing-addon2" name="nombre" required
                       value="<?php echo $query['0']->Nombre ?>">
@@ -31,18 +31,19 @@
                 <input type="text" class="form-control" aria-describedby="sizing-addon2" name="tipo" required
                       value="<?php echo $query['0']->Tipo ?>">
               </div>
+            </div>
+          </div>
+
+          </br>
+
+          <div style="margin-left:20px; margin-right:20px;">
+            <div class="content-wrapper"  style="width:100%; min-height: auto; height:auto; margin-left;10px; margin-right:10px;">
               <div class="col-xs-4">
                 <span class="input-group-addon">Lugar</span>
                 <input type="text" class="form-control" aria-describedby="sizing-addon2" name="lugar" required
                       value="<?php echo $query['0']->Lugar ?>">
               </div>
-            </div>
-          </div>
 
-          <br><br>
-
-          <div style="margin-left:20px; margin-right:20px;">
-            <div class="content-wrapper"  style="width:100%; min-height: auto; height:auto; margin-left;10px; margin-right:10px;">
               <div class="col-xs-4">
                 <span class="input-group-addon" id="sizing-addon2">Fecha inicio</span>
                 <input type="date" class="form-control" aria-describedby="sizing-addon2" data-provide="datepicker" name="fechaini"  
@@ -52,6 +53,18 @@
                 <span class="input-group-addon" id="sizing-addon2">Fecha fin</span>
                 <input type="date" class="form-control" aria-describedby="sizing-addon2" data-provide="datepicker" name="fechafin" 
                       required value="<?php echo $query['0']->Fecha_Fin ?>">
+              </div>
+            </div>
+          </div>
+
+          </br>
+
+          <div style="margin-left:20px; margin-right:20px;">
+            <div class="content-wrapper"  style="width:100%; min-height: auto; height:auto; margin-left;10px; margin-right:10px;">
+              <div class="col-xs-8">
+                <span class="input-group-addon" id="sizing-addon2">Descripci&oacute;n</span>
+                <input type="text" class="form-control" aria-describedby="sizing-addon2" name="descripcion" required 
+                value="<?php echo $query['0']->Descripcion ?>">
               </div>
             </div>
           </div>

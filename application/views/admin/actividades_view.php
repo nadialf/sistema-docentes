@@ -39,7 +39,7 @@
               </tr>
             </thead>
             <?php foreach($query as $row): ?>
-              <tr>
+              <tr style="cursor: pointer;" onclick="show('<?php echo $row->ID_Actividad ?>');">
                 <td><?php echo $row->Nombre; ?></td>
                 <td><?php echo $row->Tipo; ?></td>
                 <td><?php echo $row->Lugar; ?></td>
@@ -51,6 +51,9 @@
                 <td>
                   <a href='#' onclick="elimina('<?=base_url()?>actividades/delete/<?=$row->ID_Actividad?>');"><i class='glyphicon glyphicon-trash' title='Eliminar'></i></a>
                 </td>
+              </tr>
+              <tr id="<?php echo $row->ID_Actividad ?>" style="display: none; background-color: #F5f5F5;">
+                <td colspan=7><?php echo $row->Descripcion; ?></td>
               </tr>
             <?php endforeach; ?>
           </table>
@@ -64,7 +67,7 @@
           
           <div style="margin-left:20px; margin-right:20px;">
             <div class="content-wrapper"  style="width:100%; min-height: auto; height:auto; margin-left;10px; margin-right:10px;">
-              <div class="col-xs-4">
+              <div class="col-xs-8">
                 <span class="input-group-addon">Nombre de la actividad</span>
                 <input type="text" class="form-control" aria-describedby="sizing-addon2" name="nombre" required>
               </div>
@@ -79,17 +82,18 @@
                   <option value="Taller">Taller</option>
                 </select>
               </div>
+            </div>
+          </div>
+
+          </br>
+
+          <div style="margin-left:20px; margin-right:20px;">
+            <div class="content-wrapper"  style="width:100%; min-height: auto; height:auto; margin-left;10px; margin-right:10px;">
               <div class="col-xs-4">
                 <span class="input-group-addon">Lugar</span>
                 <input type="text" class="form-control" aria-describedby="sizing-addon2" name="lugar" required>
               </div>
-            </div>
-          </div>
 
-          <br><br>
-
-          <div style="margin-left:20px; margin-right:20px;">
-            <div class="content-wrapper"  style="width:100%; min-height: auto; height:auto; margin-left;10px; margin-right:10px;">
               <div class="col-xs-4">
                 <span class="input-group-addon" id="sizing-addon2">Fecha inicio</span>
                 <input type="date" class="form-control" aria-describedby="sizing-addon2" data-provide="datepicker" name="fechaini" required>
@@ -99,6 +103,17 @@
                 <input type="date" class="form-control" aria-describedby="sizing-addon2" data-provide="datepicker" name="fechafin" required>
               </div>
             </div>
+          </div>
+
+          </br>
+
+          <div style="margin-left:20px; margin-right:20px;">
+            <div class="content-wrapper"  style="width:100%; min-height: auto; height:auto; margin-left;10px; margin-right:10px;">
+              <div class="col-xs-8">
+                <span class="input-group-addon">Descripci&oacute;n</span>
+                <input type="text" class="form-control" aria-describedby="sizing-addon2" name="descripcion" required>
+              </div>
+              </div>
           </div>
 
           <div style="margin-left:20px; margin-right:20px;">
@@ -130,18 +145,10 @@
 
   <script type="text/javascript">
     $(document).ready(function(){
-    //utilizamos el evento keyup para coger la información
-    //cada vez que se pulsa alguna tecla con el foco en el buscador
     $(".autocompletar").keyup(function(){
-    //alert("Hello! I am an alert box!!");
-    //en info tenemos lo que vamos escribiendo en el buscador
       var info = $(this).val();
-      //hacemos la petición al método autocompletado del controlador home
-      //pasando la variable info
       $.post('<?php echo base_url().'actividades/autocompletarB' ?>',{ info : info }, function(data){
-        //si autocompletado nos devuelve algo
         if(data != ''){
-          //$('.contenedor').show();
           $("#tableSearch").html(data);
         }else{
           $("#tableSearch").html('');
@@ -177,7 +184,6 @@
                         inverse ? -1 : 1
                         : inverse ? 1 : -1;
                 }, function(){
-                    // parentNode is the element we want to move
                     return this.parentNode;      
                 });
                 inverse = !inverse;     
@@ -193,4 +199,16 @@ $("#mytable tbody tr").mouseover(function() {
 $("#mytable tbody tr").mouseout(function() {
   $(this).removeClass("tr_hover");
 });
+</script>
+
+<script type="text/javascript">
+function show(id) {
+  if (!document.getElementById) return false;
+  fila = document.getElementById(id);
+  if (fila.style.display != "none") {
+    fila.style.display = "none";
+  } else {
+    fila.style.display = ""; 
+  }
+}
 </script>

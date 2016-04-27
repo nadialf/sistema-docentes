@@ -34,7 +34,7 @@
               </tr>
             </thead>
             <?php foreach($query as $row): ?>
-              <tr>
+              <tr style="cursor: pointer;" onclick="show('<?php echo $row->ID_Actividad ?>');">
                 <td><?php echo $row->Nombre; ?></td>
                 <td><?php echo $row->Tipo; ?></td>
                 <td><?php echo $row->Lugar; ?></td>
@@ -50,6 +50,9 @@
                           }
                 ?>
                 </td>
+              </tr>
+              <tr id="<?php echo $row->ID_Actividad ?>" style="display: none; background-color: #F5f5F5;">
+                <td colspan=6><?php echo $row->Descripcion; ?></td>
               </tr>
             <?php
             endforeach; ?>
@@ -112,4 +115,26 @@
                 inverse = !inverse;     
             });                
         });
+</script>
+
+<script type="text/javascript">
+$("#mytable tbody tr").mouseover(function() {
+  $(this).addClass("tr_hover");
+});
+
+$("#mytable tbody tr").mouseout(function() {
+  $(this).removeClass("tr_hover");
+});
+</script>
+
+<script type="text/javascript">
+function show(id) {
+  if (!document.getElementById) return false;
+  fila = document.getElementById(id);
+  if (fila.style.display != "none") {
+    fila.style.display = "none"; //ocultar fila 
+  } else {
+    fila.style.display = ""; //mostrar fila 
+  }
+}
 </script>

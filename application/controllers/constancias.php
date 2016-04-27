@@ -95,7 +95,7 @@ class Constancias extends CI_Controller {
       }
     }
 
-    public function autocompletarB(){
+    public function autocompletarB(){ //Director
     $data = array();
     if($this->input->is_ajax_request() && $this->input->post('info')){
       $abuscar = $this->security->xss_clean($this->input->post('info'));
@@ -105,20 +105,34 @@ class Constancias extends CI_Controller {
         echo "<th>Docente</th>";
         echo "<th>Tipo</th>";
         echo "<th>Actividad</th>";
-        echo "<th>Formato</th>";
-        echo "<th></th>";
+        echo "<th>Formato con firma</th>";
         echo "</tr>";
         echo "</thead>";
         foreach($search->result() as $fila){
-            echo "<tr>";
-            echo "<td>".$fila->Nombres.' '.$fila->ApPaterno.' '.$fila->ApMaterno."</td>";
-            echo "<td>".$fila->Tipo."</td>";
-            echo "<td>".$fila->Nombre."</td>";
-            echo "<td></td>";
-            echo "<td><a href='".base_url()."constancias/formato/$fila->ID_Solicitud'> <i class='glyphicon glyphicon-paperclip' title='Adjuntar formato'></i></a></td>";
-            echo "</tr>";
-        ?>
-        <?php
+
+            $this->load->database('default');
+            $this->db->select('ID_Constancias, Formato, ID_Solicitud');
+            $this->db->where('ID_Solicitud', $fila->ID_Solicitud);
+            $this->db->from('constancias');
+            $query2 = $this->db->get();
+
+            if($query2->num_rows() > 0){
+              foreach ($query2->result() as $row) {
+                 if ($row->Formato != '') {
+
+                echo "<tr>";
+                    echo "<td>".$fila->Nombres.' '.$fila->ApPaterno.' '.$fila->ApMaterno."</td>";
+                    echo "<td>".$fila->Tipo."</td>";
+                    echo "<td>".$fila->Nombre."</td>";
+                    echo "<td>";                    
+                        $ruta = base_url().$row->Formato;
+                        $Archivo = "<a href='$ruta' target='_blank' title='Constancia'> <i class='glyphicon glyphicon-file' title='Ver formato con firma'></i></a>";
+                    echo $Archivo;
+                    echo "</td>";
+                echo "</tr>";
+                }
+              }
+            }
         }
       }else{
       ?>

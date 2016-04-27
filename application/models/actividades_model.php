@@ -50,7 +50,7 @@ class Actividades_model extends CI_Model{
         }
 
         $this->db->distinct();
-        $this->db->select('actividades.ID_Actividad, actividades.Tipo, actividades.Nombre, actividades.Lugar, actividades.Fecha_Inicio, actividades.Fecha_Fin, asignaciones.ID_Asignacion, asignaciones.Avance');
+        $this->db->select('actividades.ID_Actividad, actividades.Tipo, actividades.Nombre, actividades.Lugar, actividades.Fecha_Inicio, actividades.Fecha_Fin, actividades.Descripcion, asignaciones.ID_Asignacion, asignaciones.Avance');
         $this->db->from('asignaciones');
         $this->db->join('actividades', 'actividades.ID_Actividad = asignaciones.ID_Actividad');
         $this->db->order_by("actividades.Fecha_Inicio","desc");
@@ -59,23 +59,25 @@ class Actividades_model extends CI_Model{
         return $query->result();
     }
 
-    function agregarActividad($nombre, $tipo, $lugar, $fechaini, $fechafin){
+    function agregarActividad($nombre, $tipo, $lugar, $fechaini, $fechafin, $descripcion){
         $datos = array('Nombre' => $nombre,
                         'Tipo' => $tipo,
                         'Lugar' => $lugar,
                         'Fecha_Inicio' => $fechaini,
-                        'Fecha_Fin' => $fechafin);
+                        'Fecha_Fin' => $fechafin,
+                        'Descripcion' => $descripcion);
         $this->db->insert('actividades', $datos);
         redirect(base_url().'actividades/act_admin');
     }
 
-    function updateAct($id, $nombre, $tipo, $lugar, $fechaini, $fechafin){
+    function updateAct($id, $nombre, $tipo, $lugar, $fechaini, $fechafin, $descripcion){
         $datos = array('ID_Actividad' => $id,
                         'Nombre' => $nombre,
                         'Tipo' => $tipo,
                         'Lugar' => $lugar,
                         'Fecha_Inicio' => $fechaini,
-                        'Fecha_Fin' => $fechafin);
+                        'Fecha_Fin' => $fechafin,
+                        'Descripcion' => $descripcion);
         $this->db->where('ID_Actividad', $id);
         $this->db->update('actividades', $datos);
 
@@ -113,7 +115,7 @@ class Actividades_model extends CI_Model{
 
     public function buscador2($abuscar){
         $this->db->distinct();
-        $this->db->select('actividades.ID_Actividad, actividades.Tipo, actividades.Nombre, actividades.Lugar, actividades.Fecha_Inicio, actividades.Fecha_Fin, asignaciones.ID_Asignacion, asignaciones.Avance');
+        $this->db->select('actividades.ID_Actividad, actividades.Tipo, actividades.Nombre, actividades.Lugar, actividades.Fecha_Inicio, actividades.Fecha_Fin, actividades.Descripcion, asignaciones.ID_Asignacion, asignaciones.Avance');
         $this->db->from('asignaciones');
         $this->db->join('actividades', 'actividades.ID_Actividad = asignaciones.ID_Actividad');
 
