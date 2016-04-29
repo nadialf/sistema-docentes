@@ -50,11 +50,22 @@ class Docentes_model extends CI_Model{
         $this->db->where('ID_Trabajador', $id);
         $this->db->update('trabajadores', $datos);
 
-        $datos = array('Usuario' => $user,
-                        'Contrasena' => $contrasena);
         $this->db->where('ID_Cuenta', $id);
-        $this->db->update('cuentas', $datos);
+        $query = $this->db->get('cuentas');
 
+        foreach ($query->result() as $row) {
+            if ( ($row->Usuario == 'Admin') || ($row->Usuario == 'Director') ){
+                $datos = array('Contrasena' => $contrasena);
+                $this->db->where('ID_Cuenta', $id);
+                $this->db->update('cuentas', $datos);
+            } else {
+                $datos = array('Usuario' => $user,
+                                'Contrasena' => $contrasena);
+                $this->db->where('ID_Cuenta', $id);
+                $this->db->update('cuentas', $datos);
+
+            }
+        }
         redirect(base_url().'docentes/doc_admin');
     }
 

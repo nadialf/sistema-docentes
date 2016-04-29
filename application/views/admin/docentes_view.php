@@ -53,9 +53,15 @@
                 <td>
                   <a href='#' onclick="editar('<?=base_url()?>docentes/modificar/<?=$row->ID_Trabajador?>');"><i class='glyphicon glyphicon-pencil' title='Editar'></i></a>
                 </td>
-                <td>
-                  <a href='#' onclick="elimina('<?=base_url()?>docentes/delete/<?=$row->ID_Trabajador?>');"><i class='glyphicon glyphicon-trash' title='Eliminar'></i></a>
-                </td>
+                <?php
+                    if ( ($row->Usuario == 'Admin') || ($row->Usuario == 'Director') ) { ?>
+
+                          <td></td> <?php                         
+                    } else { ?>
+                        <td>
+                          <a href='#' onclick="elimina('<?=base_url()?>docentes/delete/<?=$row->ID_Trabajador?>');"><i class='glyphicon glyphicon-trash' title='Eliminar'></i></a>
+                        </td> <?php
+                    } ?>
               </tr>
             <?php endforeach; ?>
           </table>
