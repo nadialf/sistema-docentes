@@ -98,12 +98,10 @@
           <div class="tab-content clearfix">
             <div class="tab-pane" id="pdocente">
               <?=  form_open(base_url().'avances/newReportDocente')?>
-              <br>
-              <h2 style="text-align:center;">Reporte por docente</h2>
-                
+              <br>                
               <div style="margin-left:20px; margin-right:20px;">
                 <div class="content-wrapper"  style="width:100%; min-height: auto; height:auto; margin-left;10px; margin-right:10px;">
-                  <div class="col-xs-8 ui-widget">
+                  <div class="col-xs-8 col-md-push-2 ui-widget">
                     <span class="input-group-addon" id="sizing- addon2">Docente</span>
                     <input type="text" class="form-control" aria-describedby="sizing-addon2" name="docente" id="docente" required>
                   </div>
@@ -121,16 +119,14 @@
 
             <div class="tab-pane" id="pperiodo">
               <?=  form_open(base_url().'avances/newReportPeriodo')?>
-              <br>
-              <h2 style="text-align:center;">Reporte por fechas</h2>
-                
+              <br>                
               <div style="margin-left:20px; margin-right:20px;">
                 <div class="content-wrapper"  style="width:100%; min-height: auto; height:auto; margin-left;10px; margin-right:10px;">
-                  <div class="col-xs-4">
+                  <div class="col-xs-4 col-md-push-2">
                     <span class="input-group-addon" id="sizing-addon2">Fecha inicio</span>
                     <input type="date" class="form-control" aria-describedby="sizing-addon2" data-provide="datepicker" name="fechainiR" required>
                   </div>
-                  <div class="col-xs-4">
+                  <div class="col-xs-4 col-md-push-2">
                     <span class="input-group-addon" id="sizing-addon2">Fecha fin</span>
                     <input type="date" class="form-control" aria-describedby="sizing-addon2" data-provide="datepicker" name="fechafinR" required>
                   </div>
@@ -147,19 +143,18 @@
             </div> <!-- REPORTE PERIODO END -->
 
             <div class="tab-pane" id="pprogreso">
-              <?=  form_open(base_url().'avances/newReport')?>
-              <br>
-              <h2 style="text-align:center;">Reporte por progreso</h2>
-                
+              <?=  form_open(base_url().'avances/newReportProgreso')?>
+              <br>                
               <div style="margin-left:20px; margin-right:20px;">
                 <div class="content-wrapper"  style="width:100%; min-height: auto; height:auto; margin-left;10px; margin-right:10px;">
-                  <div class="col-xs-4">
-                    <span class="input-group-addon" id="sizing-addon2">Fecha inicio</span>
-                    <input type="date" class="form-control" aria-describedby="sizing-addon2" data-provide="datepicker" name="fechainiR" required>
-                  </div>
-                  <div class="col-xs-4">
-                    <span class="input-group-addon" id="sizing-addon2">Fecha fin</span>
-                    <input type="date" class="form-control" aria-describedby="sizing-addon2" data-provide="datepicker" name="fechafinR" required>
+                  <div class="col-xs-4 col-md-push-4">
+                    <span class="input-group-addon">Progreso</span>
+                    <select class="form-control" name="avanceR" required>
+                      <option></option>
+                      <option value="Por empezar">Por empezar</option>
+                      <option value="En curso">En curso</option>
+                      <option value="Terminada">Terminada</option>
+                    </select>
                   </div>
                 </div>
               </div>
@@ -174,19 +169,23 @@
             </div> <!-- REPORTE PROGRESO END -->
 
             <div class="tab-pane" id="ptipo">
-              <?=  form_open(base_url().'avances/newReport')?>
-              <br>
-              <h2 style="text-align:center;">Reporte por tipo de actividad</h2>
-                
+              <?=  form_open(base_url().'avances/newReportTipo')?>
+              <br>                
               <div style="margin-left:20px; margin-right:20px;">
                 <div class="content-wrapper"  style="width:100%; min-height: auto; height:auto; margin-left;10px; margin-right:10px;">
-                  <div class="col-xs-4">
-                    <span class="input-group-addon" id="sizing-addon2">Fecha inicio</span>
-                    <input type="date" class="form-control" aria-describedby="sizing-addon2" data-provide="datepicker" name="fechainiR" required>
-                  </div>
-                  <div class="col-xs-4">
-                    <span class="input-group-addon" id="sizing-addon2">Fecha fin</span>
-                    <input type="date" class="form-control" aria-describedby="sizing-addon2" data-provide="datepicker" name="fechafinR" required>
+                  <div class="col-xs-4 col-md-push-4">
+                    <span class="input-group-addon">Tipo de actividad</span>
+                    <select class="form-control" name="tipo" required>
+                      <option></option>
+                      <option value="Certificación">Certificación</option>
+                      <option value="Conferencia">Conferencia</option>
+                      <option value="Congreso">Congreso</option>
+                      <option value="Curso">Curso</option>
+                      <option value="Festival">Festival</option>
+                      <option value="Proyecto">Proyecto</option>
+                      <option value="Taller">Taller</option>
+                      <option value="Otro">Otro</option>
+                    </select>
                   </div>
                 </div>
               </div>
@@ -199,10 +198,9 @@
               <br>
               <?=form_close()?>
             </div> <!-- REPORTE TIPO END -->
+          </div>
+      </div> <!--REPORTES SECTION END -->
 
-          </div> <!--REPORTES SECTION END -->
-
-      </div>
     </div>
   </div> <!-- CONTENT-WRAPPER SECTION END-->
 

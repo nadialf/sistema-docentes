@@ -156,4 +156,82 @@ class Avances_model extends CI_Model{
         return $query->result();
     }
 
+    function obtenerReporteProgreso($avanceR){
+        $this->db->select('ID_Actividad, Fecha_Inicio, Fecha_Fin');
+        $this->db->from('actividades');
+        $query = $this->db->get();
+
+        foreach ($query->result() as $row) {
+            $ID_Actividad = $row->ID_Actividad;
+
+            $fecha = getdate();
+            $fechaactual = "$fecha[year]-$fecha[mon]-$fecha[mday]";
+
+            $fechahoy = new DateTime($fechaactual);
+            $fechaini = new DateTime($row->Fecha_Inicio);
+            $fechafin = new DateTime($row->Fecha_Fin);
+
+            if ($fechahoy < $fechaini){
+                $progreso = "Por comenzar";
+            } elseif ( ($fechahoy >= $fechaini) && ($fechahoy <= $fechafin) ){
+                 $progreso = "En curso";
+            } elseif ($fechahoy > $fechafin){
+                 $progreso = "Terminada";
+            }
+
+            $datos = array('Avance' => $progreso);
+            $this->db->where('ID_Actividad', $ID_Actividad);
+            $this->db->update('asignaciones', $datos);
+        }
+
+
+        $this->db->select('trabajadores.Nombres, trabajadores.ApPaterno, trabajadores.ApMaterno, actividades.ID_Actividad, actividades.Tipo, actividades.Nombre, actividades.Fecha_Inicio, actividades.Fecha_Fin, asignaciones.ID_Asignacion, asignaciones.Avance');
+        $this->db->from('asignaciones');
+        $this->db->join('trabajadores', 'trabajadores.ID_Trabajador = asignaciones.ID_Trabajador');
+        $this->db->join('actividades', 'actividades.ID_Actividad = asignaciones.ID_Actividad');
+        $this->db->where('asignaciones.Avance', $avanceR);
+        $this->db->order_by("actividades.Fecha_Inicio","desc");
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    function obtenerReporteTipo($tipo){
+        $this->db->select('ID_Actividad, Fecha_Inicio, Fecha_Fin');
+        $this->db->from('actividades');
+        $query = $this->db->get();
+
+        foreach ($query->result() as $row) {
+            $ID_Actividad = $row->ID_Actividad;
+
+            $fecha = getdate();
+            $fechaactual = "$fecha[year]-$fecha[mon]-$fecha[mday]";
+
+            $fechahoy = new DateTime($fechaactual);
+            $fechaini = new DateTime($row->Fecha_Inicio);
+            $fechafin = new DateTime($row->Fecha_Fin);
+
+            if ($fechahoy < $fechaini){
+                $progreso = "Por comenzar";
+            } elseif ( ($fechahoy >= $fechaini) && ($fechahoy <= $fechafin) ){
+                 $progreso = "En curso";
+            } elseif ($fechahoy > $fechafin){
+                 $progreso = "Terminada";
+            }
+
+            $datos = array('Avance' => $progreso);
+            $this->db->where('ID_Actividad', $ID_Actividad);
+            $this->db->update('asignaciones', $datos);
+        }
+
+
+        $this->db->select('trabajadores.Nombres, trabajadores.ApPaterno, trabajadores.ApMaterno, actividades.ID_Actividad, actividades.Tipo, actividades.Nombre, actividades.Fecha_Inicio, actividades.Fecha_Fin, asignaciones.ID_Asignacion, asignaciones.Avance');
+        $this->db->from('asignaciones');
+        $this->db->join('trabajadores', 'trabajadores.ID_Trabajador = asignaciones.ID_Trabajador');
+        $this->db->join('actividades', 'actividades.ID_Actividad = asignaciones.ID_Actividad');
+        $this->db->where('actividades.Tipo', $tipo);
+        $this->db->order_by("actividades.Fecha_Inicio","desc");
+        $query = $this->db->get();
+        return $query->result();
+    }
+
 }

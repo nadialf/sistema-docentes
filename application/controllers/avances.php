@@ -171,4 +171,82 @@ class Avances extends CI_Controller {
     $this->pdf->Output("Reporte.pdf", 'D');
   }
 
+  public function newReportProgreso(){
+    $this->load->model('avances_model');
+    $this->load->library('pdf');
+ 
+    $avanceR = $this->input->post('avanceR');
+    $query = $this->avances_model->obtenerReporteProgreso($avanceR);
+ 
+    $this->pdf = new Pdf();
+    $this->pdf->AddPage();
+    $this->pdf->AliasNbPages();
+    $this->pdf->SetTitle("Reporte de avances");
+    $this->pdf->SetLeftMargin(15);
+    $this->pdf->SetRightMargin(15);
+    $this->pdf->SetFillColor(200,200,200);
+    $this->pdf->SetFont('Arial', 'B', 9);
+    $this->pdf->Cell(10,7,'NUM','TBL',0,'C','1');
+    $this->pdf->Cell(45,7,'DOCENTE','TB',0,'L','1');
+    $this->pdf->Cell(20,7,'TIPO','TB',0,'L','1');
+    $this->pdf->Cell(40,7,'ACTIVIDAD','TB',0,'L','1');
+    $this->pdf->Cell(25,7,'FECHA INICIO','TB',0,'C','1');
+    $this->pdf->Cell(20,7,'FECHA FIN','TB',0,'L','1');
+    $this->pdf->Cell(25,7,'PROGRESO','TBR',0,'C','1');
+    $this->pdf->Ln(7);
+
+    $x = 1;
+    foreach ($query as $row){
+      $this->pdf->Cell(10,5,$x++,'BL',0,'C',0);
+      $this->pdf->Cell(45,5,utf8_decode($row->Nombres),'B',0,'L',0);
+      $this->pdf->Cell(20,5,utf8_decode($row->Tipo),'B',0,'L',0);
+      $this->pdf->Cell(40,5,utf8_decode($row->Nombre),'B',0,'L',0);
+      $this->pdf->Cell(25,5,$row->Fecha_Inicio,'B',0,'C',0);
+      $this->pdf->Cell(20,5,$row->Fecha_Fin,'B',0,'L',0);
+      $this->pdf->Cell(25,5,$row->Avance,'BR',0,'C',0);
+      $this->pdf->Ln(5);
+    }
+    
+    $this->pdf->Output("Reporte.pdf", 'D');
+  }
+
+  public function newReportTipo(){
+    $this->load->model('avances_model');
+    $this->load->library('pdf');
+ 
+    $tipo = $this->input->post('tipo');
+    $query = $this->avances_model->obtenerReporteTipo($tipo);
+ 
+    $this->pdf = new Pdf();
+    $this->pdf->AddPage();
+    $this->pdf->AliasNbPages();
+    $this->pdf->SetTitle("Reporte de avances");
+    $this->pdf->SetLeftMargin(15);
+    $this->pdf->SetRightMargin(15);
+    $this->pdf->SetFillColor(200,200,200);
+    $this->pdf->SetFont('Arial', 'B', 9);
+    $this->pdf->Cell(10,7,'NUM','TBL',0,'C','1');
+    $this->pdf->Cell(45,7,'DOCENTE','TB',0,'L','1');
+    $this->pdf->Cell(20,7,'TIPO','TB',0,'L','1');
+    $this->pdf->Cell(40,7,'ACTIVIDAD','TB',0,'L','1');
+    $this->pdf->Cell(25,7,'FECHA INICIO','TB',0,'C','1');
+    $this->pdf->Cell(20,7,'FECHA FIN','TB',0,'L','1');
+    $this->pdf->Cell(25,7,'PROGRESO','TBR',0,'C','1');
+    $this->pdf->Ln(7);
+
+    $x = 1;
+    foreach ($query as $row){
+      $this->pdf->Cell(10,5,$x++,'BL',0,'C',0);
+      $this->pdf->Cell(45,5,utf8_decode($row->Nombres),'B',0,'L',0);
+      $this->pdf->Cell(20,5,utf8_decode($row->Tipo),'B',0,'L',0);
+      $this->pdf->Cell(40,5,utf8_decode($row->Nombre),'B',0,'L',0);
+      $this->pdf->Cell(25,5,$row->Fecha_Inicio,'B',0,'C',0);
+      $this->pdf->Cell(20,5,$row->Fecha_Fin,'B',0,'L',0);
+      $this->pdf->Cell(25,5,$row->Avance,'BR',0,'C',0);
+      $this->pdf->Ln(5);
+    }
+    
+    $this->pdf->Output("Reporte.pdf", 'D');
+  }
+
 }
