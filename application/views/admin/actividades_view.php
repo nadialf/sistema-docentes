@@ -39,7 +39,8 @@
               </tr>
             </thead>
             <?php foreach($query as $row): ?>
-              <tr style="cursor: pointer;" onclick="show('<?php echo $row->ID_Actividad ?>');">
+              <tbody style="cursor: pointer;" onclick="show('<?php echo $row->ID_Actividad ?>');">
+              <tr>
                 <td><?php echo $row->Nombre; ?></td>
                 <td><?php echo $row->Tipo; ?></td>
                 <td><?php echo $row->Lugar; ?></td>
@@ -55,9 +56,10 @@
               <tr id="<?php echo $row->ID_Actividad ?>" style="display: none; background-color: #F5f5F5;">
                 <td colspan=7><?php echo $row->Descripcion; ?></td>
               </tr>
+              </tbody>
             <?php endforeach; ?>
           </table>
-        </div> <!-- ACTIVIDADES REGISTRASTAS SECTION END -->
+        </div> <!-- ACTIVIDADES REGISTRADAS SECTION END -->
 
         
         <div class="tab-pane" id="2b">
@@ -171,7 +173,7 @@
   var table = $('table');
     
     $('#nombre_header, #tipo_header, #lugar_header, #fechaini_header, #fechafin_header')
-        .wrapInner('<span title="sort this column"/>')
+        .wrapInner('<span title="Ordenar esta columna"/>')
         .each(function(){
             var th = $(this),
                 thIndex = th.index(),
