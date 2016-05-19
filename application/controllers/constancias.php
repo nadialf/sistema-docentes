@@ -26,12 +26,8 @@ class Constancias extends CI_Controller {
   }
 
   public function newConstancia(){
-    $id = $this->uri->segment(3);
-    $data = array(
-      'userfile' => $this->input->post('userfile', TRUE)
-    );
-    
-    $this->constancias_model->upload_constancia($id, $data);
+    $id = $this->uri->segment(3);    
+    $this->constancias_model->upload_constancia($id);
   }
 
 	public function autocompletar(){
@@ -195,7 +191,103 @@ class Constancias extends CI_Controller {
           unlink($ruta);
           unlink('Constancia_'.$fila->Nombres.'.docx');
           unlink('newdocument.doc');
-          
+
+          redirect(base_url().'constancias/cons_admin');
+      }
+    }
+
+    public function formatoFirmaDownload(){
+      $id = $this->uri->segment(3);
+
+      require_once '/PHPWord-master/src/PhpWord/Autoloader.php';
+      \PhpOffice\PhpWord\Autoloader::register();
+      require_once '/PHPWord-master/src/PhpWord/TemplateProcessor.php';
+      $templateWord = new PhpOffice\PhpWord\TemplateProcessor('C:\xampp\htdocs\sistema-docentes\application\controllers\plantilla-constancia-firma.docx');
+ 
+      $data = $this->constancias_model->getSolicitudID($id);
+      foreach($data->result() as $fila){
+          $docente = $fila->Nombres.' '.$fila->ApPaterno.' '.$fila->ApMaterno;
+          $tipo = $fila->Tipo;
+          $actividad = $fila->Nombre;
+          $fechaini = $fila->Fecha_Inicio;
+          $fechafin = $fila->Fecha_Fin;
+
+          $templateWord->setValue('nombre_docente',$docente);
+          $templateWord->setValue('nombre_tipo',$tipo);
+          $templateWord->setValue('nombre_actividad',$actividad);
+          $templateWord->setValue('fecha_inicio',$fechaini);
+          $templateWord->setValue('fecha_fin',$fechafin);
+
+          $templateWord->saveAs('Constancia_'.$fila->Nombres.'.docx');
+
+          $word = new COM("Word.Application") or die ("Could not initialise Object.");
+          $word->Visible = 0;
+          $word->DisplayAlerts = 0;
+          $word->Documents->Open('C:\xampp\htdocs\sistema-docentes\Constancia_'.$fila->Nombres.'.docx');
+          $word->ActiveDocument->SaveAs('C:\xampp\htdocs\sistema-docentes\newdocument.doc');
+          $word->ActiveDocument->ExportAsFixedFormat('C:\xampp\htdocs\sistema-docentes\Constancia_'.$fila->Nombres.'.pdf', 17, false, 0, 0, 0, 0, 7, true, true, 2, true, true, false);
+          $word->Quit(false);
+          $word = null;
+
+          $ruta = 'Constancia_'.$fila->Nombres.'.pdf';
+          header('Content-Type: application/force-download');
+          header('Content-Disposition: attachment; filename='.$ruta);
+          header('Content-Transfer-Encoding: binary');
+          header('Content-Length: '.filesize($ruta));
+          readfile($ruta);
+
+          unlink($ruta);
+          unlink('Constancia_'.$fila->Nombres.'.docx');
+          unlink('newdocument.doc');
+
+          redirect(base_url().'constancias/cons_direc');
+      }
+    }
+
+    public function formatoFirmaDownload2(){
+      $id = $this->uri->segment(3);
+
+      require_once '/PHPWord-master/src/PhpWord/Autoloader.php';
+      \PhpOffice\PhpWord\Autoloader::register();
+      require_once '/PHPWord-master/src/PhpWord/TemplateProcessor.php';
+      $templateWord = new PhpOffice\PhpWord\TemplateProcessor('C:\xampp\htdocs\sistema-docentes\application\controllers\plantilla-constancia-firma.docx');
+ 
+      $data = $this->constancias_model->getSolicitudID($id);
+      foreach($data->result() as $fila){
+          $docente = $fila->Nombres.' '.$fila->ApPaterno.' '.$fila->ApMaterno;
+          $tipo = $fila->Tipo;
+          $actividad = $fila->Nombre;
+          $fechaini = $fila->Fecha_Inicio;
+          $fechafin = $fila->Fecha_Fin;
+
+          $templateWord->setValue('nombre_docente',$docente);
+          $templateWord->setValue('nombre_tipo',$tipo);
+          $templateWord->setValue('nombre_actividad',$actividad);
+          $templateWord->setValue('fecha_inicio',$fechaini);
+          $templateWord->setValue('fecha_fin',$fechafin);
+
+          $templateWord->saveAs('Constancia_'.$fila->Nombres.'.docx');
+
+          $word = new COM("Word.Application") or die ("Could not initialise Object.");
+          $word->Visible = 0;
+          $word->DisplayAlerts = 0;
+          $word->Documents->Open('C:\xampp\htdocs\sistema-docentes\Constancia_'.$fila->Nombres.'.docx');
+          $word->ActiveDocument->SaveAs('C:\xampp\htdocs\sistema-docentes\newdocument.doc');
+          $word->ActiveDocument->ExportAsFixedFormat('C:\xampp\htdocs\sistema-docentes\Constancia_'.$fila->Nombres.'.pdf', 17, false, 0, 0, 0, 0, 7, true, true, 2, true, true, false);
+          $word->Quit(false);
+          $word = null;
+
+          $ruta = 'Constancia_'.$fila->Nombres.'.pdf';
+          header('Content-Type: application/force-download');
+          header('Content-Disposition: attachment; filename='.$ruta);
+          header('Content-Transfer-Encoding: binary');
+          header('Content-Length: '.filesize($ruta));
+          readfile($ruta);
+
+          unlink($ruta);
+          unlink('Constancia_'.$fila->Nombres.'.docx');
+          unlink('newdocument.doc');
+
           redirect(base_url().'constancias/cons_admin');
       }
     }

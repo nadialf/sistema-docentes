@@ -30,7 +30,6 @@
                 <th>Formato sin firma</th>
                 <th id="formato_header">Formato con firma</th>
                 <th></th>
-                <th></th>
               </tr>
             </thead>
             <?php foreach($query as $row): ?>
@@ -39,31 +38,22 @@
               <td><?php echo $row->Tipo; ?></td>
               <td><?php echo $row->Nombre; ?></td>
               <td>
-                <a href='#' onclick="formatDOW('<?=base_url()?>constancias/formatoDownload/<?=$row->ID_Solicitud?>');"><i class='glyphicon glyphicon-save' title='Descargar formato sin firma'></i></a>
+                <a href='#' onclick="formatDOW('<?=base_url()?>constancias/formatoDownload/<?=$row->ID_Solicitud?>');" class='btn-lg'><i class='glyphicon glyphicon-save' title='Descargar formato sin firma'></i></a>
               </td>
               <td><?php 
-                    
-                    $this->load->database('default');
-                    $this->db->select('ID_Constancias, Formato, ID_Solicitud');
-                    $this->db->from('constancias');
-                    $this->db->where('ID_Solicitud', $row->ID_Solicitud);
-                    $query = $this->db->get();
+                $this->load->database('default');
+                $this->db->select('ID_Constancias, Formato, ID_Solicitud');
+                $this->db->where('ID_Solicitud', $row->ID_Solicitud);
+                $this->db->from('constancias');
+                $query2 = $this->db->get();
 
-                    if($query->num_rows() > 0){
-                      foreach ($query->result() as $row) {
-                        if ($row->Formato != '') {
-                          $ruta = base_url().$row->Formato;
-                          $Archivo = "<a href='$ruta' target='_blank' title='Constancia'> <i class='glyphicon glyphicon-file' title='Ver formato con firma'></i></a>";
-                        echo $Archivo;
-                        }
-                      }
-                    } ?>
-              </td>
-              <td>
-                <form method="post" accept-charset="utf-8" action="<?=base_url()?>constancias/newConstancia/<?=$row->ID_Solicitud?>" enctype="multipart/form-data" >
-                <input type="file" accept="image/*" name="userfile" /> </br>
-                <input type="submit" value="Guardar" />
-                </form>
+                if($query2->num_rows() > 0){
+                  foreach ($query2->result() as $fila) {
+                    $ruta = base_url().'constancias/formatoFirmaDownload2/'.$row->ID_Solicitud;
+                    $Archivo = "<a href='$ruta' class='btn-lg'><i class='glyphicon glyphicon-file' title='Descargar formato con firma'></i></a>";
+                    echo $Archivo;
+                  }
+                }?>
               </td>
               <td>
                 <a href='#' onclick="elimina('<?=base_url()?>constancias/delete/<?=$row->ID_Solicitud?>');"><i class='glyphicon glyphicon-trash' title='Eliminar'></i></a>

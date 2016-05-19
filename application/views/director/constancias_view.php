@@ -28,34 +28,45 @@
                 <th id="tipo_header">Tipo</th>
                 <th id="actividad_header">Actividad</th>
                 <th>Formato con firma</th>
+                <th></th>
               </tr>
             </thead>
-            <?php foreach($query as $row){
+            <?php foreach($query as $row){ ?>
+              <tr>
+                <td><?php echo $row->Nombres.' '.$row->ApPaterno.' '.$row->ApMaterno; ?></td>
+                <td><?php echo $row->Tipo; ?></td>
+                <td><?php echo $row->Nombre; ?></td>
+                
+                <?php
+                if ($row->Etapa == "Aceptada"){ ?>
+                  <td></td>
+                  <td>
+                    <?=  form_open(base_url().'constancias/newConstancia/'.$row->ID_Solicitud)?>
+                      <input type="submit"  value="Firmar" class="btn btn-primary">
+                    <?=form_close()?>
+                  </td> <?php
+                } else {                  
+                  $this->load->database('default');
+                  $this->db->select('ID_Constancias, Formato, ID_Solicitud');
+                  $this->db->where('ID_Solicitud', $row->ID_Solicitud);
+                  $this->db->from('constancias');
+                  $query2 = $this->db->get();
 
-                $this->load->database('default');
-                $this->db->select('ID_Constancias, Formato, ID_Solicitud');
-                $this->db->where('ID_Solicitud', $row->ID_Solicitud);
-                $this->db->from('constancias');
-                $query2 = $this->db->get();
-
-                if($query2->num_rows() > 0){
-                  foreach ($query2->result() as $fila) {
-                    if ($fila->Formato != '') {
-            ?>
-                      <tr>
-                      <td><?php echo $row->Nombres.' '.$row->ApPaterno.' '.$row->ApMaterno; ?></td>
-                      <td><?php echo $row->Tipo; ?></td>
-                      <td><?php echo $row->Nombre; ?></td>
-                      <td><?php 
-                                $ruta = base_url().$fila->Formato;
-                                $Archivo = "<a href='$ruta' target='_blank' title='Constancia'> <i class='glyphicon glyphicon-file' title='Ver formato con firma'></i></a>";
-                                echo $Archivo; ?>
+                  if($query2->num_rows() > 0){
+                    foreach ($query2->result() as $fila) { ?>
+                      <td> 
+                        <?php 
+                        $ruta = base_url().'constancias/formatoFirmaDownload/'.$row->ID_Solicitud;
+                        $Archivo = "<a href='$ruta' class='btn-lg'><i class='glyphicon glyphicon-file' title='Descargar formato con firma'></i></a>";
+                        echo $Archivo; ?>
                       </td>
-                      </tr>
-                    <?php }
+                      <td></td>
+                    <?php
+                    }
                   }
-                }
-            } ?>
+                } ?>
+              </tr>
+            <?php } //END FOREACH ?>
           </table>
         </div> <!-- TABLA SECTION END -->
 
