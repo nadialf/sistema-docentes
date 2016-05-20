@@ -22,7 +22,7 @@
         
         <div class="tab-pane active" id="3b">
         </br>
-          <table class="table" id="mytable">
+          <table class="table table-responsive" id="mytable">
             <thead>
               <tr>
                 <th id="nombre_header">Nombre</th>

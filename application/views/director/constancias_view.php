@@ -6,7 +6,7 @@
       <ul  class="nav nav-pills">
       <li class="active" data-toggle="tab">
         <a href="#1b" data-toggle="tab">
-          <i class="fa fa-list"></i>     Constancias firmadas
+          <i class="fa fa-list"></i>     Constancias
         </a>
       <li data-toggle="tab">
           <a href="#2b" data-toggle="tab">
@@ -21,7 +21,7 @@
 
         <div class="tab-pane active" id="1b">
         </br>
-          <table class="table" id="mytable">
+          <table class="table table-responsive" id="mytable">
             <thead>
               <tr>
                 <th id="docente_header">Docente</th>

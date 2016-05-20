@@ -21,74 +21,72 @@
 </head>
 
 <body style="background-color:#e5e5e5;">
-  <nav class="navbar navbar-default"> <!-- navbar-fixed-top" role="navigation"> -->
-    <div class="container-fluid">
-      <div class="navbar-header" style="margin:5px;">
-        <img src="<?php echo base_url(); ?>assets/img/LogoSAC.png">
-      </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                <div style="color:#FFF;">
-                    <i class="fa fa-user"></i>     Administrador
-                    <span class="caret"></span>
-                </div>
-              </a>
-              <ul class="dropdown-menu">
-                <li><a href="<?php echo base_url().'login/logout'?>">Cerrar Sesión</a></li>
-              </ul>
-            </li>
-          </ul>
-      </div>
-    </div>
-  </nav>
-  
 
-
-  <section class="menu-section">
-    <div >
-      <div class="row">
-        <div class="col-md-12">
-          <div class="navbar-collapse collapse ">
-            <ul id="menu-top" class="nav navbar-nav navbar-right">
-              <li>
-             	<a href="<?php echo base_url().'actividades/act_admin'; ?>">
-                  <div>
-                    <i class="fa fa-calendar"></i>     Actividades
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="<?php echo base_url().'correo/mail_admin'; ?>">
-                  <div>
-                    <i class="fa fa-envelope"></i>     Correo
-                  </div>
-                </a>
-              </li>
-              <li>
-                 <a href="<?php echo base_url().'constancias/cons_admin'?>">
-                  <div>
-                    <i class="fa fa-file-text-o"></i>     Constancias
-                  </div>
-                </a>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                  <div>
-                      <i class="fa fa-users"></i>     Docentes
-                      <span class="caret"></span>
-                  </div>
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a href="<?php echo base_url().'docentes/doc_admin'; ?>">Ver docentes</a></li>
-                  <li><a href="<?php echo base_url().'asignaciones'; ?>">Asignaciones</a></li>
-                  <li><a href="<?php echo base_url().'avances'; ?>">Avances</a></li>
-                </ul>
-              </li>
-            </ul>
+  <!-- Navigation -->
+  <nav class="navbar navbar-default navbar-fixed">
+      <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header page-scroll" style="margin:5px;">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+              <img src="<?php echo base_url(); ?>assets/img/LogoSAC.png">
           </div>
-        </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-right" style="margin:10px;">
+                  <li>
+                    <a href="<?php echo base_url().'actividades/act_admin'; ?>">
+                      <div style="color:#FFF;">
+                        <i class="fa fa-calendar"></i>     Actividades
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="<?php echo base_url().'correo/mail_admin'; ?>">
+                      <div style="color:#FFF;">
+                        <i class="fa fa-envelope"></i>     Correo
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                     <a href="<?php echo base_url().'constancias/cons_admin'?>">
+                      <div style="color:#FFF;">
+                        <i class="fa fa-file-text-o"></i>     Constancias
+                      </div>
+                    </a>
+                  </li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                      <div style="color:#FFF;">
+                          <i class="fa fa-users"></i>     Docentes
+                          <span class="caret"></span>
+                      </div>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a href="<?php echo base_url().'docentes/doc_admin'; ?>" style="color:#FFF;">Ver docentes</a></li>
+                      <li><a href="<?php echo base_url().'asignaciones'; ?>" style="color:#FFF;">Asignaciones</a></li>
+                      <li><a href="<?php echo base_url().'avances'; ?>" style="color:#FFF;">Avances</a></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                      <div style="color:#FFF;">
+                        <i class="fa fa-user"></i>     Administrador
+                          <span class="caret"></span>
+                      </div>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a href="<?php echo base_url().'login/logout'?>" style="color:#FFF;">Cerrar sesión</a></li>
+                    </ul>
+                  </li>
+              </ul>
+          </div>
+          <!-- /.navbar-collapse -->
       </div>
-    </div>
-  </section>
+      <!-- /.container-fluid -->
+  </nav>

@@ -33,9 +33,15 @@ body {
 }
 
 .content-wrapper {
-    margin-top: 40px;
+    /*margin-top: 40px;
     padding-bottom: 60px;
-    width: 100%;
+    width: 100%;*/
+
+    min-height: 100%;
+    height:auto !important;
+    height:100%;
+    overflow: hidden !important; /* FF scroll-bar */ 
+    width: 100%; 
 }
 
 .page-head-line {
@@ -78,9 +84,9 @@ background-color:#2562AE;
    HEADER SECTION STYLES
  ============================================================ */
 header {
-    background-color: #2562AE;
+
     color: #fff;
-    padding: 10px;
+    /*padding: 10px;*/
     text-align: left;
     font-size: 50px;
 }
@@ -173,15 +179,15 @@ header {
 }
 
 .menu-top-active {
-    background-color: #e5e5e5;
+    background-color: #1EB463;
 }
 
 .menu-section .nav > li > a:hover,.menu-section .nav > li > a:focus {
-    background-color: #1EB463!important;
+    background-color: #e67300!important;
 }
 
 .menu-section .dropdown-menu > li > a:hover,.menu-section .dropdown-menu > li > a:focus {
-    background-color: #1EB463!important;
+    background-color: #e67300!important;
 }
 
 .navbar-inverse {
@@ -190,7 +196,7 @@ header {
 }
 
 .navbar-toggle {
-    background-color: #2562AE;
+    background-color: #e5e5e5;
     border: 1px solid #fff;
 }
 
@@ -205,7 +211,21 @@ footer {
     padding: 10px;
     color: #fff;
     font-size: 12px;
-    background-color: #2562AE;
+    /*background-color: #2562AE;*/
+    background: rgba(37,98,174,1);
+background: -moz-linear-gradient(left, rgba(37,98,174,1) 0%, rgba(73,155,234,1) 100%);
+background: -webkit-gradient(left top, right top, color-stop(0%, rgba(37,98,174,1)), color-stop(100%, rgba(73,155,234,1)));
+background: -webkit-linear-gradient(left, rgba(37,98,174,1) 0%, rgba(73,155,234,1) 100%);
+background: -o-linear-gradient(left, rgba(37,98,174,1) 0%, rgba(73,155,234,1) 100%);
+background: -ms-linear-gradient(left, rgba(37,98,174,1) 0%, rgba(73,155,234,1) 100%);
+background: linear-gradient(to right, rgba(37,98,174,1) 0%, rgba(73,155,234,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2562ae', endColorstr='#499bea', GradientType=1 );
+
+position: fixed;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
 }
 
     footer a, footer a:hover {
@@ -330,7 +350,7 @@ footer {
     background-color:rgba(255,255,255,0.5);
     border-radius: 5px;
     border-top: 5px;
-    margin:  auto;
+    margin: auto;
     margin-top: 100px;
 }
 
@@ -408,7 +428,8 @@ footer {
     background: #ff7b81;
 }
 
-#mytable thead tr th:hover{ /*Acción encima de*/
+#mytable thead tr th:hover,
+#mytable thead tr th:focus{ /*Acción encima de*/
     cursor: pointer;
     color: #1EB463;
 }
@@ -416,3 +437,8 @@ footer {
 .tr_hover {
     background-color: #93CCFC;
 }
+
+#menu_hover li a div:hover {
+    color: #e67300;
+}
+

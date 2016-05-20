@@ -10,7 +10,8 @@ class Constancias extends CI_Controller {
     }
 
 	public function cons_admin(){
-		$data['query'] = $this->constancias_model->getSolicitudes();
+		$data['query1'] = $this->constancias_model->getSolicitudesNoAceptadas();
+    $data['query2'] = $this->constancias_model->getSolicitudesAceptadas();
 
 		$this->load->view('admin/header');
 		$this->load->view('admin/constancias_view', $data);
@@ -18,7 +19,7 @@ class Constancias extends CI_Controller {
 	}
 
   public function cons_direc(){
-    $data['query'] = $this->constancias_model->getSolicitudes();
+    $data['query'] = $this->constancias_model->getSolicitudesAceptadas();
 
     $this->load->view('director/header');
     $this->load->view('director/constancias_view', $data);
@@ -37,22 +38,23 @@ class Constancias extends CI_Controller {
       $search = $this->constancias_model->buscador(trim($abuscar));
         echo "<thead>";
         echo "<tr>";
+        echo "<th>Aceptar</th>";
         echo "<th>Docente</th>";
         echo "<th>Tipo</th>";
         echo "<th>Actividad</th>";
         echo "<th>Formato sin firma</th>";
         echo "<th>Formato con firma</th>";
         echo "<th></th>";
-        echo "<th></th>";
         echo "</tr>";
         echo "</thead>";
         foreach($search->result() as $fila){
             echo "<tr>";
+            echo "<td></td>";
             echo "<td>".$fila->Nombres.' '.$fila->ApPaterno.' '.$fila->ApMaterno."</td>";
             echo "<td>".$fila->Tipo."</td>";
             echo "<td>".$fila->Nombre."</td>";
             echo "<td>
-                    <a href='".base_url()."constancias/formatoDownload/$fila->ID_Solicitud');> <i class='glyphicon glyphicon-save' title='Descargar formato sin firma'></i></a>
+                    <a href='".base_url()."constancias/formatoDownload/$fila->ID_Solicitud'); class='btn-lg'> <i class='glyphicon glyphicon-save' title='Descargar formato sin firma'></i></a>
                   </td>";
             echo "<td>";
                     $this->load->database('default');
@@ -63,22 +65,12 @@ class Constancias extends CI_Controller {
 
                     if($query->num_rows() > 0){
                       foreach ($query->result() as $row) {
-                        if ($row->Formato != '') {
-                          $ruta = base_url().$row->Formato;
-                          $Archivo = "<a href='$ruta' target='_blank' title='Constancia'> <i class='glyphicon glyphicon-file' title='Ver formato con firma'></i></a>";
+                          $ruta = base_url().'constancias/formatoFirmaDownload2/'.$row->ID_Solicitud;
+                          $Archivo = "<a href='$ruta' class='btn-lg'><i class='glyphicon glyphicon-file' title='Descargar formato con firma'></i></a>";
                         echo $Archivo;
-                        }
                       }
                     }
             echo "</td>";
-            echo "<td>";
-                    $action = base_url()."constancias/newConstancia/".$fila->ID_Solicitud;
-                    $form = "<form method='post' accept-charset='utf-8' action='$action' enctype='multipart/form-data'>
-                              <input type='file' accept='image/*'' name='userfile' /> </br>
-                              <input type='submit' value='Guardar' />
-                              </form>";
-                    echo $form;
-            echo  "</td>";
             echo "<td><a href='".base_url()."constancias/delete/$fila->ID_Solicitud'> <i class='glyphicon glyphicon-trash' title='Eliminar'></i></a></td>";
             echo "</tr>";
         ?>
@@ -95,42 +87,48 @@ class Constancias extends CI_Controller {
     $data = array();
     if($this->input->is_ajax_request() && $this->input->post('info')){
       $abuscar = $this->security->xss_clean($this->input->post('info'));
-      $search = $this->constancias_model->buscador(trim($abuscar));
+      $search = $this->constancias_model->buscadorDirector(trim($abuscar));
         echo "<thead>";
         echo "<tr>";
         echo "<th>Docente</th>";
         echo "<th>Tipo</th>";
         echo "<th>Actividad</th>";
         echo "<th>Formato con firma</th>";
+        echo "<th></th>";
         echo "</tr>";
         echo "</thead>";
         foreach($search->result() as $fila){
+          if ($fila->Aceptada == '1'){
+            echo "<tr>";
+            echo "<td>".$fila->Nombres.' '.$fila->ApPaterno.' '.$fila->ApMaterno."</td>";
+            echo "<td>".$fila->Tipo."</td>";
+            echo "<td>".$fila->Nombre."</td>";
+            echo "<td>";
+                    $this->load->database('default');
+                    $this->db->select('ID_Constancias, Formato, ID_Solicitud');
+                    $this->db->from('constancias');
+                    $this->db->where('ID_Solicitud', $fila->ID_Solicitud);
+                    $query = $this->db->get();
 
-            $this->load->database('default');
-            $this->db->select('ID_Constancias, Formato, ID_Solicitud');
-            $this->db->where('ID_Solicitud', $fila->ID_Solicitud);
-            $this->db->from('constancias');
-            $query2 = $this->db->get();
-
-            if($query2->num_rows() > 0){
-              foreach ($query2->result() as $row) {
-                 if ($row->Formato != '') {
-
-                echo "<tr>";
-                    echo "<td>".$fila->Nombres.' '.$fila->ApPaterno.' '.$fila->ApMaterno."</td>";
-                    echo "<td>".$fila->Tipo."</td>";
-                    echo "<td>".$fila->Nombre."</td>";
-                    echo "<td>";                    
-                        $ruta = base_url().$row->Formato;
-                        $Archivo = "<a href='$ruta' target='_blank' title='Constancia'> <i class='glyphicon glyphicon-file' title='Ver formato con firma'></i></a>";
-                    echo $Archivo;
-                    echo "</td>";
-                echo "</tr>";
-                }
+                    if($query->num_rows() > 0){
+                      foreach ($query->result() as $row) {
+                          $ruta = base_url().'constancias/formatoFirmaDownload/'.$row->ID_Solicitud;
+                          $Archivo = "<a href='$ruta' class='btn-lg'><i class='glyphicon glyphicon-file' title='Descargar formato con firma'></i></a>";
+                        echo $Archivo;
+                      }
+                    }
+            echo "</td>";
+            echo "<td>";
+              if ($fila->Etapa == "Aceptada"){
+                echo form_open(base_url().'constancias/newConstancia/'.$fila->ID_Solicitud);
+                  echo "<input type='submit' value='Firmar' class='btn btn-primary'>";
+                echo form_close();
               }
-            }
+            echo "</td>";
+            echo "</tr>";
+          }
         }
-      }else{
+      } else{
       ?>
         <p><?php  echo "<div class='alert alert-warning'><p class='text-center'>No hay solicitudes registradas con el nombre, tipo o actividad introducido.</p></div>"; ?></p>
       <?php
@@ -295,6 +293,16 @@ class Constancias extends CI_Controller {
     public function delete(){
     $id = $this->uri->segment(3);
     $delete = $this->constancias_model->deleteSolicitud($id);
+  }
+
+  public function changeNoAceptada(){
+    $id = $this->uri->segment(3);
+    $changeNoAceptada = $this->constancias_model->changeSolicitud1($id);
+  }
+
+  public function changeAceptada(){
+    $id = $this->uri->segment(3);
+    $changeAceptada = $this->constancias_model->changeSolicitud2($id);
   }
 
 }

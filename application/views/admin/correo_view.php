@@ -26,7 +26,7 @@
       <div class="tab-content clearfix">
         </br>
         <div class="tab-pane active" id="1b">
-          <table class="table" id="mytable">
+          <table class="table table-hover table-responsive">
             <thead>
               <tr>
                 <th>Leído</th>
@@ -51,7 +51,7 @@
 
 
         <div class="tab-pane" id="2b">
-          <table class="table" id="mytable">
+          <table class="table table-hover table-responsive">
             <thead>
               <tr>
                 <th>Leído</th>
