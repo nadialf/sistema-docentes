@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-04-2016 a las 21:08:31
+-- Tiempo de generación: 20-05-2016 a las 21:18:52
 -- Versión del servidor: 5.6.24
 -- Versión de PHP: 5.5.24
 
@@ -49,8 +49,8 @@ INSERT INTO `actividades` (`ID_Actividad`, `Tipo`, `Nombre`, `Fecha_Inicio`, `Fe
 (12, 'Conferencia', 'Redes', '2016-04-14', '2016-04-30', 'Museo de Antropología', 'El término red inalámbrica (en inglés: wireless network) se utiliza en informática para designar la conexión de nodos que se da por medio de ondas electromagnéticas, sin necesidad de una red cableada o alámbrica. La transmisión y la recepción se realizan a través de puertos.'),
 (13, 'Proyecto', 'CEPII', '2016-01-01', '2016-05-02', 'FEI', 'Proyecto CEPII se basará para la realización de un sistema software para el Centro de Desarrollo Humano y Terapias Integrativas Ixtaxochitl'' A.C. (CEPII), que ayude a la agilización y eficiencia en el control de los procesos efectuados en el antes mencionado centro.'),
 (14, 'Conferencia', 'Parallel programming model', '2015-12-05', '2015-12-05', 'Auditorio FEI', 'La programación paralela es el uso de varios procesadores trabajando en conjunto para dar solución a una tarea en común, lo que hacen es que se dividen el trabajo y cada procesador hace una porción del problema al poder intercambiar datos por una red de interconexión o atraves de memoria.'),
-(16, 'Proyecto', 'SAC', '2016-02-02', '2016-05-25', 'FEI', 'SAC (Sistema de Administración de Actividades), aspira a realizar un sistema para la Facultad de Estadística e Informática de la Universidad Veracruzana campus Xalapa, que ayude a la emisión de constancias para avalar el trabajo de los docentes que efectúan labores de modo semestral o anual, tales como actividades, cursos, proyectos y/o programas cumplidos en dicha facultad.'),
-(17, 'Congreso', 'Prueba descripción actividad', '2016-09-09', '2016-12-20', 'Museo de Antropologia', 'Acción de probar a alguien o algo para conocer sus cualidades, verificar su eficacia, saber cómo funciona o reacciona, o qué resultado produce.');
+(16, 'Proyecto', 'SAC', '2016-02-02', '2016-05-25', 'FEI', 'Proyecto SAC (Sistema de Administración de Actividades), aspira a realizar un sistema para la Facultad de Estadística e Informática de la Universidad Veracruzana campus Xalapa, que ayude a la emisión de constancias para avalar el trabajo de los docentes que efectúan labores de modo semestral o anual, tales como actividades, cursos, proyectos y/o programas cumplidos en dicha facultad.'),
+(17, 'Congreso', 'Prueba descripción', '2016-09-09', '2016-12-20', 'Museo de Antropologia', 'Acción de probar a alguien o algo para conocer sus cualidades, verificar su eficacia, saber cómo funciona o reacciona, o qué resultado produce.');
 
 -- --------------------------------------------------------
 
@@ -77,12 +77,11 @@ INSERT INTO `asignaciones` (`ID_Asignacion`, `Fecha_Incorporacion`, `Avance`, `I
 (6, '2016-12-31', 'Terminada', 8, 4),
 (7, '2017-02-02', 'Terminada', 10, 15),
 (8, '2014-06-29', 'Terminada', 9, 5),
-(9, '2016-04-02', 'En curso', 13, 10),
-(10, '2016-04-12', 'En curso', 11, 2),
+(9, '2016-04-02', 'Terminada', 13, 10),
 (11, '2015-12-01', 'Terminada', 14, 14),
 (16, '2016-04-21', 'En curso', 16, 7),
 (17, '2016-04-21', 'En curso', 16, 1),
-(21, '2016-04-21', 'En curso', 12, 9),
+(21, '2016-04-21', 'Terminada', 12, 9),
 (24, '2016-04-27', 'Por comenzar', 17, 1);
 
 -- --------------------------------------------------------
@@ -95,16 +94,17 @@ CREATE TABLE IF NOT EXISTS `constancias` (
   `ID_Constancias` int(11) NOT NULL,
   `Formato` varchar(100) NOT NULL,
   `ID_Solicitud` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `constancias`
 --
 
 INSERT INTO `constancias` (`ID_Constancias`, `Formato`, `ID_Solicitud`) VALUES
-(32, 'assets/constancias/5.png', 5),
-(33, 'assets/constancias/4.png', 4),
-(34, 'assets/constancias/3.png', 3);
+(32, 'Si', 5),
+(33, 'Si', 4),
+(34, 'Si', 3),
+(42, 'Si', 8);
 
 -- --------------------------------------------------------
 
@@ -142,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `cuentas` (
   `Usuario` varchar(10) NOT NULL,
   `Contrasena` varchar(10) NOT NULL,
   `TipoUsuario` varchar(10) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `cuentas`
@@ -150,20 +150,20 @@ CREATE TABLE IF NOT EXISTS `cuentas` (
 
 INSERT INTO `cuentas` (`ID_Cuenta`, `Usuario`, `Contrasena`, `TipoUsuario`) VALUES
 (1, 'Admin', '1234', '1'),
-(3, 'Director', '1234', '2'),
 (4, 'Docente2', '1234', '3'),
 (5, 'Docente3', '1234', '3'),
 (7, 'Docente5', '1234', '3'),
-(8, 'Docente6', '1234', '3'),
+(8, 'Docente6', '123456', '3'),
 (9, 'Docente7', '1234', '3'),
 (10, 'Docente8', '1234', '3'),
 (11, 'Docente9', '1234', '3'),
 (12, 'Docente12', '1234', '3'),
 (13, 'Docente13', '1234', '3'),
 (14, 'Docente14', '1234', '3'),
-(15, 'DocenteX', '1234', '3'),
+(15, 'DocenteX', '123456', '3'),
 (16, 'Docente16', '1234', '3'),
-(19, 'hola', '1234', '3');
+(19, 'hola', '1234', '3'),
+(20, 'Director', '1234', '2');
 
 -- --------------------------------------------------------
 
@@ -175,18 +175,22 @@ CREATE TABLE IF NOT EXISTS `solicitudes` (
   `ID_Solicitud` int(11) NOT NULL,
   `Etapa` varchar(30) NOT NULL,
   `ID_Trabajador` int(11) NOT NULL,
-  `ID_Actividad` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+  `ID_Actividad` int(11) NOT NULL,
+  `Aceptada` tinyint(1) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `solicitudes`
 --
 
-INSERT INTO `solicitudes` (`ID_Solicitud`, `Etapa`, `ID_Trabajador`, `ID_Actividad`) VALUES
-(3, 'En proceso', 9, 13),
-(4, 'En proceso', 16, 9),
-(5, 'En proceso', 14, 14),
-(8, 'En proceso', 5, 9);
+INSERT INTO `solicitudes` (`ID_Solicitud`, `Etapa`, `ID_Trabajador`, `ID_Actividad`, `Aceptada`) VALUES
+(3, 'Firmada', 9, 13, 1),
+(4, 'Firmada', 16, 9, 1),
+(5, 'Firmada', 14, 14, 1),
+(8, 'Firmada', 5, 9, 1),
+(9, 'En proceso', 15, 10, 0),
+(10, 'En proceso', 10, 13, 0),
+(11, 'En proceso', 8, 10, 0);
 
 -- --------------------------------------------------------
 
@@ -201,7 +205,7 @@ CREATE TABLE IF NOT EXISTS `trabajadores` (
   `ApMaterno` varchar(30) NOT NULL,
   `TipoTrabajo` varchar(10) NOT NULL,
   `ID_Cuenta` int(10) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `trabajadores`
@@ -209,7 +213,6 @@ CREATE TABLE IF NOT EXISTS `trabajadores` (
 
 INSERT INTO `trabajadores` (`ID_Trabajador`, `Nombres`, `ApPaterno`, `ApMaterno`, `TipoTrabajo`, `ID_Cuenta`) VALUES
 (1, 'Guillermo Felipe Francisco', 'Araceli', 'Nadia', 'PTC', 1),
-(2, 'Gerardo', 'Contreras', 'Vega', 'PTC', 3),
 (4, 'María Lina', 'López', 'Martínez', 'TP', 4),
 (5, 'Lizbeth Alejandra', 'Hernández', 'González', 'TP', 5),
 (7, 'Jorge Gibran', 'Hernández', 'Calderón', 'PTC', 7),
@@ -222,7 +225,8 @@ INSERT INTO `trabajadores` (`ID_Trabajador`, `Nombres`, `ApPaterno`, `ApMaterno`
 (14, 'Juan Carlos', 'Pérez', 'Arriaga', 'PTC', 14),
 (15, 'Alfonso', 'Sánchez', 'Orea', 'PTC', 15),
 (16, 'Jesús Roberto', 'Méndez', 'Ortíz', 'PTC', 16),
-(19, 'Memowii', 'hola', 'hola', 'hola', 19);
+(19, 'Memowii', 'hola', 'hola', 'hola', 19),
+(20, 'Gerardo', 'Contreras', 'Vega', 'PTC', 20);
 
 --
 -- Índices para tablas volcadas
@@ -288,7 +292,7 @@ ALTER TABLE `asignaciones`
 -- AUTO_INCREMENT de la tabla `constancias`
 --
 ALTER TABLE `constancias`
-  MODIFY `ID_Constancias` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=37;
+  MODIFY `ID_Constancias` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=43;
 --
 -- AUTO_INCREMENT de la tabla `correos`
 --
@@ -298,17 +302,17 @@ ALTER TABLE `correos`
 -- AUTO_INCREMENT de la tabla `cuentas`
 --
 ALTER TABLE `cuentas`
-  MODIFY `ID_Cuenta` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
+  MODIFY `ID_Cuenta` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT de la tabla `solicitudes`
 --
 ALTER TABLE `solicitudes`
-  MODIFY `ID_Solicitud` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+  MODIFY `ID_Solicitud` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `trabajadores`
 --
 ALTER TABLE `trabajadores`
-  MODIFY `ID_Trabajador` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
+  MODIFY `ID_Trabajador` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 --
 -- Restricciones para tablas volcadas
 --
