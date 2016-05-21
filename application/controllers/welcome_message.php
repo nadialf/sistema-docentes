@@ -7,7 +7,7 @@ class Welcome_message extends CI_Controller {
         $this->load->helper(array('url', 'form'));       
   		$this->load->model('login_model');
   		$this->load->database('default');
-  		//$this->load->model('citas_model');
+  		$this->load->model('docentes_model');
 	}
 
 	public function admin(){
@@ -22,10 +22,13 @@ class Welcome_message extends CI_Controller {
 		$this->load->view('footer');
 	}
 
-	public function docente($idCuenta){
-		//$this->load->view('docente/header');
-		//$this->load->view('footer');
-		echo$idCuenta;
+	public function docente(){
+		$id = $this->uri->segment(3);
+		$data['query'] = $this->docentes_model->getDocenteID($id);
+
+		$this->load->view('docente/header',$data);
+		$this->load->view('message_view');
+		$this->load->view('footer');
 	}
 
 }

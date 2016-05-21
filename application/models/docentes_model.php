@@ -25,6 +25,13 @@ class Docentes_model extends CI_Model{
         return $query->result();
     }
 
+    function getDocenteID($id){
+        $this->db->select();
+        $this->db->where('ID_Trabajador', $id);
+        $query = $this->db->get('trabajadores');
+        return $query->result();
+    }
+
     function agregarDocente($nombre, $paterno, $materno, $tipot, $user, $contrasena){
         $datos = array('Usuario' => $user,
                         'Contrasena' => $contrasena,

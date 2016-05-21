@@ -20,8 +20,12 @@ class Correo extends CI_Controller {
 		$this->load->view('footer');
 	}
 	public function correo_doc(){
-		$this->load->view('docente/header');
-		$this->load->view('docente/correo_doc_view');
+    $id = $this->uri->segment(3);
+    $data['query'] = $this->docentes_model->getDocenteID($id);
+    $data['query1'] = $this->correo_model->getMisCorreos($id);
+
+		$this->load->view('docente/header', $data);
+		$this->load->view('docente/correo_doc_view', $data);
 		$this->load->view('footer');
 	}
 	public function agregarCorreo(){
@@ -65,7 +69,7 @@ class Correo extends CI_Controller {
         echo "<thead>";
         echo "<tr>";
         echo "<th>Remitente</th>";
-        echo "<th>Asunto</th>";
+        echo "<th>Mensaje</th>";
         echo "<th>Fecha</th>";
         echo "</tr>";
         echo "</thead>";
@@ -81,6 +85,38 @@ class Correo extends CI_Controller {
       }else{
       ?>
         <p><?php  echo "<div class='alert alert-warning'><p class='text-center'>No hay remitentes registrados con el nombre introducido.</p></div>"; ?></p>
+      <?php
+      }
+    }
+
+    public function autocompletarB(){
+    $id = $this->uri->segment(3);
+    $data = array();
+    if($this->input->is_ajax_request() && $this->input->post('info')){
+      $id = $this->uri->segment(3);
+      $abuscar = $this->security->xss_clean($this->input->post('info'));
+      $search = $this->correo_model->buscador2(trim($abuscar));
+        echo "<thead>";
+        echo "<tr>";
+        echo "<th>Destinatario</th>";
+        echo "<th>Mensaje</th>";
+        echo "<th>Fecha</th>";
+        echo "</tr>";
+        echo "</thead>";
+        foreach($search->result() as $fila){
+          if ($fila->ID_Remitente == $id){
+            echo "<tr>";
+            echo "<td>Administrador</td>";
+            echo "<td>".$fila->Asunto."</td>";
+            echo "<td>".$fila->Fecha_Envio."</td>";
+            echo "</tr>";
+          }
+        ?>
+        <?php
+        }
+      }else{
+      ?>
+        <p><?php  echo "<div class='alert alert-warning'><p class='text-center'>No hay mensajes registrados con las palabras introducidas.</p></div>"; ?></p>
       <?php
       }
     }

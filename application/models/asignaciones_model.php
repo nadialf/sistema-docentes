@@ -92,6 +92,12 @@ class Asignaciones_model extends CI_Model{
         redirect(base_url().'asignaciones');
     }
 
+    function deleteAsig2($id, $docente){
+        $this->db->where('ID_Asignacion', $id);
+        $this->db->delete('asignaciones');
+        redirect(base_url().'actividades/act_doc/'.$docente);
+    }
+
     function getDocentes($q){
         $this->db->select();
         $this->db->like('Nombres', $q);

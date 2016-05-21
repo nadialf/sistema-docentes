@@ -27,6 +27,16 @@ class Correo_model extends CI_Model{
         return $query->result();
     }
 
+    function getMisCorreos($id){
+        $this->db->select('trabajadores.Nombres, trabajadores.ApPaterno, trabajadores.ApMaterno, correos.ID_Correo, correos.Asunto, correos.Leido, correos.Fecha_Envio');
+        $this->db->from('correos');
+        $this->db->join('trabajadores', 'trabajadores.ID_Trabajador = correos.ID_Remitente');
+        $this->db->where('correos.ID_Remitente', $id);
+        $this->db->order_by("correos.Fecha_Envio","desc");
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     function changeMail1($id){
         $datos = array('Leido' => '0');
         $this->db->where('ID_Correo', $id);
@@ -66,5 +76,20 @@ class Correo_model extends CI_Model{
             return FALSE;
         }
     }  
+
+    public function buscador2($abuscar){
+        $this->db->select();
+        $this->db->from('correos');
+        $this->db->like('Asunto',$abuscar,'both');
+        $this->db->order_by("Fecha_Envio","desc");
+        $resultados = $this->db->get();
+
+        if($resultados->num_rows() > 0){
+            return $resultados;
+            
+        }else{
+            return FALSE;
+        }
+    }
 
 }

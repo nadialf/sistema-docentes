@@ -139,4 +139,44 @@ class Constancias_model extends CI_Model{
         redirect(base_url().'constancias/cons_admin');
     }
 
+    function getMisSolicitudes($id){
+        $this->db->select('ID_Actividad, Fecha_Inicio, Fecha_Fin');
+        $this->db->from('actividades');
+        $query = $this->db->get();
+
+        foreach ($query->result() as $row) {
+            $ID_Actividad = $row->ID_Actividad;
+
+            $fecha = getdate();
+            $fechaactual = "$fecha[year]-$fecha[mon]-$fecha[mday]";
+
+            $fechahoy = new DateTime($fechaactual);
+            $fechaini = new DateTime($row->Fecha_Inicio);
+            $fechafin = new DateTime($row->Fecha_Fin);
+
+            if ($fechahoy < $fechaini){
+                $progreso = "Por comenzar";
+            } elseif ( ($fechahoy >= $fechaini) && ($fechahoy <= $fechafin) ){
+                 $progreso = "En curso";
+            } elseif ($fechahoy > $fechafin){
+                 $progreso = "Terminada";
+            }
+
+            $datos = array('Avance' => $progreso);
+            $this->db->where('ID_Actividad', $ID_Actividad);
+            $this->db->update('asignaciones', $datos);
+        }
+
+        $this->db->distinct();
+        $this->db->select('actividades.ID_Actividad, actividades.Tipo, actividades.Nombre, actividades.Fecha_Inicio, actividades.Fecha_Fin, asignaciones.ID_Asignacion, asignaciones.Avance, asignaciones.ID_Trabajador, solicitudes.Etapa, solicitudes.Aceptada, solicitudes.ID_Actividad, solicitudes.ID_Solicitud');
+        $this->db->from('asignaciones');
+        $this->db->join('actividades', 'actividades.ID_Actividad = asignaciones.ID_Actividad');
+        $this->db->join('solicitudes', 'solicitudes.ID_Actividad = asignaciones.ID_Actividad');
+        $this->db->where('solicitudes.ID_Trabajador',$id);
+        $this->db->order_by("actividades.Fecha_Inicio","desc");
+        $this->db->group_by('actividades.ID_Actividad');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
 }

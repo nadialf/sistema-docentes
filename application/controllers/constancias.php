@@ -6,6 +6,7 @@ class Constancias extends CI_Controller {
 		parent::__construct();
       $this->load->helper(array('url', 'form'));       
   		$this->load->model('constancias_model');
+      $this->load->model('docentes_model');
   		$this->load->database('default');
     }
 
@@ -23,6 +24,16 @@ class Constancias extends CI_Controller {
 
     $this->load->view('director/header');
     $this->load->view('director/constancias_view', $data);
+    $this->load->view('footer');
+  }
+
+  public function cons_docente(){
+    $id = $this->uri->segment(3);
+    $data['query'] = $this->docentes_model->getDocenteID($id);
+    $data1['query1'] = $this->constancias_model->getMisSolicitudes($id);
+
+    $this->load->view('docente/header', $data);
+    $this->load->view('docente/constancias_view_doc', $data1);
     $this->load->view('footer');
   }
 

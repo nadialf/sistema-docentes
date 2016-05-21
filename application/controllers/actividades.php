@@ -6,6 +6,7 @@ class Actividades extends CI_Controller {
 		parent::__construct();
         $this->load->helper(array('url', 'form'));       
   		$this->load->model('actividades_model');
+      $this->load->model('docentes_model');
   		$this->load->database('default');
 	}
 
@@ -17,12 +18,14 @@ class Actividades extends CI_Controller {
 		$this->load->view('footer');
 	}
 
-
   public function act_doc(){
-    $data['query'] = $this->actividades_model->getActividades();
+    $id = $this->uri->segment(3);
+    $data['query'] = $this->docentes_model->getDocenteID($id);
+    $data1['query1'] = $this->actividades_model->getMisActividadesAvances($id);
+    $data1['query2'] = $this->actividades_model->getActividadesAvances();
 
-    $this->load->view('docente/header');
-    $this->load->view('docente/actividades_view_doc', $data);
+    $this->load->view('docente/header',$data);
+    $this->load->view('docente/actividades_view_doc', $data1);
     $this->load->view('footer');
   }
 
@@ -125,7 +128,7 @@ class Actividades extends CI_Controller {
     }
   }
 
-    public function autocompletar(){ //Director
+    public function autocompletar(){ //Director y docente
     $this->load->database('default');
     $this->load->model('actividades_model');
       $data = array();

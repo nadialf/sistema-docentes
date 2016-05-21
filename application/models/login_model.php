@@ -7,28 +7,25 @@ class Login_model extends CI_Model {
     }
     
     public function validate($usuario, $contrasena){
-//print_r($usuario);
-        $this->db->select('tipousuario,ID_Cuenta');
+    //print_r($usuario);
+        $this->db->select('TipoUsuario,ID_Cuenta');
         $this->db->from('cuentas');
         $this->db->where('usuario', $usuario);
         $this->db->where('contrasena', $contrasena);
         $query = $this->db->get();
         foreach($query->result() as $row) {
-            $tipo = $row->tipousuario;
-        }
+            $tipo = $row->TipoUsuario;
+            $id = $row->ID_Cuenta;
 
-        if ($tipo == "1") {
+            if ($tipo == "1") {
             redirect(base_url().'welcome_message/admin');    
-        } if ($tipo == "2") {
-            redirect(base_url().'welcome_message/director');    
-        } if ($tipo == "3") {
-            //redirect(base_url().'welcome_message/docente');
-
-            $this->load->view('docente/header',$data);
-            $this->load->view('footer'); 
-             
-        }else {
-            redirect(base_url());
+            } elseif ($tipo == "2") {
+                redirect(base_url().'welcome_message/director');    
+            } elseif ($tipo == "3") {
+                redirect(base_url().'welcome_message/docente/'.$row->ID_Cuenta);
+            }else {
+                redirect(base_url());
+            }
         }
     }
     public function cuenta($usuario){
