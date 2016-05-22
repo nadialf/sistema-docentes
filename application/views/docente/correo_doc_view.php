@@ -6,12 +6,12 @@
       <ul  class="nav nav-pills">
         <li class="active" data-toggle="tab">
           <a href="#1b" data-toggle="tab">
-            <i class="glyphicon glyphicon-pencil"></i>     Nuevo correo
+            <i class="glyphicon glyphicon-send"></i>     Enviados
           </a>
         </li>
         <li data-toggle="tab">
           <a href="#2b" data-toggle="tab">
-            <i class="glyphicon glyphicon-send"></i>     Enviados
+            <i class="glyphicon glyphicon-pencil"></i>     Nuevo correo
           </a>
         </li>
         <li data-toggle="tab">
@@ -24,11 +24,31 @@
       <div style="background-color:#e5e5e5; height:3px;"></div>
 
       <div class="tab-content clearfix">
-      </br>
-        
+      </br>        
+
         <div class="tab-pane active" id="1b">
+          <table class="table table-hover table-responsive">
+            <thead>
+              <tr>
+                <th>Remitente</th>
+                <th>Mensaje</th>
+                <th>Fecha</th>
+              </tr>
+            </thead>
+            <?php foreach($query1 as $row): ?>
+            <tr>
+              <td><?php echo $row->Nombres.' '.$row->ApPaterno.' '.$row->ApMaterno; ?></td>
+              <td><?php echo $row->Asunto; ?></td>
+              <td><?php echo $row->Fecha_Envio; ?></td>
+            </tr>
+            <?php endforeach; ?>
+          </table>
+
+        </div> <!--ENVIADOS SECTION END-->
+
+        <div class="tab-pane" id="2b">
         <?php foreach ($query as $row) { ?>  
-        <?=  form_open(base_url().'correo/newCorreo')?>
+        <?=  form_open(base_url().'correo/newMail/'.$row->ID_Trabajador)?>
           <br>
           <div style="margin-left:20px; margin-right:20px;">
             <div class="content-wrapper"  style="width:100%; min-height: auto; height:auto; margin-left;10px; margin-right:10px;">
@@ -67,7 +87,7 @@
             <div class="content-wrapper"  style="width:100%; min-height: auto; height:auto; margin-left;10px; margin-right:10px;">
               <div class="col-xs-12">
                 <span class="input-group-addon">Mensaje</span>
-                <input type="text" class="form-control" aria-describedby="sizing-addon2" name="asunto" id="asunto" required>
+                <input type="text" class="form-control" aria-describedby="sizing-addon2" name="mensaje" id="mensaje" required>
               </div>
             </div>
           </div>
@@ -81,27 +101,7 @@
           <br>
           <?=form_close()?>
         <?php } ?>
-        </div> <!--NUEVO SECTION END -->        
-
-        <div class="tab-pane" id="2b">
-          <table class="table table-hover table-responsive">
-            <thead>
-              <tr>
-                <th>Remitente</th>
-                <th>Mensaje</th>
-                <th>Fecha</th>
-              </tr>
-            </thead>
-            <?php foreach($query1 as $row): ?>
-            <tr>
-              <td><?php echo $row->Nombres.' '.$row->ApPaterno.' '.$row->ApMaterno; ?></td>
-              <td><?php echo $row->Asunto; ?></td>
-              <td><?php echo $row->Fecha_Envio; ?></td>
-            </tr>
-            <?php endforeach; ?>
-          </table>
-
-        </div> <!--ENVIADOS SECTION END-->
+        </div> <!--NUEVO SECTION END -->
 
         <div class="tab-pane" id="3b">
           <br/>

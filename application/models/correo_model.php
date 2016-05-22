@@ -53,6 +53,19 @@ class Correo_model extends CI_Model{
         redirect(base_url().'correo/mail_admin');
     }
 
+    function agregarMail($remitente, $fecha, $mensaje){
+        $fecha = getdate();
+        $fechaactual = "$fecha[year]/$fecha[mon]/$fecha[mday]";
+
+        $datos = array('ID_Remitente' => $remitente,
+                        'Destinatario' => 'Admin',
+                        'Asunto' => $mensaje,
+                        'Leido' => '0',
+                        'Fecha_Envio' => $fechaactual);
+        $this->db->insert('correos', $datos);
+        redirect(base_url().'correo/correo_doc/'.$remitente);
+    }
+
     function deleteMail($id){
         $this->db->where('ID_Correo', $id);
         $this->db->delete('correos');

@@ -28,22 +28,11 @@ class Correo extends CI_Controller {
 		$this->load->view('docente/correo_doc_view', $data);
 		$this->load->view('footer');
 	}
-	public function agregarCorreo(){
-		$usuario = $this->input->post('de',true);
-		$datos=$this->login_model->cuenta($usuario);
-		foreach ($datos->result() as $row) {
-			$id=$row->ID_Trabajador;
-		}
-		$data['id'] =$id;
-
-		$datos = array (
-			'ID_Remitente' =>($id),
-			'Destinatario' => $this->input->post('para',true),
-			'Asunto' => $this->input->post('asunto',true),
-			'Leido' => ('1')
-			);
-		$this->docentes_model->guarda_correo($datos);
-			
+	public function newMail(){
+    $remitente = $this->uri->segment(3);
+    $fecha = $this->input->post('fecha');
+    $mensaje = $this->input->post('mensaje');
+    $insert = $this->correo_model->agregarMail($remitente, $fecha, $mensaje);
 	}
 
   public function changeNoLeido(){
