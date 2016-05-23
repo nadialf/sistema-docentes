@@ -20,7 +20,7 @@ class Login_model extends CI_Model {
             if ($tipo == "1") {
             redirect(base_url().'welcome_message/admin');    
             } elseif ($tipo == "2") {
-                redirect(base_url().'welcome_message/director');    
+                redirect(base_url().'welcome_message/director/'.$row->ID_Cuenta);    
             } elseif ($tipo == "3") {
                 redirect(base_url().'welcome_message/docente/'.$row->ID_Cuenta);
             }else {

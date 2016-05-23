@@ -17,7 +17,10 @@ class Welcome_message extends CI_Controller {
 	}
 
 	public function director(){
-		$this->load->view('director/header');
+		$id = $this->uri->segment(3);
+		$data['query'] = $this->docentes_model->getDocenteID($id);
+
+		$this->load->view('director/header',$data);
 		$this->load->view('message_view');
 		$this->load->view('footer');
 	}

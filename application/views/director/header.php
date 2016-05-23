@@ -36,18 +36,19 @@
               <img src="<?php echo base_url(); ?>assets/img/LogoSAC.png">
           </div>
 
+          <?php foreach($query as $row){ ?>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav navbar-right" style="margin:10px;">
                   <li>
-                    <a href="<?php echo base_url().'actividades/act_direc'; ?>">
+                    <a href="<?php echo base_url().'actividades/act_direc/'.$row->ID_Trabajador ?>">
                       <div style="color:#FFF;">
                         <i class="fa fa-calendar"></i>     Actividades
                       </div>
                     </a>
                   </li>
                   <li>
-                     <a href="<?php echo base_url().'constancias/cons_direc'?>">
+                     <a href="<?php echo base_url().'constancias/cons_direc/'.$row->ID_Trabajador ?>">
                       <div style="color:#FFF;">
                         <i class="fa fa-file-text-o"></i>     Constancias
                       </div>
@@ -67,6 +68,7 @@
               </ul>
           </div>
           <!-- /.navbar-collapse -->
+          <?php } ?>
       </div>
       <!-- /.container-fluid -->
   </nav>

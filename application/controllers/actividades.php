@@ -30,10 +30,13 @@ class Actividades extends CI_Controller {
   }
 
 	public function act_direc(){
-		$data['query'] = $this->actividades_model->getActividadesAvances();
+    $id = $this->uri->segment(3);
+    $data['query'] = $this->docentes_model->getDocenteID($id);
+    $data1['query1'] = $this->actividades_model->getMisActividadesAvances($id);
+		$data1['query'] = $this->actividades_model->getActividadesAvances();
 
-		$this->load->view('director/header');
-		$this->load->view('director/actividades_view', $data);
+		$this->load->view('director/header', $data);
+		$this->load->view('director/actividades_view', $data1);
 		$this->load->view('footer');
 	}
 

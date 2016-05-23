@@ -21,9 +21,12 @@ class Constancias extends CI_Controller {
 	}
 
   public function cons_direc(){
+    $id = $this->uri->segment(3);
+    $data1['query'] = $this->docentes_model->getDocenteID($id);
+    $data['query1'] = $this->actividades_model->getMisAvances($id);
     $data['query'] = $this->constancias_model->getSolicitudesAceptadas();
 
-    $this->load->view('director/header');
+    $this->load->view('director/header', $data1);
     $this->load->view('director/constancias_view', $data);
     $this->load->view('footer');
   }

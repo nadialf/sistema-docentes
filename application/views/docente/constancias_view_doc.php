@@ -8,6 +8,7 @@
         <a href="#1b" data-toggle="tab">
           <i class="fa fa-list"></i>     Solicitudes de constancias 
         </a>
+      </li>
       <li data-toggle="tab">
           <a href="#2b" data-toggle="tab">
             <i class="glyphicon glyphicon-search"></i>     Búsqueda
