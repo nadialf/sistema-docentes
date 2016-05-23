@@ -31,11 +31,14 @@
                 <select class="form-control" value="<?php echo $query['0']->Tipo ?>" id="tipo" required>
                   <option value="<?php echo $query['0']->Tipo ?>" name"<?php echo $query['0']->Tipo ?>">
                           <?php echo $query['0']->Tipo ?></option>
-                  <option value="Conferencia" name="Conferencia">Conferencia</option>
-                  <option value="Congreso" name="Congreso">Congreso</option>
-                  <option value="Festival" name="Festival">Festival</option>
-                  <option value="Proyecto" name="Proyecto">Proyecto</option>
-                  <option value="Taller" name="Taller">Taller</option>
+                  <option value="Certificación">Certificación</option>
+                  <option value="Conferencia">Conferencia</option>
+                  <option value="Congreso">Congreso</option>
+                  <option value="Curso">Curso</option>
+                  <option value="Festival">Festival</option>
+                  <option value="Proyecto">Proyecto</option>
+                  <option value="Taller">Taller</option>
+                  <option value="Otro">Otro</option>
                 </select>
               </div>
             </div>

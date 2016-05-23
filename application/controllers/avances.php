@@ -17,6 +17,14 @@ class Avances extends CI_Controller {
 		$this->load->view('footer');
 	}
 
+  public function reportes(){
+    $data['query'] = $this->avances_model->getAvances();
+
+    $this->load->view('admin/header');
+    $this->load->view('admin/reportes_view', $data);
+    $this->load->view('footer');
+  }
+
 	public function autocompletar(){
     $data = array();
     if($this->input->is_ajax_request() && $this->input->post('info')){

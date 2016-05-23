@@ -26,7 +26,7 @@
 
         <div class="tab-pane active" id="1b">
           </br>
-          <table class="table table-responsive table-hover">
+          <table class="table table-responsive table-hover" id="mytable">
             <thead>
               <tr>
                 <th id="nombre_header">Nombre</th>
@@ -39,7 +39,8 @@
               </tr>
             </thead>
             <?php foreach($query1 as $row): ?>
-              <tr style="cursor: pointer;" onclick="show('<?php echo $row->ID_Actividad ?>');">
+            <tbody style="cursor: pointer;" onclick="show('<?php echo $row->ID_Actividad ?>');">
+              <tr>
                 <td><?php echo $row->Nombre; ?></td>
                 <td><?php echo $row->Tipo; ?></td>
                 <td><?php echo $row->Lugar; ?></td>
@@ -56,12 +57,13 @@
                 ?>
                 </td>
                 <td>
-                  <a href='#' onclick="elimina('<?=base_url()?>asignaciones/delete2/<?=$row->ID_Asignacion?>/<?=$row->ID_Trabajador?>');"><i class='glyphicon glyphicon-trash' title='Eliminar asignación'></i></a>
+                  <a href='#' onclick="elimina('<?=base_url()?>asignaciones/delete2/<?=$row->ID_Asignacion?>/<?=$row->ID_Trabajador?>/<?=$row->ID_Actividad?>');"><i class='glyphicon glyphicon-trash' title='Eliminar asignación'></i></a>
                 </td>
               </tr>
               <tr id="<?php echo $row->ID_Actividad ?>" style="display: none; background-color: #F5f5F5;">
                 <td colspan=7><?php echo $row->Descripcion; ?></td>
               </tr>
+              </tbody>
             <?php
             endforeach; ?>
           </table>
@@ -72,16 +74,17 @@
           <table class="table table-responsive table-hover">
             <thead>
               <tr>
-                <th id="nombre_header">Nombre</th>
-                <th id="tipo_header">Tipo</th>
-                <th id="lugar_header">Lugar</th>
-                <th id="fechaini_header">Fecha inicio</th>
-                <th id="fechafin_header">Fecha fin</th>
-                <th id="progreso_header">Progreso</th>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Lugar</th>
+                <th>Fecha inicio</th>
+                <th>Fecha fin</th>
+                <th>Progreso</th>
               </tr>
             </thead>
             <?php foreach($query2 as $row): ?>
-              <tr style="cursor: pointer;" onclick="show('<?php echo $row->ID_Actividad ?>');">
+            <tbody style="cursor: pointer;" onclick="show('<?php echo $row->ID_Actividad ?>');">
+              <tr>
                 <td><?php echo $row->Nombre; ?></td>
                 <td><?php echo $row->Tipo; ?></td>
                 <td><?php echo $row->Lugar; ?></td>
@@ -101,6 +104,7 @@
               <tr id="<?php echo $row->ID_Actividad ?>" style="display: none; background-color: #F5f5F5;">
                 <td colspan=6><?php echo $row->Descripcion; ?></td>
               </tr>
+            </tbody>
             <?php
             endforeach; ?>
           </table>
@@ -154,4 +158,28 @@ function show(id) {
     fila.style.display = ""; //mostrar fila 
   }
 }
+</script>
+
+<script type="text/javascript">
+  var table = $('#mytable');
+    
+    $('#nombre_header, #tipo_header, #lugar_header, #fechaini_header, #fechafin_header, #progreso_header')
+        .wrapInner('<span title="Ordenar esta columna"/>')
+        .each(function(){
+            var th = $(this),
+                thIndex = th.index(),
+                inverse = false;
+            th.click(function(){
+                table.find('td').filter(function(){
+                    return $(this).index() === thIndex;
+                }).sortElements(function(a, b){
+                    return $.text([a]) > $.text([b]) ?
+                        inverse ? -1 : 1
+                        : inverse ? 1 : -1;
+                }, function(){
+                    return this.parentNode;      
+                });
+                inverse = !inverse;     
+            });                
+        });
 </script>

@@ -7,6 +7,7 @@ class Constancias extends CI_Controller {
       $this->load->helper(array('url', 'form'));       
   		$this->load->model('constancias_model');
       $this->load->model('docentes_model');
+      $this->load->model('actividades_model');
   		$this->load->database('default');
     }
 
@@ -30,7 +31,7 @@ class Constancias extends CI_Controller {
   public function cons_docente(){
     $id = $this->uri->segment(3);
     $data['query'] = $this->docentes_model->getDocenteID($id);
-    $data1['query1'] = $this->constancias_model->getMisSolicitudes($id);
+    $data1['query'] = $this->actividades_model->getMisAvances($id);
 
     $this->load->view('docente/header', $data);
     $this->load->view('docente/constancias_view_doc', $data1);
@@ -42,6 +43,12 @@ class Constancias extends CI_Controller {
     $this->constancias_model->upload_constancia($id);
   }
 
+  public function newSolicitud(){
+    $docente = $this->uri->segment(3);
+    $actividad = $this->uri->segment(4);
+    $this->constancias_model->upload_solicitud($docente, $actividad);
+  }
+
 	public function autocompletar(){
     $data = array();
     if($this->input->is_ajax_request() && $this->input->post('info')){
@@ -49,18 +56,15 @@ class Constancias extends CI_Controller {
       $search = $this->constancias_model->buscador(trim($abuscar));
         echo "<thead>";
         echo "<tr>";
-        echo "<th>Aceptar</th>";
         echo "<th>Docente</th>";
         echo "<th>Tipo</th>";
         echo "<th>Actividad</th>";
         echo "<th>Formato sin firma</th>";
         echo "<th>Formato con firma</th>";
-        echo "<th></th>";
         echo "</tr>";
         echo "</thead>";
         foreach($search->result() as $fila){
             echo "<tr>";
-            echo "<td></td>";
             echo "<td>".$fila->Nombres.' '.$fila->ApPaterno.' '.$fila->ApMaterno."</td>";
             echo "<td>".$fila->Tipo."</td>";
             echo "<td>".$fila->Nombre."</td>";
@@ -82,7 +86,6 @@ class Constancias extends CI_Controller {
                       }
                     }
             echo "</td>";
-            echo "<td><a href='".base_url()."constancias/delete/$fila->ID_Solicitud'> <i class='glyphicon glyphicon-trash' title='Eliminar'></i></a></td>";
             echo "</tr>";
         ?>
         <?php
@@ -136,6 +139,85 @@ class Constancias extends CI_Controller {
                 echo form_close();
               }
             echo "</td>";
+            echo "</tr>";
+          }
+        }
+      } else{
+      ?>
+        <p><?php  echo "<div class='alert alert-warning'><p class='text-center'>No hay solicitudes registradas con el nombre, tipo o actividad introducido.</p></div>"; ?></p>
+      <?php
+      }
+    }
+
+    public function autocompletarC(){ //Docente
+    $docente = $this->uri->segment(3);
+    $data = array();
+    if($this->input->is_ajax_request() && $this->input->post('info')){
+      $abuscar = $this->security->xss_clean($this->input->post('info'));
+      $search = $this->constancias_model->buscadorDocente(trim($abuscar));
+        echo "<thead>";
+        echo "<tr>";
+        echo "<th>Actividad</th>";
+        echo "<th>Tipo</th>";
+        echo "<th>Progreso</th>";
+        echo "<th>Formato</th>";
+        echo "<th>Estado</th>";
+        echo "</tr>";
+        echo "</thead>";
+        foreach($search->result() as $fila){
+          if ($fila->ID_Trabajador == $docente) {
+            echo "<tr>";
+                echo "<td>".$fila->Nombre."</td>";
+                echo "<td>".$fila->Tipo."</td>";
+                echo "<td>".$fila->Avance."</td>";
+
+                $this->db->distinct();
+                $this->db->select('asignaciones.ID_Asignacion, asignaciones.Avance, asignaciones.ID_Trabajador, asignaciones.ID_Actividad, 
+                  solicitudes.ID_Solicitud, solicitudes.Etapa, solicitudes.ID_Trabajador, solicitudes.ID_Actividad, solicitudes.Aceptada');
+                $this->db->from('asignaciones');
+                $this->db->where('asignaciones.ID_Trabajador', $fila->ID_Trabajador);
+                $this->db->where('asignaciones.ID_Asignacion', $fila->ID_Asignacion);
+                $this->db->where('asignaciones.ID_Actividad', $fila->ID_Actividad);
+                $this->db->join('solicitudes', 'solicitudes.ID_Actividad = asignaciones.ID_Actividad');
+                $this->db->where('solicitudes.ID_Trabajador', $fila->ID_Trabajador);
+                $this->db->group_by('asignaciones.ID_Asignacion');
+                $query = $this->db->get();
+
+                if($query->num_rows() > 0){
+                  foreach ($query->result() as $line) {
+                    
+                    if ($line->Etapa == 'Firmada'){
+                       
+                       $ruta = base_url().'constancias/formatoFirmaDownload3/'.$line->ID_Solicitud;
+                       $Archivo = "<a href='$ruta' class='btn-lg'><i class='glyphicon glyphicon-file' title='Descargar formato con firma'></i></a>"; ?>
+                        
+                        <td><?php echo $Archivo; ?></td>
+                        <td><?php echo "<span style='color: #FF0000'>$line->Etapa</span>"; ?></td> <?php
+
+                    } elseif ($line->Etapa == 'En proceso'){ ?>
+                        <td></td>
+                        <td><?php echo "<span style='color: #0000FF'>$line->Etapa</span>"; ?></td> <?php
+                    } elseif ($line->Etapa == 'Aceptada'){ ?>
+                        <td></td>
+                        <td><?php echo "<span style='color: #31B404'>$line->Etapa</span>"; ?></td> <?php
+                    }
+                  }
+                } else { ?>
+                    <td></td>
+                    <td>
+                      <?php
+                      if ($fila->Avance == 'Terminada') { ?>
+                        <?=  form_open(base_url().'constancias/newSolicitud/'.$fila->ID_Trabajador.'/'.$fila->ID_Actividad)?>
+                          <input type="submit"  value="Solicitar" class="btn btn-primary">
+                        <?=form_close()?> <?php
+                      } else { ?>
+                          <?=  form_open()?>
+                            <input type="submit" value="Solicitar" class="btn btn-primary disabled">
+                          <?=form_close()?> <?php
+                      } ?>
+                    </td> <?php
+                }
+
             echo "</tr>";
           }
         }
@@ -298,6 +380,54 @@ class Constancias extends CI_Controller {
           unlink('newdocument.doc');
 
           redirect(base_url().'constancias/cons_admin');
+      }
+    }
+
+    public function formatoFirmaDownload3(){
+      $id = $this->uri->segment(3);
+
+      require_once '/PHPWord-master/src/PhpWord/Autoloader.php';
+      \PhpOffice\PhpWord\Autoloader::register();
+      require_once '/PHPWord-master/src/PhpWord/TemplateProcessor.php';
+      $templateWord = new PhpOffice\PhpWord\TemplateProcessor('C:\xampp\htdocs\sistema-docentes\application\controllers\plantilla-constancia-firma.docx');
+ 
+      $data = $this->constancias_model->getSolicitudID($id);
+      foreach($data->result() as $fila){
+          $docente = $fila->Nombres.' '.$fila->ApPaterno.' '.$fila->ApMaterno;
+          $tipo = $fila->Tipo;
+          $actividad = $fila->Nombre;
+          $fechaini = $fila->Fecha_Inicio;
+          $fechafin = $fila->Fecha_Fin;
+
+          $templateWord->setValue('nombre_docente',$docente);
+          $templateWord->setValue('nombre_tipo',$tipo);
+          $templateWord->setValue('nombre_actividad',$actividad);
+          $templateWord->setValue('fecha_inicio',$fechaini);
+          $templateWord->setValue('fecha_fin',$fechafin);
+
+          $templateWord->saveAs('Constancia_'.$fila->Nombres.'.docx');
+
+          $word = new COM("Word.Application") or die ("Could not initialise Object.");
+          $word->Visible = 0;
+          $word->DisplayAlerts = 0;
+          $word->Documents->Open('C:\xampp\htdocs\sistema-docentes\Constancia_'.$fila->Nombres.'.docx');
+          $word->ActiveDocument->SaveAs('C:\xampp\htdocs\sistema-docentes\newdocument.doc');
+          $word->ActiveDocument->ExportAsFixedFormat('C:\xampp\htdocs\sistema-docentes\Constancia_'.$fila->Nombres.'.pdf', 17, false, 0, 0, 0, 0, 7, true, true, 2, true, true, false);
+          $word->Quit(false);
+          $word = null;
+
+          $ruta = 'Constancia_'.$fila->Nombres.'.pdf';
+          header('Content-Type: application/force-download');
+          header('Content-Disposition: attachment; filename='.$ruta);
+          header('Content-Transfer-Encoding: binary');
+          header('Content-Length: '.filesize($ruta));
+          readfile($ruta);
+
+          unlink($ruta);
+          unlink('Constancia_'.$fila->Nombres.'.docx');
+          unlink('newdocument.doc');
+
+          redirect(base_url().'constancias/cons_docente/'.$fila->ID_Trabajador);
       }
     }
 

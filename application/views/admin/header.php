@@ -71,6 +71,7 @@
                       <li><a href="<?php echo base_url().'docentes/doc_admin'; ?>" style="color:#FFF;">Ver docentes</a></li>
                       <li><a href="<?php echo base_url().'asignaciones'; ?>" style="color:#FFF;">Asignaciones</a></li>
                       <li><a href="<?php echo base_url().'avances'; ?>" style="color:#FFF;">Avances</a></li>
+                      <li><a href="<?php echo base_url().'avances/reportes'; ?>" style="color:#FFF;">Reportes</a></li>
                     </ul>
                   </li>
                   <li>

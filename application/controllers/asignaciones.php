@@ -101,7 +101,8 @@ class Asignaciones extends CI_Controller {
   public function delete2(){
     $id = $this->uri->segment(3);
     $docente = $this->uri->segment(4);
-    $delete = $this->asignaciones_model->deleteAsig2($id, $docente);
+    $actividad = $this->uri->segment(5);
+    $delete = $this->asignaciones_model->deleteAsig2($id, $docente, $actividad);
   }
 
 }

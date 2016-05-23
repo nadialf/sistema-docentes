@@ -27,12 +27,12 @@
       </br>        
 
         <div class="tab-pane active" id="1b">
-          <table class="table table-hover table-responsive">
+          <table class="table table-hover table-responsive mytable" id="mytable">
             <thead>
               <tr>
                 <th>Remitente</th>
-                <th>Mensaje</th>
-                <th>Fecha</th>
+                <th id="mensaje_header">Mensaje</th>
+                <th id="fecha_header">Fecha</th>
               </tr>
             </thead>
             <?php foreach($query1 as $row): ?>
@@ -139,3 +139,27 @@
         }
       }
     </script>
+
+<script type="text/javascript">
+  var table = $('.mytable');
+    
+    $('#mensaje_header, #fecha_header')
+        .wrapInner('<span title="Ordenar esta columna"/>')
+        .each(function(){
+            var th = $(this),
+                thIndex = th.index(),
+                inverse = false;
+            th.click(function(){
+                table.find('td').filter(function(){
+                    return $(this).index() === thIndex;
+                }).sortElements(function(a, b){
+                    return $.text([a]) > $.text([b]) ?
+                        inverse ? -1 : 1
+                        : inverse ? 1 : -1;
+                }, function(){
+                    return this.parentNode;      
+                });
+                inverse = !inverse;     
+            });                
+        });
+</script>

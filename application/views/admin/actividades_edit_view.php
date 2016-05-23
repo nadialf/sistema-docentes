@@ -28,8 +28,18 @@
               </div>
               <div class="col-xs-4">
                 <span class="input-group-addon">Tipo de actividad</span>
-                <input type="text" class="form-control" aria-describedby="sizing-addon2" name="tipo" required
-                      value="<?php echo $query['0']->Tipo ?>">
+                <select class="form-control" value="<?php echo $query['0']->Tipo ?>" id="tipo" required>
+                  <option value="<?php echo $query['0']->Tipo ?>" name"<?php echo $query['0']->Tipo ?>">
+                            <?php echo $query['0']->Tipo ?></option>
+                  <option value="Certificación">Certificación</option>
+                  <option value="Conferencia">Conferencia</option>
+                  <option value="Congreso">Congreso</option>
+                  <option value="Curso">Curso</option>
+                  <option value="Festival">Festival</option>
+                  <option value="Proyecto">Proyecto</option>
+                  <option value="Taller">Taller</option>
+                  <option value="Otro">Otro</option>
+                </select>
               </div>
             </div>
           </div>

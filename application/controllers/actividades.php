@@ -101,7 +101,8 @@ class Actividades extends CI_Controller {
         echo "</thead>";
         foreach($search->result() as $fila){ 
         ?>
-          <tr style="cursor: pointer;" onclick="show('<?php echo $fila->ID_Actividad; echo $fila->ID_Actividad  ?>');">
+        <tbody style="cursor: pointer;" onclick="show('<?php echo $fila->ID_Actividad; echo $fila->ID_Actividad  ?>');"> 
+          <tr>
           <?php
             echo "<td>".$fila->Nombre."</td>";
             echo "<td>".$fila->Tipo."</td>";
@@ -117,6 +118,7 @@ class Actividades extends CI_Controller {
             echo "<td colspan=7>".$fila->Descripcion."</td>";
             echo "</tr>";
             ?>
+          </tbody>
         <?php
         }
       //en otro caso decimos que no hay resultados
@@ -148,7 +150,8 @@ class Actividades extends CI_Controller {
         echo "</thead>";
         foreach($search->result() as $fila){
         ?>
-          <tr style="cursor: pointer;" onclick="show('<?php echo $fila->ID_Actividad; echo $fila->ID_Actividad  ?>');">
+        <tbody style="cursor: pointer;" onclick="show('<?php echo $fila->ID_Actividad; echo $fila->ID_Actividad  ?>');">
+          <tr>
           <?php
             echo "<td>".$fila->Nombre."</td>";
             echo "<td>".$fila->Tipo."</td>";
@@ -171,6 +174,7 @@ class Actividades extends CI_Controller {
           <?php
             echo "<td colspan=6>".$fila->Descripcion."</td>";
             echo "</tr>";
+        echo "</tbody>";
         }
       }else{
       ?>

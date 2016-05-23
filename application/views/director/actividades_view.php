@@ -34,7 +34,8 @@
               </tr>
             </thead>
             <?php foreach($query as $row): ?>
-              <tr style="cursor: pointer;" onclick="show('<?php echo $row->ID_Actividad ?>');">
+            <tbody style="cursor: pointer;" onclick="show('<?php echo $row->ID_Actividad ?>');">
+              <tr>
                 <td><?php echo $row->Nombre; ?></td>
                 <td><?php echo $row->Tipo; ?></td>
                 <td><?php echo $row->Lugar; ?></td>
@@ -54,6 +55,7 @@
               <tr id="<?php echo $row->ID_Actividad ?>" style="display: none; background-color: #F5f5F5;">
                 <td colspan=6><?php echo $row->Descripcion; ?></td>
               </tr>
+            </tbody>
             <?php
             endforeach; ?>
           </table>
