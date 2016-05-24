@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Nadia Libreros">
   <title>SAC</title>
 
   <link href="<?php echo base_url(); ?>assets/css/bootstrap.css" rel="stylesheet" />
@@ -14,7 +15,6 @@
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/css/jquery-ui.js"></script>
   <script src="//rawgit.com/padolsey/jQuery-Plugins/master/sortElements/jquery.sortElements.js"></script>
-  <!-- <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js'></script> -->
 
   <link rel="icon" type="image/x-icon" href="<?php echo base_url(); ?>assets/img/icon.png">
 

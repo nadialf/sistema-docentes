@@ -21,6 +21,7 @@ class Docentes_model extends CI_Model{
         $this->db->from('trabajadores');
         $this->db->join('cuentas', 'cuentas.ID_Cuenta = trabajadores.ID_Cuenta');
         $this->db->where('ID_Trabajador', $id);
+        $this->db->order_by("Nombres","asc");
         $query = $this->db->get();
         return $query->result();
     }
@@ -28,6 +29,7 @@ class Docentes_model extends CI_Model{
     function getDocenteID($id){
         $this->db->select();
         $this->db->where('ID_Trabajador', $id);
+        $this->db->order_by("Nombres","asc");
         $query = $this->db->get('trabajadores');
         return $query->result();
     }
@@ -103,9 +105,5 @@ class Docentes_model extends CI_Model{
     	}else{
     		return FALSE;
     	}
-    }
-
-    public function guarda_correo($data){
-        $this->db->insert('correos',$data);
     }
 }

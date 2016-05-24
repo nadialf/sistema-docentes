@@ -23,11 +23,20 @@ class Constancias extends CI_Controller {
   public function cons_direc(){
     $id = $this->uri->segment(3);
     $data1['query'] = $this->docentes_model->getDocenteID($id);
-    $data['query1'] = $this->actividades_model->getMisAvances($id);
     $data['query'] = $this->constancias_model->getSolicitudesAceptadas();
 
     $this->load->view('director/header', $data1);
     $this->load->view('director/constancias_view', $data);
+    $this->load->view('footer');
+  }
+
+  public function mis_cons_direc(){
+    $id = $this->uri->segment(3);
+    $data1['query'] = $this->docentes_model->getDocenteID($id);
+    $data['query1'] = $this->actividades_model->getMisAvances($id);
+
+    $this->load->view('director/header', $data1);
+    $this->load->view('director/misconstancias_view', $data);
     $this->load->view('footer');
   }
 
@@ -42,14 +51,21 @@ class Constancias extends CI_Controller {
   }
 
   public function newConstancia(){
-    $id = $this->uri->segment(3);    
-    $this->constancias_model->upload_constancia($id);
+    $docente = $this->uri->segment(3);
+    $id = $this->uri->segment(4);
+    $this->constancias_model->upload_constancia($id, $docente);
   }
 
   public function newSolicitud(){
     $docente = $this->uri->segment(3);
     $actividad = $this->uri->segment(4);
     $this->constancias_model->upload_solicitud($docente, $actividad);
+  }
+
+  public function newSolicitudD(){
+    $docente = $this->uri->segment(3);
+    $actividad = $this->uri->segment(4);
+    $this->constancias_model->upload_solicitudD($docente, $actividad);
   }
 
 	public function autocompletar(){

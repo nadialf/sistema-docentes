@@ -21,7 +21,7 @@ class Welcome_message extends CI_Controller {
 		$data['query'] = $this->docentes_model->getDocenteID($id);
 
 		$this->load->view('director/header',$data);
-		$this->load->view('message_view');
+		$this->load->view('message_view1');
 		$this->load->view('footer');
 	}
 
@@ -30,7 +30,7 @@ class Welcome_message extends CI_Controller {
 		$data['query'] = $this->docentes_model->getDocenteID($id);
 
 		$this->load->view('docente/header',$data);
-		$this->load->view('message_view');
+		$this->load->view('message_view2',$data);
 		$this->load->view('footer');
 	}
 

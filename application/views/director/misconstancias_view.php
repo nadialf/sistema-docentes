@@ -1,4 +1,4 @@
- <div class="content-wrapper" style="background-color: #e5e5e5; margin-top:0px;">
+<div class="content-wrapper" style="background-color: #e5e5e5; margin-top:0px;">
    
     <br>
     <div id="exTab3" class="tab">
@@ -6,7 +6,7 @@
       <ul  class="nav nav-pills">
       <li class="active" data-toggle="tab">
         <a href="#1b" data-toggle="tab">
-          <i class="fa fa-list"></i>     Solicitudes de constancias 
+          <i class="fa fa-list"></i>     Mis constancias
         </a>
       </li>
       <li data-toggle="tab">
@@ -20,9 +20,9 @@
 
       <div class="tab-content clearfix">
 
-        <div class="tab-pane active" id="1b">
+      <div class="tab-pane active" id="1b">
         </br>
-          <table class="table table-responsive table-hover mytable" id="mytable">
+          <table class="table table-responsive table-hover" id="mytable">
             <thead>
               <tr>
                 <th id="actividad_header">Actividad</th>
@@ -32,7 +32,7 @@
                 <th id="estado_header">Estado</th>
               </tr>
             </thead>
-            <?php foreach($query as $row){ ?>
+            <?php foreach($query1 as $row){ ?>
             <tr>
               <td><?php echo $row->Nombre; ?></td>
               <td><?php echo $row->Tipo; ?></td>
@@ -42,9 +42,9 @@
               $this->load->database('default');
               $this->db->select('ID_Actividad, Fecha_Inicio, Fecha_Fin');
               $this->db->from('actividades');
-              $query1 = $this->db->get();
+              $query2 = $this->db->get();
 
-              foreach ($query1->result() as $line) {
+              foreach ($query2->result() as $line) {
                 $ID_Actividad = $line->ID_Actividad;
 
                 $fecha = getdate();
@@ -77,10 +77,10 @@
                 $this->db->join('solicitudes', 'solicitudes.ID_Actividad = asignaciones.ID_Actividad');
                 $this->db->where('solicitudes.ID_Trabajador', $row->ID_Trabajador);
                 $this->db->group_by('asignaciones.ID_Asignacion');
-                $query2 = $this->db->get();
+                $query3 = $this->db->get();
 
-                if($query2->num_rows() > 0){
-                  foreach ($query2->result() as $fila) {
+                if($query3->num_rows() > 0){
+                  foreach ($query3->result() as $fila) {
                     
                     if ($fila->Etapa == 'Firmada'){
                        
@@ -103,7 +103,7 @@
                     <td>
                       <?php
                       if ($row->Avance == 'Terminada') { ?>
-                        <?=  form_open(base_url().'constancias/newSolicitud/'.$row->ID_Trabajador.'/'.$row->ID_Actividad)?>
+                        <?=  form_open(base_url().'constancias/newSolicitudD/'.$row->ID_Trabajador.'/'.$row->ID_Actividad)?>
                           <input type="submit"  value="Solicitar" class="btn btn-primary">
                         <?=form_close()?> <?php
                       } else { ?>
@@ -116,8 +116,7 @@
             </tr>
             <?php } ?>
           </table>
-        </div> <!-- TABLA SECTION END -->
-
+        </div> <!-- MIS CONSTANCIAS SECTION END -->
 
         <div class="tab-pane" id="2b">
           <br/>
@@ -149,17 +148,18 @@
     })
 
     })
-
-      function formatDOW(url){
-        location.href=url;
+      function elimina(url){
+        if (confirm("¿Está seguro que desea eliminar la solicitud?") ){
+          location.href=url;
+        }
       }
 </script>
 
 <script type="text/javascript">
-  var table = $('.mytable');
+  var table = $('#mytable');
     
-    $('#actividad_header, #tipo_header, #progreso_header, #formato_header, #estado_header')
-        .wrapInner('<span title="Ordenar esta columna"/>')
+    $('#docente_header, #tipo_header, #actividad_header')
+        .wrapInner('<span title="sort this column"/>')
         .each(function(){
             var th = $(this),
                 thIndex = th.index(),
@@ -172,9 +172,20 @@
                         inverse ? -1 : 1
                         : inverse ? 1 : -1;
                 }, function(){
+                    // parentNode is the element we want to move
                     return this.parentNode;      
                 });
                 inverse = !inverse;     
             });                
         });
+</script>
+
+<script type="text/javascript">
+$("#mytable tbody tr").mouseover(function() {
+  $(this).addClass("tr_hover");
+});
+
+$("#mytable tbody tr").mouseout(function() {
+  $(this).removeClass("tr_hover");
+});
 </script>

@@ -13,7 +13,7 @@ class Constancias_model extends CI_Model{
         $this->db->join('trabajadores', 'trabajadores.ID_Trabajador = solicitudes.ID_Trabajador');
         $this->db->join('actividades', 'actividades.ID_Actividad = solicitudes.ID_Actividad');
         $this->db->where('Aceptada', '1');
-        $this->db->order_by("ID_Solicitud","desc");
+        $this->db->order_by("solicitudes.Etapa","asc");
         $query = $this->db->get();
         return $query->result();
     }
@@ -24,7 +24,7 @@ class Constancias_model extends CI_Model{
         $this->db->join('trabajadores', 'trabajadores.ID_Trabajador = solicitudes.ID_Trabajador');
         $this->db->join('actividades', 'actividades.ID_Actividad = solicitudes.ID_Actividad');
         $this->db->where('Aceptada', '0');
-        $this->db->order_by("ID_Solicitud","desc");
+        $this->db->order_by("solicitudes.Etapa","asc");
         $query = $this->db->get();
         return $query->result();
     }
@@ -35,6 +35,7 @@ class Constancias_model extends CI_Model{
         $this->db->join('trabajadores', 'trabajadores.ID_Trabajador = solicitudes.ID_Trabajador');
         $this->db->join('actividades', 'actividades.ID_Actividad = solicitudes.ID_Actividad');
         $this->db->where('ID_Solicitud', $id);
+        $this->db->order_by("solicitudes.Etapa","asc");
         $resultados = $this->db->get();
 
         if($resultados->num_rows() > 0){
@@ -45,7 +46,7 @@ class Constancias_model extends CI_Model{
         }
     }
 
-    function upload_constancia($id) {
+    function upload_constancia($id, $docente) {
         $this->db->select();
         $this->db->where('ID_Solicitud', $id);
         $query = $this->db->get('constancias');
@@ -60,7 +61,7 @@ class Constancias_model extends CI_Model{
                     $this->db->where('ID_Solicitud', $id);
                     $this->db->update('solicitudes', $datos);
         }          
-        redirect(base_url().'constancias/cons_direc');
+        redirect(base_url().'constancias/cons_direc/'.$docente);
     }
 
     function upload_solicitud($docente, $actividad) {
@@ -71,6 +72,16 @@ class Constancias_model extends CI_Model{
                     $this->db->insert('solicitudes', $datos);         
     
         redirect(base_url().'constancias/cons_docente/'.$docente);
+    }
+
+    function upload_solicitudD($docente, $actividad) {
+        $datos = array('Etapa' => "En proceso",
+                        'ID_Trabajador' => $docente,
+                        'ID_Actividad' => $actividad,
+                        'Aceptada' => '0');
+                    $this->db->insert('solicitudes', $datos);         
+    
+        redirect(base_url().'constancias/cons_direc/'.$docente);
     }
 
     function deleteSolicitud($id){
@@ -92,7 +103,7 @@ class Constancias_model extends CI_Model{
         $this->db->or_like('actividades.Tipo',$abuscar,'both');
         $this->db->or_like('actividades.Nombre',$abuscar,'both');
         
-        $this->db->order_by("ID_Solicitud","desc");
+        $this->db->order_by("trabajadores.Nombres","asc");
         $resultados = $this->db->get();
 
         if($resultados->num_rows() > 0){
@@ -116,7 +127,7 @@ class Constancias_model extends CI_Model{
         $this->db->or_like('actividades.Tipo',$abuscar,'both');
         $this->db->or_like('actividades.Nombre',$abuscar,'both');
        
-        $this->db->order_by("ID_Solicitud","desc");
+        $this->db->order_by("trabajadores.Nombres","asc");
         $resultados = $this->db->get();
 
         if($resultados->num_rows() > 0){
@@ -136,7 +147,7 @@ class Constancias_model extends CI_Model{
         $this->db->or_like('actividades.Nombre',$abuscar,'both');
         $this->db->or_like('asignaciones.Avance',$abuscar,'both');
 
-        $this->db->order_by("asignaciones.Avance","asc");
+        $this->db->order_by("actividades.Nombre","asc");
         $resultados = $this->db->get();
 
         if($resultados->num_rows() > 0){

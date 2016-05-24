@@ -77,14 +77,14 @@
                 <span class="input-group-addon">Tipo de actividad</span>
                 <select class="form-control" name="tipo" required>
                   <option></option>
-                  <option value="Certificación">Certificación</option>
-                  <option value="Conferencia">Conferencia</option>
-                  <option value="Congreso">Congreso</option>
-                  <option value="Curso">Curso</option>
-                  <option value="Festival">Festival</option>
-                  <option value="Proyecto">Proyecto</option>
-                  <option value="Taller">Taller</option>
-                  <option value="Otro">Otro</option>
+                  <option value="Certificación" name="Certificación">Certificación</option>
+                  <option value="Conferencia" name="Conferencia">Conferencia</option>
+                  <option value="Congreso" name="Congreso">Congreso</option>
+                  <option value="Curso" name="Curso">Curso</option>
+                  <option value="Festival" name="Festival">Festival</option>
+                  <option value="Proyecto" name="Proyecto">Proyecto</option>
+                  <option value="Taller" name="Taller">Taller</option>
+                  <option value="Otro" name="Otro">Otro</option>
                 </select>
               </div>
             </div>
@@ -147,6 +147,8 @@
     </div>
 
   </div> <!-- CONTENT-WRAPPER SECTION END-->
+
+<br><br><br>
 
   <script type="text/javascript">
     $(document).ready(function(){

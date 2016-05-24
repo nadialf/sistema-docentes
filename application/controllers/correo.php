@@ -19,6 +19,17 @@ class Correo extends CI_Controller {
 		$this->load->view('admin/correo_view', $data);
 		$this->load->view('footer');
 	}
+
+  public function mail_direc(){
+    $id = $this->uri->segment(3);
+    $data['query'] = $this->docentes_model->getDocenteID($id);
+    $data['query1'] = $this->correo_model->getMisCorreos($id);
+
+    $this->load->view('director/header', $data);
+    $this->load->view('director/correo_view', $data);
+    $this->load->view('footer');
+  }
+
 	public function correo_doc(){
     $id = $this->uri->segment(3);
     $data['query'] = $this->docentes_model->getDocenteID($id);
@@ -34,6 +45,13 @@ class Correo extends CI_Controller {
     $mensaje = $this->input->post('mensaje');
     $insert = $this->correo_model->agregarMail($remitente, $fecha, $mensaje);
 	}
+
+  public function newMail2(){
+    $remitente = $this->uri->segment(3);
+    $fecha = $this->input->post('fecha');
+    $mensaje = $this->input->post('mensaje');
+    $insert = $this->correo_model->agregarMail2($remitente, $fecha, $mensaje);
+  }
 
   public function changeNoLeido(){
     $id = $this->uri->segment(3);

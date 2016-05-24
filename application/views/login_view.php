@@ -4,9 +4,8 @@
 	<meta charset="utf-8">
  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
  	<meta name="viewport" content="width=device-width, initial-scale=1">
- 	<meta name="description" content="">
- 	<meta name="author" content="">
- 	
+ 	<meta name="author" content="Nadia Libreros">
+
  	<title>SAC</title>
 
 	<link href="assets/css/bootstrap.css" rel="stylesheet" />
@@ -19,7 +18,7 @@
 
 </head>
 
-<body style="background: url('assets/img/fondo4.jpg') no-repeat fixed center center; background-size: cover;font-family: Roboto;" class="img-responsive">
+<body style="background: url('assets/img/fondoFEI.jpg') no-repeat fixed center center; background-size: cover;font-family: Roboto;" class="img-responsive">
   
 <!-- Navigation -->
   <nav class="navbar navbar-default navbar-fixed">

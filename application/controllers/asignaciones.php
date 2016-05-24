@@ -95,7 +95,9 @@ class Asignaciones extends CI_Controller {
 
   public function delete(){
     $id = $this->uri->segment(3);
-    $delete = $this->asignaciones_model->deleteAsig($id);
+    $docente = $this->uri->segment(4);
+    $actividad = $this->uri->segment(5);
+    $delete = $this->asignaciones_model->deleteAsig($id, $docente, $actividad);
   }
 
   public function delete2(){
@@ -103,6 +105,13 @@ class Asignaciones extends CI_Controller {
     $docente = $this->uri->segment(4);
     $actividad = $this->uri->segment(5);
     $delete = $this->asignaciones_model->deleteAsig2($id, $docente, $actividad);
+  }
+
+  public function delete3(){
+    $id = $this->uri->segment(3);
+    $docente = $this->uri->segment(4);
+    $actividad = $this->uri->segment(5);
+    $delete = $this->asignaciones_model->deleteAsig3($id, $docente, $actividad);
   }
 
 }

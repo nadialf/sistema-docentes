@@ -58,7 +58,7 @@
                 ?>
                 </td>
                 <td>
-                  <a href='#' onclick="elimina('<?=base_url()?>asignaciones/delete2/<?=$row->ID_Asignacion?>/<?=$row->ID_Trabajador?>/<?=$row->ID_Actividad?>');"><i class='glyphicon glyphicon-trash' title='Eliminar asignación'></i></a>
+                  <a href='#' onclick="elimina('<?=base_url()?>asignaciones/delete3/<?=$row->ID_Asignacion?>/<?=$row->ID_Trabajador?>/<?=$row->ID_Actividad?>');"><i class='glyphicon glyphicon-trash' title='Eliminar asignación'></i></a>
                 </td>
               </tr>
               <tr id="<?php echo $row->ID_Actividad ?>" style="display: none; background-color: #F5f5F5;">
@@ -127,6 +127,7 @@
 
   </div>  <!-- CONTENT-WRAPPER SECTION END-->
 
+<br><br><br>
 
 <script type="text/javascript">
     $(document).ready(function(){

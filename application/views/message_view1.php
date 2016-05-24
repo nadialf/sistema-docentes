@@ -2,7 +2,7 @@
 
 </br></br></br></br></br></br></br>
 <h1>Bienvenido al</h1>
-<h1>Sistema de Administración de Constancias, Administrador</h1>
+<h1>Sistema de Administración de Constancias, Director</h1>
 
 </div>
 

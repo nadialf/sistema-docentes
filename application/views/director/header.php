@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Nadia Libreros">
   <title>SAC</title>
 
   <link href="<?php echo base_url(); ?>assets/css/bootstrap.css" rel="stylesheet" />
@@ -14,7 +15,6 @@
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/css/jquery-ui.js"></script>
   <script src="//rawgit.com/padolsey/jQuery-Plugins/master/sortElements/jquery.sortElements.js"></script>
-  <!-- <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js'></script> -->
 
   <link rel="icon" type="image/x-icon" href="<?php echo base_url(); ?>assets/img/icon.png">
 
@@ -48,11 +48,23 @@
                     </a>
                   </li>
                   <li>
-                     <a href="<?php echo base_url().'constancias/cons_direc/'.$row->ID_Trabajador ?>">
+                     <a href="<?php echo base_url().'correo/mail_direc/'.$row->ID_Trabajador?>">
                       <div style="color:#FFF;">
-                        <i class="fa fa-file-text-o"></i>     Constancias
+                        <i class="fa fa-envelope"></i>     Correo
                       </div>
                     </a>
+                  </li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                      <div style="color:#FFF;">
+                          <i class="fa fa-file-text-o"></i>     Constancias
+                          <span class="caret"></span>
+                      </div>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a href="<?php echo base_url().'constancias/mis_cons_direc/'.$row->ID_Trabajador ?>" style="color:#FFF;">Mis constancias</a></li>
+                      <li><a href="<?php echo base_url().'constancias/cons_direc/'.$row->ID_Trabajador ?>" style="color:#FFF;">Firmar constancias</a></li>
+                    </ul>
                   </li>
                   <li>
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">

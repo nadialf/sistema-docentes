@@ -60,7 +60,7 @@ class Actividades_model extends CI_Model{
         $this->db->select('actividades.ID_Actividad, actividades.Tipo, actividades.Nombre, actividades.Lugar, actividades.Fecha_Inicio, actividades.Fecha_Fin, actividades.Descripcion, asignaciones.ID_Asignacion, asignaciones.Avance');
         $this->db->from('asignaciones');
         $this->db->join('actividades', 'actividades.ID_Actividad = asignaciones.ID_Actividad');
-        $this->db->order_by("actividades.Fecha_Inicio","desc");
+        $this->db->order_by("asignaciones.Avance","asc");
         $this->db->group_by('ID_Actividad');
         $query = $this->db->get();
         return $query->result();
@@ -99,7 +99,7 @@ class Actividades_model extends CI_Model{
         $this->db->from('asignaciones');
         $this->db->join('actividades', 'actividades.ID_Actividad = asignaciones.ID_Actividad');
         $this->db->where('asignaciones.ID_Trabajador',$id);
-        $this->db->order_by("actividades.Fecha_Inicio","desc");
+        $this->db->order_by("asignaciones.Avance","asc");
         $this->db->group_by('ID_Actividad');
         $query = $this->db->get();
         return $query->result();
@@ -138,7 +138,7 @@ class Actividades_model extends CI_Model{
         $this->db->from('asignaciones');
         $this->db->join('actividades', 'actividades.ID_Actividad = asignaciones.ID_Actividad');
         $this->db->where('asignaciones.ID_Trabajador',$id);
-        $this->db->order_by("actividades.Fecha_Inicio","desc");
+        $this->db->order_by("asignaciones.Avance","asc");
         $this->db->group_by('ID_Actividad');
         $query = $this->db->get();
         return $query->result();
@@ -186,7 +186,7 @@ class Actividades_model extends CI_Model{
     	$this->db->like('Nombre',$abuscar,'both');
     	$this->db->or_like('Tipo',$abuscar,'both');
     	$this->db->or_like('Lugar',$abuscar,'both');
-        $this->db->order_by("Fecha_Inicio","desc");
+        $this->db->order_by("Nombre","asc");
     	$resultados = $this->db->get('actividades', 22);
 
     	//si existe algún resultado lo devolvemos
@@ -209,7 +209,7 @@ class Actividades_model extends CI_Model{
         $this->db->or_like('Lugar',$abuscar,'both');
         $this->db->or_like('Avance',$abuscar,'both');
 
-        $this->db->order_by("actividades.Fecha_Inicio","desc");
+        $this->db->order_by("asignaciones.Avance","asc");
         $this->db->group_by('ID_Actividad');
 
         $resultados = $this->db->get();

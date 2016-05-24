@@ -48,7 +48,7 @@
 
         <div class="tab-pane" id="2b">
         <?php foreach ($query as $row) { ?>  
-        <?=  form_open(base_url().'correo/newMail/'.$row->ID_Trabajador)?>
+        <?=  form_open(base_url().'correo/newMail2/'.$row->ID_Trabajador)?>
           <br>
           <div style="margin-left:20px; margin-right:20px;">
             <div class="content-wrapper"  style="width:100%; min-height: auto; height:auto; margin-left;10px; margin-right:10px;">

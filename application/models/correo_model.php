@@ -66,6 +66,19 @@ class Correo_model extends CI_Model{
         redirect(base_url().'correo/correo_doc/'.$remitente);
     }
 
+    function agregarMail2($remitente, $fecha, $mensaje){
+        $fecha = getdate();
+        $fechaactual = "$fecha[year]/$fecha[mon]/$fecha[mday]";
+
+        $datos = array('ID_Remitente' => $remitente,
+                        'Destinatario' => 'Admin',
+                        'Asunto' => $mensaje,
+                        'Leido' => '0',
+                        'Fecha_Envio' => $fechaactual);
+        $this->db->insert('correos', $datos);
+        redirect(base_url().'correo/mail_direc/'.$remitente);
+    }
+
     function deleteMail($id){
         $this->db->where('ID_Correo', $id);
         $this->db->delete('correos');
@@ -79,7 +92,7 @@ class Correo_model extends CI_Model{
         $this->db->like('trabajadores.Nombres',$abuscar,'both');
         $this->db->or_like('trabajadores.ApPaterno',$abuscar,'both');
         $this->db->or_like('trabajadores.ApMaterno',$abuscar,'both');
-        $this->db->order_by("correos.Fecha_Envio","desc");
+        $this->db->order_by("trabajadores.Nombres","asc");
         $resultados = $this->db->get();
 
         if($resultados->num_rows() > 0){

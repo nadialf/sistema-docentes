@@ -40,7 +40,7 @@ class Avances_model extends CI_Model{
         $this->db->from('asignaciones');
         $this->db->join('trabajadores', 'trabajadores.ID_Trabajador = asignaciones.ID_Trabajador');
         $this->db->join('actividades', 'actividades.ID_Actividad = asignaciones.ID_Actividad');
-        $this->db->order_by("actividades.Fecha_Inicio","desc");
+        $this->db->order_by("asignaciones.Avance","asc");
         $query = $this->db->get();
         return $query->result();
     }
@@ -57,7 +57,7 @@ class Avances_model extends CI_Model{
         $this->db->or_like('actividades.Tipo',$abuscar,'both');
         $this->db->or_like('actividades.Nombre',$abuscar,'both');
         $this->db->or_like('asignaciones.Avance',$abuscar,'both');
-        $this->db->order_by("actividades.Fecha_Inicio","desc");
+        $this->db->order_by("asignaciones.Avance","asc");
         $resultados = $this->db->get();
 
         if($resultados->num_rows() > 0){
@@ -111,7 +111,7 @@ class Avances_model extends CI_Model{
         $this->db->join('trabajadores', 'trabajadores.ID_Trabajador = asignaciones.ID_Trabajador');
         $this->db->join('actividades', 'actividades.ID_Actividad = asignaciones.ID_Actividad');
         $this->db->where('trabajadores.ID_Trabajador', $ID_Trabajador);
-        $this->db->order_by("actividades.Fecha_Inicio","desc");
+        $this->db->order_by("asignaciones.Avance","asc");
         $query = $this->db->get();
         return $query->result();
     }
@@ -151,7 +151,7 @@ class Avances_model extends CI_Model{
         $this->db->join('actividades', 'actividades.ID_Actividad = asignaciones.ID_Actividad');
         $this->db->where('actividades.Fecha_Inicio >=', $fechainiR);
         $this->db->where('actividades.Fecha_Inicio <=', $fechafinR);
-        $this->db->order_by("actividades.Fecha_Inicio","desc");
+        $this->db->order_by("asignaciones.Avance","asc");
         $query = $this->db->get();
         return $query->result();
     }
@@ -190,7 +190,7 @@ class Avances_model extends CI_Model{
         $this->db->join('trabajadores', 'trabajadores.ID_Trabajador = asignaciones.ID_Trabajador');
         $this->db->join('actividades', 'actividades.ID_Actividad = asignaciones.ID_Actividad');
         $this->db->where('asignaciones.Avance', $avanceR);
-        $this->db->order_by("actividades.Fecha_Inicio","desc");
+        $this->db->order_by("asignaciones.Avance","asc");
         $query = $this->db->get();
         return $query->result();
     }
@@ -229,7 +229,7 @@ class Avances_model extends CI_Model{
         $this->db->join('trabajadores', 'trabajadores.ID_Trabajador = asignaciones.ID_Trabajador');
         $this->db->join('actividades', 'actividades.ID_Actividad = asignaciones.ID_Actividad');
         $this->db->where('actividades.Tipo', $tipo);
-        $this->db->order_by("actividades.Fecha_Inicio","desc");
+        $this->db->order_by("asignaciones.Avance","asc");
         $query = $this->db->get();
         return $query->result();
     }
