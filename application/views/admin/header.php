@@ -49,7 +49,7 @@
                   <li>
                     <a href="<?php echo base_url().'correo/mail_admin'; ?>">
                       <div style="color:#FFF;">
-                        <i class="fa fa-envelope"></i>     Correo
+                        <i class="fa fa-envelope"></i>     Mensajes
                       </div>
                     </a>
                   </li>

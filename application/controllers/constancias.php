@@ -250,10 +250,10 @@ class Constancias extends CI_Controller {
     public function formatoDownload(){
       $id = $this->uri->segment(3);
 
-      require_once '/PHPWord-master/src/PhpWord/Autoloader.php';
+      require_once 'C:\xampp\htdocs\sistema-docentes\application\controllers\PHPWord-master\src\PhpWord\Autoloader.php';
       \PhpOffice\PhpWord\Autoloader::register();
 
-      require_once '/PHPWord-master/src/PhpWord/TemplateProcessor.php';
+      require_once 'C:\xampp\htdocs\sistema-docentes\application\controllers\PHPWord-master\src/PhpWord\TemplateProcessor.php';
 
       $templateWord = new PhpOffice\PhpWord\TemplateProcessor('C:\xampp\htdocs\sistema-docentes\application\controllers\plantilla-constancia.docx');
  
